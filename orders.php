@@ -92,9 +92,10 @@ if($_GET['o'] == 'add') {
 			  	<thead>
 			  		<tr>			  			
 			  			<th style="width:30%;">Product</th>
+			  			<th style="width:20%;">Price Type</th>
 			  			<th style="width:20%;">Rate</th>
 			  			<th style="width:15%;">Available Quantity</th>
-			  			<th style="width:10%;">Quantity</th>			  			
+			  			<th style="width:10%;">Quantity</th>
 			  			<th style="width:15%;">Total</th>			  			
 			  			<th style="width:10%;"></th>
 			  		</tr>
@@ -103,7 +104,7 @@ if($_GET['o'] == 'add') {
 			  		<?php
 			  		$arrayNumber = 0;
 			  		for($x = 1; $x < 2; $x++) { ?>
-			  			<tr id="row<?php echo $x; ?>" class="<?php echo $arrayNumber; ?>">			  				
+			  			<tr id="row<?php echo $x; ?>" class="<?php echo $arrayNumber; ?>" data-rowId ="<?= $x; ?>">
 			  				<td style="margin-left:20px;">
 			  					<div class="form-group">
 
@@ -119,9 +120,21 @@ if($_GET['o'] == 'add') {
 
 			  						?>
 		  						</select>
+								
 			  					</div>
 			  				</td>
-			  				<td style="padding-left:20px;">			  					
+			  				<td style="margin-left:20px;">
+			  					<div class="form-group">
+			  					<select class="form-control" name="price_type[]" id="price_type<?php echo $x; ?>"  onchange="getProductRateWiseData(this,<?php echo $x; ?>)">
+			  						<option value="">Select price type</option>
+                                    <option value="rate">Rate</option>
+                                    <option value="wholesale">WholeSale</option>
+                                    <option value="thb">Thb</option>
+                                </select>
+
+			  					</div>
+			  				</td>
+			  				<td style="padding-left:20px;">
 			  					<input type="text" name="rate[]" id="rate<?php echo $x; ?>" autocomplete="off" disabled="true" class="form-control" />			  					
 			  					<input type="hidden" name="rateValue[]" id="rateValue<?php echo $x; ?>" autocomplete="off" class="form-control" />			  					
 			  				</td>
@@ -330,6 +343,7 @@ if($_GET['o'] == 'add') {
 			  	<thead>
 			  		<tr>			  			
 			  			<th style="width:40%;">Product</th>
+			  			<th style="width:40%;">Product</th>
 			  			<th style="width:20%;">Rate</th>
 			  			<th style="width:15%;">Available Quantity</th>			  			
 			  			<th style="width:15%;">Quantity</th>			  			
@@ -376,8 +390,8 @@ if($_GET['o'] == 'add') {
 			  					</div>
 			  				</td>
 			  				<td style="padding-left:20px;">			  					
-			  					<input type="text" name="rate[]" id="rate<?php echo $x; ?>" autocomplete="off" disabled="true" class="form-control" value="<?php echo $orderItemData['rate']; ?>" />			  					
-			  					<input type="hidden" name="rateValue[]" id="rateValue<?php echo $x; ?>" autocomplete="off" class="form-control" value="<?php echo $orderItemData['rate']; ?>" />			  					
+			  					<input type="text" name="rate[]" id="rate<?php echo $x; ?>" autocomplete="off" disabled="true" class="form-control" value="<?php echo $orderItemData['rate']; ?>" />
+			  					<input type="hidden" name="rateValue[]" id="rateValue<?php echo $x; ?>" autocomplete="off" class="form-control" value="<?php echo $orderItemData['rate']; ?>" />
 			  				</td>
 							<td style="padding-left:20px;">
 			  					<div class="form-group">

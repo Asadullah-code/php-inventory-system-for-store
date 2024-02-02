@@ -30,7 +30,15 @@
 
   <!-- bootstrap js -->
 	<script src="assests/bootstrap/js/bootstrap.min.js"></script>
-
+  <?php
+function dd($variable)
+{
+    echo '<pre>';
+    var_dump($variable);
+    echo '</pre>';
+    die();
+}
+?>
 </head>
 <body>
 
