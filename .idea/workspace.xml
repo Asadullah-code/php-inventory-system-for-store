@@ -34,12 +34,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1706901823719</updated>
-      <workItem from="1706901825477" duration="4952000" />
+      <workItem from="1706901825477" duration="8500000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="478" y="147" width="579" height="530" key="find.popup" timestamp="1706907977427">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="478" y="147" width="579" height="530" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1706907977427" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -48,6 +54,11 @@
           <url>file://$PROJECT_DIR$/orders.php</url>
           <line>106</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/orders.php</url>
+          <line>57</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -41,7 +41,7 @@ if($_POST) {
 
 			$editQuantity = $updateProductQuantityResult[0] + $orderItemData[0];							
 
-			$updateQuantitySql = "UPDATE product SET quantity = $editQuantity WHERE product_id = ".$_POST['productName'][$x]."";
+			$updateQuantitySql = "UPDATE product SET quantity = $editQuantity WHERE product_id = ".$_POST['productName'][$x];
 			$connect->query($updateQuantitySql);		
 		} // while	
 		
@@ -51,9 +51,9 @@ if($_POST) {
 	} // /for quantity
 
 	// remove the order item data from order item table
-	for($x = 0; $x < count($_POST['productName']); $x++) {			
+	for($x = 0; $x < count($_POST['productName']); $x++) {
 		$removeOrderSql = "DELETE FROM order_item WHERE order_id = {$orderId}";
-		$connect->query($removeOrderSql);	
+		$connect->query($removeOrderSql);
 	} // /for quantity
 
 	if($readyToUpdateOrderItem) {
@@ -69,10 +69,10 @@ if($_POST) {
 					$connect->query($updateProductTable);
 
 					// add into order_item
-				$orderItemSql = "INSERT INTO order_item (order_id, product_id, quantity, rate, total, order_item_status) 
-				VALUES ({$orderId}, '".$_POST['productName'][$x]."', '".$_POST['quantity'][$x]."', '".$_POST['rateValue'][$x]."', '".$_POST['totalValue'][$x]."', 1)";
+                $orderItemSql = "INSERT INTO order_item (order_id, product_id, quantity, rate, total, order_item_status,product_price_type) 
+				VALUES ({$orderId}, '".$_POST['productName'][$x]."', '".$_POST['quantity'][$x]."', '".$_POST['rateValue'][$x]."', '".$_POST['totalValue'][$x]."', 1, '".$_POST['price_type'][$x]."')";
 
-				$connect->query($orderItemSql);		
+                $connect->query($orderItemSql);
 			} // while	
 		} // /for quantity
 	}

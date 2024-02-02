@@ -343,7 +343,7 @@ if($_GET['o'] == 'add') {
 			  	<thead>
 			  		<tr>			  			
 			  			<th style="width:40%;">Product</th>
-			  			<th style="width:40%;">Product</th>
+			  			<th style="width:40%;">Price Type</th>
 			  			<th style="width:20%;">Rate</th>
 			  			<th style="width:15%;">Available Quantity</th>			  			
 			  			<th style="width:15%;">Quantity</th>			  			
@@ -354,7 +354,7 @@ if($_GET['o'] == 'add') {
 			  	<tbody>
 			  		<?php
 
-			  		$orderItemSql = "SELECT order_item.order_item_id, order_item.order_id, order_item.product_id, order_item.quantity, order_item.rate, order_item.total FROM order_item WHERE order_item.order_id = {$orderId}";
+			  		$orderItemSql = "SELECT order_item.order_item_id,product_price_type, order_item.order_id, order_item.product_id, order_item.quantity, order_item.rate, order_item.total FROM order_item WHERE order_item.order_id = {$orderId}";
 						$orderItemResult = $connect->query($orderItemSql);
 						// $orderItemData = $orderItemResult->fetch_all();						
 						
@@ -364,7 +364,7 @@ if($_GET['o'] == 'add') {
 			  		$x = 1;
 			  		while($orderItemData = $orderItemResult->fetch_array()) { 
 			  			// print_r($orderItemData); ?>
-			  			<tr id="row<?php echo $x; ?>" class="<?php echo $arrayNumber; ?>">			  				
+			  			<tr id="row<?php echo $x; ?>" data-rowId = "<?= $x?>"class="<?php echo $arrayNumber; ?>">
 			  				<td style="margin-left:20px;">
 			  					<div class="form-group">
 
@@ -389,6 +389,18 @@ if($_GET['o'] == 'add') {
 		  						</select>
 			  					</div>
 			  				</td>
+                            <td style="margin-left:20px;">
+                                <div class="form-group">
+                                    <select class="form-control" name="price_type[]" id="price_type<?php echo $x; ?>"  onchange="getProductRateWiseData(this,<?php echo $x; ?>)">
+                                        <option value="">Select price type</option>
+
+                                        <option value="rate"<?= $orderItemData['product_price_type'] === "rate"  ? "selected" : "" ?>>Rate</option>
+                                        <option value="wholesale"<?= $orderItemData['product_price_type'] === "wholesale"  ? "selected" : "" ?>>WholeSale</option>
+                                        <option value="thb"<?= $orderItemData['product_price_type'] === "thb"  ? "selected" : "" ?>>Thb</option>
+                                    </select>
+
+                                </div>
+                            </td>
 			  				<td style="padding-left:20px;">			  					
 			  					<input type="text" name="rate[]" id="rate<?php echo $x; ?>" autocomplete="off" disabled="true" class="form-control" value="<?php echo $orderItemData['rate']; ?>" />
 			  					<input type="hidden" name="rateValue[]" id="rateValue<?php echo $x; ?>" autocomplete="off" class="form-control" value="<?php echo $orderItemData['rate']; ?>" />
