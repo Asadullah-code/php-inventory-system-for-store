@@ -77,6 +77,12 @@ function dd($variable)
 		<?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
         <li id="navProduct"><a href="product.php"> <i class="glyphicon glyphicon-ruble"></i> Product </a></li> 
 		<?php } ?>
+    <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+        <li id=""><a href="operator.php"> <i class="glyphicon glyphicon-user"></i> Operator </a></li> 
+    <?php } ?>
+    <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+        <li id=""><a href="contaminated.php"> <i class="glyphicon glyphicon-tree-conifer"></i> Contaminated </a></li> 
+    <?php } ?>
 		
         <li class="dropdown" id="navOrder">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-shopping-cart"></i> Orders <span class="caret"></span></a>

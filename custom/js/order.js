@@ -1,12 +1,12 @@
 var manageOrderTable;
-let defaultVat = 18;
+let defaultVat = 0;
 let selectedProductId = null;
 $(document).ready(function () {
     $("#paymentPlace").change(function () {
         if ($("#paymentPlace").val() == 2) {
-            $(".gst").text("IGST 18%");
+            $(".gst").text("IGST 5%");
         } else {
-            $(".gst").text("GST 18%");
+            $(".gst").text("GST 5%");
         }
     });
 
@@ -580,7 +580,12 @@ $('#paymentType').change(function () {
     var vat = (Number($("#subTotal").val()) / 100) * ($(this).val() == 1 ? 5 : defaultVat);
     $("#vat").val(vat);
     $("#vatValue").val(vat);
+    subAmount();
 })
+
+function addShippingCostToTotal(shipping_input){
+	subAmount();
+}
 
 function subAmount() {
     var tableProductLength = $("#productTable tbody tr").length;
@@ -599,7 +604,7 @@ function subAmount() {
     $("#subTotal").val(totalSubAmount);
     $("#subTotalValue").val(totalSubAmount);
 
-    console.log($('#paymentType').val())
+    //console.log($('#paymentType').val())
     // vat
     var vat = (Number($("#subTotal").val()) / 100) * ($('#paymentType').val() == 1 ? 5 : defaultVat);
     vat = vat.toFixed(2);
@@ -607,14 +612,17 @@ function subAmount() {
     $("#vatValue").val(vat);
 
     // total amount
-    var totalAmount = (Number($("#subTotal").val()) + Number($("#vat").val()));
+    var totalAmount = (Number($("#subTotal").val()) + Number($("#vat").val()) + Number($("#shipping_cost").val()));
     totalAmount = totalAmount.toFixed(2);
     $("#totalAmount").val(totalAmount);
     $("#totalAmountValue").val(totalAmount);
+    
 
     var discount = $("#discount").val();
-    if (discount) {
-        var grandTotal = Number($("#totalAmount").val()) - Number(discount);
+    if (discount && Number(discount)>0) {
+    	console.log(totalAmount);
+        //var grandTotal = Number($("#totalAmount").val()) - Number(discount);
+        var grandTotal = totalAmount - Number(discount);
         grandTotal = grandTotal.toFixed(2);
         $("#grandTotal").val(grandTotal);
         $("#grandTotalValue").val(grandTotal);
@@ -644,6 +652,7 @@ function discountFunc() {
     var grandTotal;
     if (totalAmount) {
         grandTotal = Number($("#totalAmount").val()) - Number($("#discount").val());
+        //grandTotal = Number($("#totalAmount").val()) - Number($("#discount").val());
         grandTotal = grandTotal.toFixed(2);
 
         $("#grandTotal").val(grandTotal);

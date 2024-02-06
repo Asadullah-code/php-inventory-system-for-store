@@ -92,8 +92,8 @@ if($_GET['o'] == 'add') {
 			  	<thead>
 			  		<tr>			  			
 			  			<th style="width:30%;">Product</th>
-			  			<th style="width:20%;">Price Type</th>
-			  			<th style="width:20%;">Rate</th>
+			  			<th style="width:15%;">Price Type</th>
+			  			<th style="width:15%;">Rate</th>
 			  			<th style="width:15%;">Available Quantity</th>
 			  			<th style="width:10%;">Quantity</th>
 			  			<th style="width:15%;">Total</th>			  			
@@ -123,7 +123,7 @@ if($_GET['o'] == 'add') {
 								
 			  					</div>
 			  				</td>
-			  				<td style="margin-left:20px;">
+			  				<td style="padding-left:30px;">
 			  					<div class="form-group">
 			  					<select class="form-control" name="price_type[]" id="price_type<?php echo $x; ?>"  onchange="getProductRateWiseData(this,<?php echo $x; ?>)">
 			  						<option value="">Select price type</option>
@@ -180,25 +180,26 @@ if($_GET['o'] == 'add') {
 				      <input type="hidden" class="form-control" id="subTotalValue" name="subTotalValue" />
 				    </div>
 				  </div> <!--/form-group-->			  
-				   <!--/form-group-->			  
-				  <div class="form-group">
+				   <!--/form-group-->	<input type="hidden" class="form-control" id="totalAmount" name="totalAmount" disabled="true"/>
+				      <input type="hidden" class="form-control" id="totalAmountValue" name="totalAmountValue" />		  
+				  <!-- <div class="form-group">
 				    <label for="totalAmount" class="col-sm-3 control-label">Total Amount</label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="totalAmount" name="totalAmount" disabled="true"/>
 				      <input type="hidden" class="form-control" id="totalAmountValue" name="totalAmountValue" />
 				    </div>
-				  </div> <!--/form-group-->			  
+				  </div> -->
+				   <!--/form-group-->			  
 				  <div class="form-group">
-				    <label for="discount" class="col-sm-3 control-label">Shipping Cost</label>
+				    <label for="shipping_cost" class="col-sm-3 control-label">Shipping Coost</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" />
+				      <input type="number" class="form-control" id="shipping_cost" name="shipping_cost" onkeyup="addShippingCostToTotal(this)" autocomplete="off" />
 				    </div>
 				  </div> <!--/form-group-->	
 				  <div class="form-group">
-				    <label for="grandTotal" class="col-sm-3 control-label">Grand Total</label>
+				    <label for="discount" class="col-sm-3 control-label">Discount</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="grandTotal" name="grandTotal" disabled="true" />
-				      <input type="hidden" class="form-control" id="grandTotalValue" name="grandTotalValue" />
+				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" />
 				    </div>
 				  </div> <!--/form-group-->	
 				<p>  <div class="form-group">
@@ -208,6 +209,13 @@ if($_GET['o'] == 'add') {
 				      <input type="hidden" class="form-control" id="vatValue" name="vatValue" />
 				    </div>
 				  </div>	</p>  		  
+				  <div class="form-group">
+				    <label for="grandTotal" class="col-sm-3 control-label">Grand Total</label>
+				    <div class="col-sm-9">
+				      <input type="number" class="form-control" id="grandTotal" name="grandTotal" disabled="true" />
+				      <input type="hidden" class="form-control" id="grandTotalValue" name="grandTotalValue" />
+				    </div>
+				  </div> <!--/form-group-->	
 			  </div> <!--/col-md-6-->
 
 			  <div class="col-md-6">
