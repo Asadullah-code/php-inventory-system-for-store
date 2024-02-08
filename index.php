@@ -62,6 +62,13 @@ if($_POST) {
 	<link rel="stylesheet" href="assests/bootstrap/css/bootstrap-theme.min.css">
 	<!-- font awesome -->
 	<link rel="stylesheet" href="assests/font-awesome/css/font-awesome.min.css">
+	<style>
+		.active {
+	     background-color: #cce7f4b0;
+	     padding: 16px;
+        box-shadow: 0px 0px 7px #0000007d; /* Example box shadow */
+    }
+	</style>
 
   <!-- custom css -->
   <link rel="stylesheet" href="custom/css/custom.css">	
@@ -84,6 +91,36 @@ if($_POST) {
 						<h3 class="panel-title">Please Sign in</h3>
 					</div>
 					<div class="panel-body">
+						<div class="row panelrow">
+							<div class="col-lg-6 col-md-6 col-12 panelCol1"> 
+								<a id="adminBtn" class="panelCol1Btn active" onclick="showLoginForm('admin')" href="#">As Admin</a>
+							</div>
+							<div class="col-lg-6 col-md-6 col-12 panelCol2">
+								<a id="userBtn" class="panelCol2Btn" onclick="showLoginForm('user')" href="#">As User</a>
+							</div>
+						</div>
+						<script>
+							function showLoginForm(userType){
+								$loginForm = document.getElementById("loginForm");
+								$loginFormU = document.getElementById("loginFormU");
+
+								if (userType ==='admin') {
+									loginForm.style.display = 'block';
+									loginFormU.style.display = 'none';
+
+									adminBtn.classList.add('active');
+									userBtn.classList.remove('active');
+								}
+								else{
+									loginForm.style.display = 'none';
+									loginFormU.style.display = 'block';
+
+									userBtn.classList.add('active');
+									adminBtn.classList.remove('active');
+								}
+
+							}
+						</script>
 
 						<div class="messages">
 							<?php if($errors) {
@@ -97,7 +134,7 @@ if($_POST) {
 
 						<form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" id="loginForm">
 							<fieldset>
-							  <div class="form-group">
+							    <div class="form-group">
 									<label for="username" class="col-sm-2 control-label">Username</label>
 									<div class="col-sm-10">
 									  <input type="text" class="form-control" id="username" name="username" placeholder="Username" autocomplete="off" />
@@ -109,10 +146,31 @@ if($_POST) {
 									  <input type="password" class="form-control" id="password" name="password" placeholder="Password" autocomplete="off" />
 									</div>
 								</div>								
-								<div class="form-group">
+								<div class="form-group d-flex align-items-center justify-content-center">
 									<div class="col-sm-offset-2 col-sm-10">
-									  <button type="submit" class="btn btn-default"> <i class="glyphicon glyphicon-log-in"></i> Sign in</button>
+									  <button type="submit" class="btn btn-default" style="margin-bottom: 12px;"> <i class="glyphicon glyphicon-log-in"></i> As Admin</button>
+								    </div>
+								</div>
+							</fieldset>
+						</form>
+						<form action="php_action/checkUserLogin.php" method="post" id="loginFormU" style="display: none;">
+							<fieldset>
+							    <div class="form-group">
+									<label for="usernameu" class="col-sm-2 control-label">Username</label>
+									<div class="col-sm-10">
+									  <input type="text" class="form-control" id="usernameu" name="usernameU" placeholder="Username" autocomplete="off" />
 									</div>
+								</div>
+								<div class="form-group">
+									<label for="passwordu" class="col-sm-2 control-label">Password</label>
+									<div class="col-sm-10">
+									  <input type="password" class="form-control" id="passwordu" name="passwordU" placeholder="Password" autocomplete="off" />
+									</div>
+								</div>								
+								<div class="form-group d-flex align-items-center justify-content-center">
+									<div class="col-sm-offset-2 col-sm-10">
+									  <button type="submit" class="btn btn-default" style="margin-bottom: 12px;"> <i class="glyphicon glyphicon-log-in"></i> As User</button>
+								    </div>
 								</div>
 							</fieldset>
 						</form>

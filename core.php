@@ -10,6 +10,11 @@ if(!$_SESSION['userId']) {
 	header('location:'.$store_url);	
 } 
 
+if (!isset($_SESSION['temp_userId'])) {
+    // User is not logged in, redirect to the login form
+    header("Location: index.php");
+    exit();
+}
 
 
 ?>
