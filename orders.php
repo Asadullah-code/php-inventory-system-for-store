@@ -127,11 +127,10 @@ if($_GET['o'] == 'add') {
 			  					<div class="form-group">
 			  					<select class="form-control" name="price_type[]" id="price_type<?php echo $x; ?>"  onchange="getProductRateWiseData(this,<?php echo $x; ?>)">
 			  						<option value="">Select price type</option>
-                                    <option value="rate">Rate</option>
-                                    <option value="wholesale">WholeSale</option>
-                                    <option value="thb">Thb</option>
-                                </select>
-
+                        <option value="rate">Rate</option>
+                        <option value="wholesale">WholeSale</option>
+                        <option value="thb">Thb</option>
+                    </select>
 			  					</div>
 			  				</td>
 			  				<td style="padding-left:20px;">
@@ -191,9 +190,9 @@ if($_GET['o'] == 'add') {
 				  </div> -->
 				   <!--/form-group-->			  
 				  <div class="form-group">
-				    <label for="shipping_cost" class="col-sm-3 control-label">Shipping Coost</label>
+				    <label for="shipping_cost" class="col-sm-3 control-label">Shipping Cost</label>
 				    <div class="col-sm-9">
-				      <input type="number" class="form-control" id="shipping_cost" name="shipping_cost" onkeyup="addShippingCostToTotal(this)" autocomplete="off" />
+				      <input type="number" class="form-control" id="shipping_cost" name="shipping" onkeyup="addShippingCostToTotal(this)" autocomplete="off" />
 				    </div>
 				  </div> <!--/form-group-->	
 				  <div class="form-group">

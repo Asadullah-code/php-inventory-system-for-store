@@ -1,5 +1,6 @@
 <?php
 include 'db_connect.php'; // Assuming db_connect.php includes the database connection
+session_start(); // Start the session
 
 // Retrieve username and password from the form submission
 $username = $_POST['usernameU'];
@@ -17,7 +18,14 @@ $result = mysqli_query($connect, $sql);
 if ($result) {
     // Check if a row is returned
     if (mysqli_num_rows($result) == 1) {
-        // Username and password are correct, redirect to the dashboard
+        // Fetch user data
+        $row = mysqli_fetch_assoc($result);
+        
+        // Store user ID and username in session
+        $_SESSION['temp_user_id'] = $row['id'];
+        $_SESSION['temp_user_username'] = $row['username'];
+        
+        // Redirect to the dashboard
         header("Location: ".$store_url."dashboard.php");
         exit();
     } else {

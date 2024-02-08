@@ -14,6 +14,7 @@ if($_POST) {
   $subTotalValue 				= $_POST['subTotalValue'];
   $vatValue 						=	$_POST['vatValue'];
   $totalAmountValue     = $_POST['totalAmountValue'];
+  $shipping     = $_POST['shipping'];
   $discount 						= $_POST['discount'];
   $grandTotalValue 			= $_POST['grandTotalValue'];
   $paid 								= $_POST['paid'];
@@ -25,7 +26,7 @@ if($_POST) {
   $userid 				= $_SESSION['userId'];
 
 				
-	$sql = "INSERT INTO orders (order_date, client_name, client_contact, client_address, sub_total, vat, total_amount, discount, grand_total, paid, due, payment_type, payment_status,payment_place, gstn,order_status,user_id) VALUES ('$orderDate', '$clientName', '$clientContact', 'clientAddress', '$subTotalValue', '$vatValue', '$totalAmountValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', $paymentType, $paymentStatus,$paymentPlace,$gstn, 1,$userid)";
+	$sql = "INSERT INTO orders (order_date, client_name, client_contact, client_address, sub_total, vat, total_amount, shipping, discount, grand_total, paid, due, payment_type, payment_status,payment_place, gstn,order_status,user_id) VALUES ('$orderDate', '$clientName', '$clientContact', 'clientAddress', '$subTotalValue', '$shipping', '$vatValue', '$totalAmountValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', $paymentType, $paymentStatus,$paymentPlace,$gstn, 1,$userid)";
 	
 	$order_id;
 	$orderStatus = false;
