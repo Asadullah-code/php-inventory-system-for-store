@@ -4,7 +4,7 @@
 require_once 'core.php';
 
 $valid['success'] = array('success' => false, 'messages' => array(), 'order_id' => '');
-// print_r($valid);
+
 if($_POST) {	
 
 	$orderDate 						= date('Y-m-d', strtotime($_POST['orderDate']));	
@@ -25,8 +25,8 @@ if($_POST) {
   $gstn 				= $_POST['gstn'];
   $userid 				= $_SESSION['userId'];
 
-				
-	$sql = "INSERT INTO orders (order_date, client_name, client_contact, client_address, sub_total, vat, total_amount, shipping, discount, grand_total, paid, due, payment_type, payment_status,payment_place, gstn,order_status,user_id) VALUES ('$orderDate', '$clientName', '$clientContact', 'clientAddress', '$subTotalValue', '$shipping', '$vatValue', '$totalAmountValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', $paymentType, $paymentStatus,$paymentPlace,$gstn, 1,$userid)";
+
+    $sql = "INSERT INTO orders (order_date, client_name, client_contact, client_address, sub_total, vat, total_amount, shipping, discount, grand_total, paid, due, payment_type, payment_status, payment_place, gstn, order_status, user_id) VALUES ('$orderDate', '$clientName', '$clientContact', '$clientAddress', '$subTotalValue', '$vatValue', '$totalAmountValue', '$shipping', '$discount', '$grandTotalValue', '$paid', '$dueValue', '$paymentType', '$paymentStatus', '$paymentPlace', '$gstn', 1, '$userid')";
 	
 	$order_id;
 	$orderStatus = false;

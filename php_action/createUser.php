@@ -9,10 +9,11 @@ if($_POST) {
 	$userName 		= $_POST['userName'];
   $upassword 			= md5($_POST['upassword']);
   $uemail 			= $_POST['uemail'];
+  $role_id 			= $_POST['role_id'];
 
 	
-				$sql = "INSERT INTO users (username, password,email) 
-				VALUES ('$userName', '$upassword' , '$uemail')";
+				$sql = "INSERT INTO users (username, password,email,role_id) 
+				VALUES ('$userName', '$upassword' , '$uemail', '$role_id')";
 				if($connect->query($sql) === TRUE) {
 					$valid['success'] = true;
 					$valid['messages'] = "Successfully Added";	

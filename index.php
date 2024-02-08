@@ -8,47 +8,58 @@ if(isset($_SESSION['userId'])) {
 
 $errors = array();
 
-if($_POST) {		
+if ($_POST) {
 
-	$username = $_POST['username'];
-	$password = $_POST['password'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $role = $_POST['role'];
+//    echo "<pre>";
+//    print_r($_POST);
+//    die();
+    if (empty($username) || empty($password)) {
+        if (empty($username)) {
+            $errors[] = "Username is required";
+        }
 
-	if(empty($username) || empty($password)) {
-		if($username == "") {
-			$errors[] = "Username is required";
-		} 
+        if (empty($password)) {
+            $errors[] = "Password is required";
+        }
+    } else {
 
-		if($password == "") {
-			$errors[] = "Password is required";
-		}
-	} else {
-		$sql = "SELECT * FROM users WHERE username = '$username'";
-		$result = $connect->query($sql);
+        // Use a prepared statement to avoid SQL injection
+        $stmt = $connect->prepare("SELECT users.*, roles.name as role_name FROM users
+                                    JOIN roles ON users.role_id = roles.id
+                                    WHERE users.username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-		if($result->num_rows == 1) {
-			$password = md5($password);
-			// exists
-			$mainSql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-			$mainResult = $connect->query($mainSql);
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            $password = md5($password);
 
-			if($mainResult->num_rows == 1) {
-				$value = $mainResult->fetch_assoc();
-				$user_id = $value['user_id'];
+            if ($role == $row['role_name']) {
+                if ($password == $row['password']) {
+                    // Set session
+                    $_SESSION['userId'] = $row['user_id'];
+                    $_SESSION['userRole'] = $row['role_name'];
 
-				// set session
-				$_SESSION['userId'] = $user_id;
+                    header('location:' . $store_url . 'dashboard.php');
+                } else {
+                    $errors[] = "Incorrect username/password combination";
+                }
+            }else{
+                $errors[] = "No ".$role." registered with this email";
+            }
 
-				header('location:'.$store_url.'dashboard.php');	
-			} else{
-				
-				$errors[] = "Incorrect username/password combination";
-			} // /else
-		} else {		
-			$errors[] = "Username doesnot exists";		
-		} // /else
-	} // /else not empty username // password
-	
-} // /if $_POST
+
+        } else {
+            $errors[] = "Username does not exist";
+        }
+
+        $stmt->close();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -93,10 +104,10 @@ if($_POST) {
 					<div class="panel-body">
 						<div class="row panelrow">
 							<div class="col-lg-6 col-md-6 col-12 panelCol1"> 
-								<a id="adminBtn" class="panelCol1Btn active" onclick="showLoginForm('admin')" href="#">As Admin</a>
+								<a id="adminBtn" class="panelCol1Btn role_btn  active" data-role="admin" href="#">As Admin</a>
 							</div>
 							<div class="col-lg-6 col-md-6 col-12 panelCol2">
-								<a id="userBtn" class="panelCol2Btn" onclick="showLoginForm('user')" href="#">As User</a>
+								<a id="userBtn" class="panelCol2Btn role_btn" data-role="user" href="#">As User</a>
 							</div>
 						</div>
 						<script>
@@ -120,7 +131,13 @@ if($_POST) {
 								}
 
 							}
-						</script>
+                            $(document).on('click', '.role_btn', function () {
+                                $(".role_btn").removeClass('active');
+                                $(this).addClass('active');
+                                $('#loginForm').find('input[name="role"]').val($(this).data('role'))
+                            });
+
+                        </script>
 
 						<div class="messages">
 							<?php if($errors) {
@@ -140,6 +157,7 @@ if($_POST) {
 									  <input type="text" class="form-control" id="username" name="username" placeholder="Username" autocomplete="off" />
 									</div>
 								</div>
+                                <input type="hidden" name="role" value="admin">
 								<div class="form-group">
 									<label for="password" class="col-sm-2 control-label">Password</label>
 									<div class="col-sm-10">
@@ -149,27 +167,6 @@ if($_POST) {
 								<div class="form-group d-flex align-items-center justify-content-center">
 									<div class="col-sm-offset-2 col-sm-10">
 									  <button type="submit" class="btn btn-default" style="margin-bottom: 12px;"> <i class="glyphicon glyphicon-log-in"></i> As Admin</button>
-								    </div>
-								</div>
-							</fieldset>
-						</form>
-						<form action="php_action/checkUserLogin.php" method="post" id="loginFormU" style="display: none;">
-							<fieldset>
-							    <div class="form-group">
-									<label for="usernameu" class="col-sm-2 control-label">Username</label>
-									<div class="col-sm-10">
-									  <input type="text" class="form-control" id="usernameu" name="usernameU" placeholder="Username" autocomplete="off" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="passwordu" class="col-sm-2 control-label">Password</label>
-									<div class="col-sm-10">
-									  <input type="password" class="form-control" id="passwordu" name="passwordU" placeholder="Password" autocomplete="off" />
-									</div>
-								</div>								
-								<div class="form-group d-flex align-items-center justify-content-center">
-									<div class="col-sm-offset-2 col-sm-10">
-									  <button type="submit" class="btn btn-default" style="margin-bottom: 12px;"> <i class="glyphicon glyphicon-log-in"></i> As User</button>
 								    </div>
 								</div>
 							</fieldset>

@@ -41,7 +41,8 @@ $(document).ready(function() {
 			// form validation
 			var userName = $("#userName").val();
 			var upassword = $("#upassword").val();
-	
+			var role_id = $("#role_id").val();
+
 			if(userName == "") {
 				$("#userName").after('<p class="text-danger">User name field is required</p>');
 				$('#userName').closest('.form-group').addClass('has-error');
@@ -64,10 +65,20 @@ $(document).ready(function() {
 				$("#upassword").closest('.form-group').addClass('has-success');	  	
 			}	// /else
 
-			
-				// /else
+			if(role_id && role_id !== "") {
+				// remov error text field
+				$("#role_id").find('.text-danger').remove();
+				// success out for form
+				$("#role_id").closest('.form-group').addClass('has-success');
+			}	else {
+				$("#role_id").after('<p class="text-danger">Role field is required</p>');
+				$('#role_id').closest('.form-group').addClass('has-error');
 
-			if(upassword && userName) {
+			}
+
+			// /else
+
+			if(upassword && userName && role_id) {
 				// submit loading button
 				$("#createUserBtn").button('loading');
 
