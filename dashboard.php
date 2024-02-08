@@ -43,7 +43,7 @@ $connect->close();
 
 
 <div class="row">
-	<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+	
 	<div class="col-md-4">
 		<div class="panel panel-success">
 			<div class="panel-heading">
@@ -70,7 +70,7 @@ $connect->close();
 	</div> <!--/col-md-4-->
 	
 	
-	<?php } ?>  
+ 
 		<div class="col-md-4">
 			<div class="panel panel-info">
 			<div class="panel-heading">
@@ -99,7 +99,7 @@ $connect->close();
 
 	</div>
 	
-	<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+
 	<div class="col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i> Date Wise Order</div>
@@ -110,15 +110,19 @@ $connect->close();
 			  			<th style="width:40%;">Date</th>
 			  			<th style="width:40%;">Name</th>
 			  			<th style="width:20%;">Orders in $</th>
-			  			<!-- <th style="width:20%;">Orders in THB</th> -->
+			  			<th style="width:20%;">Orders in THB</th>
 			  		</tr>
 			  	</thead>
 			  	<tbody>
 						<?php
-             include 'php_action/db_connect.php';
+						include 'php_action/db_connect.php';
 
 						// SQL query to fetch data from the "orders" table for today's date
-						$sqlOrder = "SELECT order_date, client_name, total_amount FROM orders WHERE order_date = '$currentDate'";
+						$sqlOrder = "SELECT o.order_date, o.client_name, o.total_amount, oi.total
+             FROM orders AS o
+             JOIN order_item AS oi ON o.order_id = oi.order_id
+             WHERE o.order_date = '$currentDate'
+             AND oi.product_price_type = 'thb'";
 
 						$resultOrder = $connect->query($sqlOrder);
 
@@ -129,7 +133,7 @@ $connect->close();
 						        echo "<td>" . $row["order_date"] . "</td>";
 						        echo "<td>" . $row["client_name"] . "</td>";
 						        echo "<td>" . $row["total_amount"] . "</td>";
-						        //echo "<td>" . $row["thb"] . "</td>";
+						        echo "<td>" . $row["total"] . "</td>";
 						        echo "</tr>";
 						    }
 						} else {
@@ -140,6 +144,7 @@ $connect->close();
 						$connect->close();
 						?>
 
+
 				</tbody>
 				</table>
 				<!--<div id="calendar"></div>-->
@@ -147,7 +152,6 @@ $connect->close();
 		</div>
 		
 	</div> 
-	<?php  } ?>
 	
 </div> <!--/row-->
 

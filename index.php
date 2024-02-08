@@ -166,7 +166,7 @@ if ($_POST) {
 								</div>								
 								<div class="form-group d-flex align-items-center justify-content-center">
 									<div class="col-sm-offset-2 col-sm-10">
-									  <button type="submit" class="btn btn-default" style="margin-bottom: 12px;"> <i class="glyphicon glyphicon-log-in"></i> As Admin</button>
+									  <button type="submit" class="btn btn-default" style="margin-bottom: 12px;"> <i class="glyphicon glyphicon-log-in"></i> Login</button>
 								    </div>
 								</div>
 							</fieldset>

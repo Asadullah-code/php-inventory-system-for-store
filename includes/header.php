@@ -74,9 +74,7 @@ function dd($variable)
 		<?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
         <li id="navCategories"><a href="categories.php"> <i class="glyphicon glyphicon-th-list"></i> Category</a></li>        
 		<?php } ?>
-		<?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
         <li id="navProduct"><a href="product.php"> <i class="glyphicon glyphicon-ruble"></i> Product </a></li> 
-		<?php } ?>
     <?php 
     $current_page = basename($_SERVER['PHP_SELF']);
 
