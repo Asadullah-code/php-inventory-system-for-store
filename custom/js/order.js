@@ -202,7 +202,9 @@ $(document).ready(function () {
             var orderDate = $("#orderDate").val();
             var clientName = $("#clientName").val();
             var clientContact = $("#clientContact").val();
+            var clientAddress = $("#clientAddress").val();
             var paid = $("#paid").val();
+            var shipping = $("#shipping").val();
             var discount = $("#discount").val();
             var paymentType = $("#paymentType").val();
             var paymentStatus = $("#paymentStatus").val();
@@ -228,12 +230,25 @@ $(document).ready(function () {
             } else {
                 $('#clientContact').closest('.form-group').addClass('has-success');
             } // /else
+            if (clientAddress == "") {
+                $("#clientAddress").after('<p class="text-danger"> The Address field is required </p>');
+                $('#clientAddress').closest('.form-group').addClass('has-error');
+            } else {
+                $('#clientAddress').closest('.form-group').addClass('has-success');
+            } // /else
 
             if (paid == "") {
                 $("#paid").after('<p class="text-danger"> The Paid field is required </p>');
                 $('#paid').closest('.form-group').addClass('has-error');
             } else {
                 $('#paid').closest('.form-group').addClass('has-success');
+            } // /else
+
+            if (shipping == "") {
+                $("#shipping").after('<p class="text-danger"> The shipping field is required </p>');
+                $('#shipping').closest('.form-group').addClass('has-error');
+            } else {
+                $('#shipping').closest('.form-group').addClass('has-success');
             } // /else
 
             if (discount == "") {
@@ -300,7 +315,7 @@ $(document).ready(function () {
             } // for
 
 
-            if (orderDate && clientName && clientContact && paid && discount && paymentType && paymentStatus) {
+            if (orderDate && clientName && clientContact && clientAddress && paid && shipping && discount && paymentType && paymentStatus) {
                 if (validateProduct == true && validateQuantity == true) {
                     // create order button
                     // $("#createOrderBtn").button('loading');

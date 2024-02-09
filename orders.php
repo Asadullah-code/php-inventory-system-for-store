@@ -239,8 +239,8 @@ if($_GET['o'] == 'add') {
 				      	<option value="1">PayPal</option>
 				      	<option value="2">Western Union</option>
 				      	<option value="3">Wise</option>
-						<option value="4">Bank Transfer</option>
-						<option value="5">Cash</option>
+								<option value="4">Bank Transfer</option>
+								<option value="5">Cash</option>
 				      </select>
 				    </div>
 				  </div> <!--/form-group-->							  
@@ -320,7 +320,7 @@ if($_GET['o'] == 'add') {
 
   			<?php $orderId = $_GET['i'];
 
-  			$sql = "SELECT orders.order_id, orders.order_date, orders.client_name, orders.client_contact, orders.sub_total, orders.vat, orders.total_amount, orders.discount, orders.grand_total, orders.paid, orders.due, orders.payment_type, orders.payment_status,orders.payment_place,orders.gstn FROM orders 	
+  			$sql = "SELECT orders.order_id, orders.order_date, orders.client_name, orders.client_contact, orders.client_address, orders.sub_total, orders.vat, orders.total_amount, orders.shipping, orders.discount, orders.grand_total, orders.paid, orders.due, orders.payment_type, orders.payment_status,orders.payment_place,orders.gstn FROM orders 	
 					WHERE orders.order_id = {$orderId}";
 
 				$result = $connect->query($sql);
@@ -345,14 +345,19 @@ if($_GET['o'] == 'add') {
 			      <input type="text" class="form-control" id="clientContact" name="clientContact" placeholder="Contact Number" autocomplete="off" value="<?php echo $data[3] ?>" />
 			    </div>
 			  </div> <!--/form-group-->			  
-
+			  <div class="form-group">
+			    <label for="clientAddress" class="col-sm-2 control-label">Client Address</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="form-control" id="clientAddress" name="clientAddress" placeholder="Contact Number" autocomplete="off" value="<?php echo $data[4] ?>" />
+			    </div>
+			  </div> <!--/form-group-->	
 			  <table class="table" id="productTable">
 			  	<thead>
 			  		<tr>			  			
-			  			<th style="width:40%;">Product</th>
-			  			<th style="width:40%;">Price Type</th>
-			  			<th style="width:20%;">Rate</th>
-			  			<th style="width:15%;">Available Quantity</th>			  			
+			  			<th style="width:25%;">Product</th>
+			  			<th style="width:15%;">Price Type</th>
+			  			<th style="width:10%;">Rate</th>
+			  			<th style="width:10%;">Available Quantity</th>			  			
 			  			<th style="width:15%;">Quantity</th>			  			
 			  			<th style="width:15%;">Total</th>			  			
 			  			<th style="width:10%;"></th>
@@ -372,7 +377,7 @@ if($_GET['o'] == 'add') {
 			  		while($orderItemData = $orderItemResult->fetch_array()) { 
 			  			// print_r($orderItemData); ?>
 			  			<tr id="row<?php echo $x; ?>" data-rowId = "<?= $x?>"class="<?php echo $arrayNumber; ?>">
-			  				<td style="margin-left:20px;">
+			  				<td style="padding-right:20px;">
 			  					<div class="form-group">
 
 			  					<select class="form-control" name="productName[]" id="productName<?php echo $x; ?>" onchange="getProductData(<?php echo $x; ?>)" >
@@ -396,7 +401,7 @@ if($_GET['o'] == 'add') {
 		  						</select>
 			  					</div>
 			  				</td>
-                            <td style="margin-left:20px;">
+                            <td style="padding-left:20px;">
                                 <div class="form-group">
                                     <select class="form-control" name="price_type[]" id="price_type<?php echo $x; ?>"  onchange="getProductRateWiseData(this,<?php echo $x; ?>)">
                                         <option value="">Select price type</option>
@@ -460,58 +465,69 @@ if($_GET['o'] == 'add') {
 			  	<div class="form-group">
 				    <label for="subTotal" class="col-sm-3 control-label">Sub Amount</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="subTotal" name="subTotal" disabled="true" value="<?php echo $data[4] ?>" />
-				      <input type="hidden" class="form-control" id="subTotalValue" name="subTotalValue" value="<?php echo $data[4] ?>" />
+				      <input type="text" class="form-control" id="subTotal" name="subTotal" disabled="true" value="<?php echo $data[5] ?>" />
+				      <input type="hidden" class="form-control" id="subTotalValue" name="subTotalValue" value="<?php echo $data[5] ?>" />
 				    </div>
 				  </div> <!--/form-group-->			  
+
+				  <input type="hidden" class="form-control" id="totalAmount" name="totalAmount" disabled="true" value="<?php echo $data[7] ?>" />
+				      <input type="hidden" class="form-control" id="totalAmountValue" name="totalAmountValue" value="<?php echo $data[7] ?>"  />
 				  			  
-				  <div class="form-group">
+				  <!-- <div class="form-group">
 				    <label for="totalAmount" class="col-sm-3 control-label">Total Amount</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="totalAmount" name="totalAmount" disabled="true" value="<?php echo $data[6] ?>" />
-				      <input type="hidden" class="form-control" id="totalAmountValue" name="totalAmountValue" value="<?php echo $data[6] ?>"  />
+				      <input type="text" class="form-control" id="totalAmount" name="totalAmount" disabled="true" value="<?php //echo $data[7] ?>" />
+				      <input type="hidden" class="form-control" id="totalAmountValue" name="totalAmountValue" value="<?php //echo $data[7] ?>"  />
+				    </div>
+				  </div>  -->
+				  <!--/form-group-->	
+				  <div class="form-group">
+				    <label for="shipping" class="col-sm-3 control-label">Shipping</label>
+				    <div class="col-sm-9">
+				      <input type="text" class="form-control" id="shipping" name="shipping" autocomplete="off" value="<?php echo $data[8] ?>" />
 				    </div>
 				  </div> <!--/form-group-->			  
 				  <div class="form-group">
 				    <label for="discount" class="col-sm-3 control-label">Discount</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" value="<?php echo $data[7] ?>" />
+				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" value="<?php echo $data[9] ?>" />
 				    </div>
 				  </div> <!--/form-group-->	
 				  <div class="form-group">
 				    <label for="grandTotal" class="col-sm-3 control-label">Grand Total</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="grandTotal" name="grandTotal" disabled="true" value="<?php echo $data[8] ?>"  />
-				      <input type="hidden" class="form-control" id="grandTotalValue" name="grandTotalValue" value="<?php echo $data[8] ?>"  />
+				      <input type="text" class="form-control" id="grandTotal" name="grandTotal" disabled="true" value="<?php echo $data[10] ?>"  />
+				      <input type="hidden" class="form-control" id="grandTotalValue" name="grandTotalValue" value="<?php echo $data[10] ?>"  />
 				    </div>
 				  </div> <!--/form-group-->	
 				  <div class="form-group">
-				    <label for="vat" class="col-sm-3 control-label gst"><?php if($data[13] == 2) {echo "IGST 0%";} else echo "GST 0%"; ?></label>
+				    <label for="vat" class="col-sm-3 control-label gst"><?php if($data[13] == 2) {echo "IGST 0%";} else echo "GST 5%"; ?></label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="vat" name="vat" disabled="true" value="<?php echo $data[5] ?>"  />
-				      <input type="hidden" class="form-control" id="vatValue" name="vatValue" value="<?php echo $data[5] ?>"  />
+				      <input type="text" class="form-control" id="vat" name="vat" disabled="true" value="<?php echo $data[6] ?>"  />
+				      <input type="hidden" class="form-control" id="vatValue" name="vatValue" value="<?php echo $data[6] ?>"  />
 				    </div>
 				  </div> 
-				  <div class="form-group">
+				  <!-- <div class="form-group">
 				    <label for="gstn" class="col-sm-3 control-label gst">G.S.T.IN</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="gstn" name="gstn" value="<?php echo $data[14] ?>"  />
+				      <input type="text" class="form-control" id="gstn" name="gstn" value="<?php //echo $data[14] ?>"  />
 				    </div>
-				  </div><!--/form-group-->		  		  
+				  </div> -->
+				  <!--/form-group-->		  		  
 			  </div> <!--/col-md-6-->
 
 			  <div class="col-md-6">
 			  	<div class="form-group">
 				    <label for="paid" class="col-sm-3 control-label">Paid Amount</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" value="<?php echo $data[9] ?>"  />
+				      <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" value="<?php echo $data[11] ?>"  />
 				    </div>
 				  </div> <!--/form-group-->			  
 				  <div class="form-group">
 				    <label for="due" class="col-sm-3 control-label">Due Amount</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="due" name="due" disabled="true" value="<?php echo $data[10] ?>"  />
-				      <input type="hidden" class="form-control" id="dueValue" name="dueValue" value="<?php echo $data[10] ?>"  />
+				      <input type="text" class="form-control" id="due" name="due" disabled="true" value="<?php echo $data[12] ?>"  />
+				      <input type="hidden" class="form-control" id="dueValue" name="dueValue" value="<?php echo $data[12] ?>"  />
 				    </div>
 				  </div> <!--/form-group-->		
 				  <div class="form-group">
@@ -519,15 +535,21 @@ if($_GET['o'] == 'add') {
 				    <div class="col-sm-9">
 				      <select class="form-control" name="paymentType" id="paymentType" >
 				      	<option value="">~~SELECT~~</option>
-				      	<option value="1" <?php if($data[11] == 1) {
+				      	<option value="1" <?php if($data[13] == 1) {
 				      		echo "selected";
-				      	} ?> >Cheque</option>
-				      	<option value="2" <?php if($data[11] == 2) {
+				      	} ?> >paypal</option>
+				      	<option value="2" <?php if($data[13] == 2) {
 				      		echo "selected";
-				      	} ?>  >Cash</option>
-				      	<option value="3" <?php if($data[11] == 3) {
+				      	} ?>  >western union</option>
+				      	<option value="3" <?php if($data[13] == 3) {
 				      		echo "selected";
-				      	} ?> >Credit Card</option>
+				      	} ?> >wise</option>
+				      	<option value="3" <?php if($data[13] == 4) {
+				      		echo "selected";
+				      	} ?> >bank Transfer</option>
+				      	<option value="3" <?php if($data[13] == 5) {
+				      		echo "selected";
+				      	} ?> >cash</option>
 				      </select>
 				    </div>
 				  </div> <!--/form-group-->							  
@@ -536,13 +558,13 @@ if($_GET['o'] == 'add') {
 				    <div class="col-sm-9">
 				      <select class="form-control" name="paymentStatus" id="paymentStatus">
 				      	<option value="">~~SELECT~~</option>
-				      	<option value="1" <?php if($data[12] == 1) {
+				      	<option value="1" <?php if($data[14] == 1) {
 				      		echo "selected";
-				      	} ?>  >Full Payment</option>
-				      	<option value="2" <?php if($data[12] == 2) {
+				      	} ?>  >paid</option>
+				      	<option value="2" <?php if($data[14] == 2) {
 				      		echo "selected";
-				      	} ?> >Advance Payment</option>
-				      	<option value="3" <?php if($data[10] == 3) {
+				      	} ?> >Payment processing</option>
+				      	<option value="3" <?php if($data[14] == 3) {
 				      		echo "selected";
 				      	} ?> >No Payment</option>
 				      </select>
@@ -555,10 +577,34 @@ if($_GET['o'] == 'add') {
 				      	<option value="">~~SELECT~~</option>
 				      	<option value="1" <?php if($data[13] == 1) {
 				      		echo "selected";
-				      	} ?>  >In Gujarat</option>
+				      	} ?>  >USA</option>
 				      	<option value="2" <?php if($data[13] == 2) {
 				      		echo "selected";
-				      	} ?> >Out Gujarat</option>
+				      	} ?> >Eu</option>
+				      	<option value="2" <?php if($data[13] == 3) {
+				      		echo "selected";
+				      	} ?> >uk</option>
+				      	<option value="2" <?php if($data[13] == 4) {
+				      		echo "selected";
+				      	} ?> >canada</option>
+				      	<option value="2" <?php if($data[13] == 5) {
+				      		echo "selected";
+				      	} ?> >signapore</option>
+				      	<option value="2" <?php if($data[13] == 6) {
+				      		echo "selected";
+				      	} ?> >hongkong</option>
+				      	<option value="2" <?php if($data[13] == 7) {
+				      		echo "selected";
+				      	} ?> >norway</option>
+				      	<option value="2" <?php if($data[13] == 8) {
+				      		echo "selected";
+				      	} ?> >switezerland</option>
+				      	<option value="2" <?php if($data[13] == 9) {
+				      		echo "selected";
+				      	} ?> >Alaska & hawaii</option>
+				      	<option value="2" <?php if($data[13] == 10) {
+				      		echo "selected";
+				      	} ?> >Aus</option>
 				      </select>
 				    </div>
 				  </div>							  

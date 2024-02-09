@@ -68,12 +68,7 @@ function dd($variable)
 	  
 
       	<li id="navDashboard"><a href="index.php"><i class="glyphicon glyphicon-list-alt" style="color: #23232; font-size:25px; font-weight:600 ;" > dashboard </i></a></li>        
-        <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
-        <li id="navBrand"><a href="brand.php"><i class="glyphicon glyphicon-btc"></i>  Brand</a></li>        
-		<?php } ?>
-		<?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
-        <li id="navCategories"><a href="categories.php"> <i class="glyphicon glyphicon-th-list"></i> Category</a></li>        
-		<?php } ?>
+        
         <li id="navProduct"><a href="product.php"> <i class="glyphicon glyphicon-ruble"></i> Product </a></li> 
     <?php 
     $current_page = basename($_SERVER['PHP_SELF']);
