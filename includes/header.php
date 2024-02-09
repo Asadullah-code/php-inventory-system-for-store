@@ -68,7 +68,6 @@ function dd($variable)
 	  
 
       	<li id="navDashboard"><a href="index.php"><i class="glyphicon glyphicon-list-alt" style="color: #23232; font-size:25px; font-weight:600 ;" > dashboard </i></a></li>        
-        
         <li id="navProduct"><a href="product.php"> <i class="glyphicon glyphicon-ruble"></i> Product </a></li> 
     <?php 
     $current_page = basename($_SERVER['PHP_SELF']);
