@@ -204,7 +204,7 @@ $(document).ready(function () {
             var clientContact = $("#clientContact").val();
             var clientAddress = $("#clientAddress").val();
             var paid = $("#paid").val();
-            var shipping = $("#shipping").val();
+            var shipping = $("#shipping_cost").val();
             var discount = $("#discount").val();
             var paymentType = $("#paymentType").val();
             var paymentStatus = $("#paymentStatus").val();
@@ -245,10 +245,10 @@ $(document).ready(function () {
             } // /else
 
             if (shipping == "") {
-                $("#shipping").after('<p class="text-danger"> The shipping field is required </p>');
-                $('#shipping').closest('.form-group').addClass('has-error');
+                $("#shipping_cost").after('<p class="text-danger"> The shipping field is required </p>');
+                $('#shipping_cost').closest('.form-group').addClass('has-error');
             } else {
-                $('#shipping').closest('.form-group').addClass('has-success');
+                $('#shipping_cost').closest('.form-group').addClass('has-success');
             } // /else
 
             if (discount == "") {
