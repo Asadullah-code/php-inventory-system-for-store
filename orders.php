@@ -724,9 +724,11 @@ if($_GET['o'] == 'add') {
 			    <div class="col-sm-9">
 			      <select class="form-control" name="paymentType" id="paymentType" >
 			      	<option value="">~~SELECT~~</option>
-			      	<option value="1">Cheque</option>
-			      	<option value="2">Cash</option>
-			      	<option value="3">Credit Card</option>
+			      	<option value="1">Paypal</option>
+			      	<option value="2">Western Union</option>
+			      	<option value="3">Wise</option>
+			      	<option value="4">Bank Transfer</option>
+			      	<option value="5">Cash</option>
 			      </select>
 			    </div>
 			  </div> <!--/form-group-->							  
@@ -735,8 +737,8 @@ if($_GET['o'] == 'add') {
 			    <div class="col-sm-9">
 			      <select class="form-control" name="paymentStatus" id="paymentStatus">
 			      	<option value="">~~SELECT~~</option>
-			      	<option value="1">Full Payment</option>
-			      	<option value="2">Advance Payment</option>
+			      	<option value="1">Paid</option>
+			      	<option value="2">Payment Processing</option>
 			      	<option value="3">No Payment</option>
 			      </select>
 			    </div>
