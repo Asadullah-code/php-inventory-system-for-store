@@ -7,12 +7,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data and sanitize inputs
     $operator_date = date('Y-m-d', strtotime($_POST['operator_date']));
     $operator_number = $_POST['operator_number'];
-    $product_id = $_POST['product_id'];
+    $product_name = $_POST['product_name'];
     $operator_quantity = $_POST['operator_quantity'];
 
     // SQL query to insert data into the operators table
-    $sql = "INSERT INTO operators (operator_date, operator_number, product_id, operator_quantity) 
-            VALUES ('$operator_date', '$operator_number', '$product_id', '$operator_quantity')";
+    $sql = "INSERT INTO operators (operator_date, operator_number, product_name, operator_quantity) 
+            VALUES ('$operator_date', '$operator_number', '$product_name', '$operator_quantity')";
 
     if ($connect->query($sql) === TRUE) {
         header("location: ../operator.php?status=1");

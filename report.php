@@ -56,6 +56,21 @@
 				    </div>
 				  </div>
 				  <div class="form-group">
+				    <label for="endDate" class="col-sm-2 control-label">Specify Product</label>
+				    <div class="col-sm-10">
+				        <select class="form-select form-control" name="product_id" aria-label="Default select example">
+						  <option selected>Specify Product</option>
+						    <?php
+	  							$productSql = "SELECT * FROM product WHERE active = 1 AND status = 1 AND quantity != 0";
+	  							$productData = $connect->query($productSql);
+	  							while($row = $productData->fetch_array()) {
+								echo "<option value='".$row['product_id']."' id='changeProduct".$row['product_id']."'>".$row['product_name']."</option>";
+								 	}  
+	  						?>
+						</select>
+				    </div>
+				  </div>
+				  <div class="form-group">
 				    <div class="col-sm-offset-2 col-sm-10">
 				      <button type="submit" class="btn btn-success" id="generateReportBtn"> <i class="glyphicon glyphicon-ok-sign"></i> Generate Report</button>
 				    </div>
@@ -89,6 +104,21 @@
 				    </div>
 				  </div>
 				  <div class="form-group">
+				    <label for="endDate" class="col-sm-2 control-label">Specify Operator</label>
+				    <div class="col-sm-10">
+				      <select class="form-select form-control" name="operator_id" aria-label="Default select example">
+						  <option selected>Specify Operator</option>
+						    <?php
+	  							$operatorSql = "SELECT * FROM operators";
+	  							$operatorData = $connect->query($operatorSql);
+	  							while($row = $operatorData->fetch_array()) {
+								echo "<option value='".$row['operator_id']."' id='changeOperator".$row['operator_id']."'>".$row['operator_number']."</option>";
+								 	}  
+	  						?>
+						</select>
+				    </div>
+				  </div>
+				  <div class="form-group">
 				    <div class="col-sm-offset-2 col-sm-10">
 				      <button type="submit" class="btn btn-success" id="generateReportBtn"> <i class="glyphicon glyphicon-ok-sign"></i> Generate Report</button>
 				    </div>
@@ -119,6 +149,21 @@
 				    <label for="endDate" class="col-sm-2 control-label">End Date</label>
 				    <div class="col-sm-10">
 				      <input type="date" class="form-control" id="endDate" name="endDate" placeholder="End Date" />
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="endDate" class="col-sm-2 control-label">Specify Contaminated Operator</label>
+				    <div class="col-sm-10">
+				      <select class="form-select form-control" name="operator_number" aria-label="Default select example">
+						  <option selected>Specify Contaminated Operator</option>
+						    <?php
+	  							$contaminatedSql = "SELECT * FROM contaminated_plants";
+	  							$contaminatedData = $connect->query($contaminatedSql);
+	  							while($row = $contaminatedData->fetch_array()) {
+								echo "<option value='".$row['operator_number']."' id='changeOperator".$row['operator_number']."'>".$row['operator_number']."</option>";
+								 	}  
+	  						?>
+						</select>
 				    </div>
 				  </div>
 				  <div class="form-group">

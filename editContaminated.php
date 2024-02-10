@@ -10,10 +10,9 @@
         // Fetch the row from the result set
         $rowEdit = $resultEdit->fetch_assoc();
         
-        $product_id = $rowEdit['product_id'];
+        $product_name = $rowEdit['product_name'];
         $contaminated_id = $rowEdit['contaminated_id'];
         $contaminated_date = $rowEdit['contaminated_date'];
-        $contaminated_name = $rowEdit['contaminated_name'];
         $operator_number = $rowEdit['operator_number'];
         $contaminated_quantity = $rowEdit['contaminated_quantity'];
     } else {
@@ -59,13 +58,9 @@
 								<input class="form-control" value="<?php echo $contaminated_date; ?>" type="date" id="date" name="contaminated_date" required>
 							</div>
 							<div class="col-sm-6 form-group">
-								<label for="contaminated_name">Contaminated Name:</label>
-								<input class="form-control" type="text" value="<?php echo $contaminated_name; ?>" name="contaminated_name" required>
-							</div>
-							<div class="col-sm-6 form-group">
 								<label for="product">Choose Product:</label>
 								
-								<select class="form-control" value="<?php echo $product_id; ?>" name="product_id" id="product" required>
+								<select class="form-control" value="<?php echo $product_name; ?>" name="product_name" id="product" required>
 									<?php
 
 									// Establish a database connection
@@ -85,7 +80,7 @@
 									    // Output data of each row using a while loop
 									    while ($row = $result->fetch_assoc()) {
 									        // Generate <option> tags with product names as values
-									        echo '<option value="' . $row["product_id"] . '">' . $row["product_name"] . '</option>';
+									        echo '<option value="' . $row["product_name"] . '">' . $row["product_name"] . '</option>';
 									    }
 									} else {
 									    echo '<option value="">No products found</option>';

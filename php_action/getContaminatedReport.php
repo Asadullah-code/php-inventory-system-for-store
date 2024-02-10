@@ -8,9 +8,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get start date and end date from the form
     $startDate = $_POST['startDate'];
     $endDate = $_POST['endDate'];
+    $operator_number = $_POST['operator_number'];
 
     // Prepare SQL query to fetch products within the specified date range
-    $sql = "SELECT * FROM contaminated_plants WHERE contaminated_date >= '$startDate' AND contaminated_date <= '$endDate'";
+    $sql = "SELECT * FROM contaminated_plants WHERE contaminated_date >= '$startDate' AND contaminated_date <= '$endDate' AND operator_number = '$operator_number'";
 
     // Execute the query
     $result = $connect->query($sql);
@@ -21,13 +22,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo'<div class="container my-4" style="padding: 16px 16px">';
         echo '<h2>contaminated Report</h2>';
         echo '<table class="table" border="1">';
-        echo '<tr><th style="padding: 6px 10px;">contaminated Name</th><th style="padding: 6px 10px;">contaminated Date</th><th style="padding: 6px 10px;">Quantity</th><th style="padding: 6px 10px;">Operator Number</th></tr>';
+        echo '<tr><th style="padding: 6px 10px;">Product Name<th style="padding: 6px 10px;">Quantity</th><th style="padding: 6px 10px;">Operator Number</th></th><th style="padding: 6px 10px;">contaminated Date</th></tr>';
         while ($row = $result->fetch_assoc()) {
             echo '<tr>';
-            echo '<td style="padding: 6px 10px;">' . $row['contaminated_name'] . '</td>';
-            echo '<td style="padding: 6px 10px;">' . $row['contaminated_date'] . '</td>';
+            echo '<td style="padding: 6px 10px;">' . $row['product_name'] . '</td>';
             echo '<td style="padding: 6px 10px;">' . $row['contaminated_quantity'] . '</td>';
             echo '<td style="padding: 6px 10px;">' . $row['operator_number'] . '</td>';
+            echo '<td style="padding: 6px 10px;">' . $row['contaminated_date'] . '</td>';
             echo '</tr>';
         }
         echo '</table>';

@@ -8,9 +8,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get start date and end date from the form
     $startDate = $_POST['startDate'];
     $endDate = $_POST['endDate'];
+    $product_id = $_POST['product_id'];
 
     // Prepare SQL query to fetch products within the specified date range
-    $sql = "SELECT * FROM product WHERE product_date >= '$startDate' AND product_date <= '$endDate'";
+    $sql = "SELECT * FROM product WHERE product_date >= '$startDate' AND product_date <= '$endDate' AND product_id= '$product_id'";
 
     // Execute the query
     $result = $connect->query($sql);

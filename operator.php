@@ -44,7 +44,7 @@
 							<div class="col-sm-6 form-group">
 								<label for="product">Choose Product:</label>
 								
-								<select class="form-control" name="product_id" id="product" required>
+								<select class="form-control" name="product_name" id="product" required>
 									<?php
 
 									// Establish a database connection
@@ -64,7 +64,7 @@
 									    // Output data of each row using a while loop
 									    while ($row = $result->fetch_assoc()) {
 									        // Generate <option> tags with product names as values
-									        echo '<option value="' . $row["product_id"] . '">' . $row["product_name"] . '</option>';
+									        echo '<option value="' . $row["product_name"] . '">' . $row["product_name"] . '</option>';
 									    }
 									} else {
 									    echo '<option value="">No products found</option>';
@@ -104,6 +104,7 @@
 							  <thead>
 							    <tr>
 							      <th scope="col">Date</th>
+							      <th scope="col">Product</th>
 							      <th scope="col">Operator number</th>
 							      <th scope="col">Quantity</th>
 							      <th scope="col">Action</th>
@@ -121,6 +122,7 @@
 									    while ($rowOper = $resultOper->fetch_assoc()) {
 									    	echo'<tr>';
 											echo'<th scope="row">'. $rowOper["operator_date"] .'</th>';
+										      echo'<td>'. $rowOper["product_name"] .'</td>';
 										      echo'<td>'. $rowOper["operator_number"] .'</td>';
 										      echo'<td>'. $rowOper["operator_quantity"] .'</td>';
 										      echo'<td>

@@ -126,7 +126,7 @@ if($_GET['o'] == 'add') {
 			  				<td style="padding-left:30px;">
 			  					<div class="form-group">
 			  					<select class="form-control" name="price_type[]" id="price_type<?php echo $x; ?>"  onchange="getProductRateWiseData(this,<?php echo $x; ?>)">
-			  						<option value="">Select price type</option>
+			  						<option value="">price type</option>
                         <option value="rate">Rate</option>
                         <option value="wholesale">WholeSale</option>
                         <option value="thb">Thb</option>
@@ -262,17 +262,43 @@ if($_GET['o'] == 'add') {
 				      	<option value="">~~SELECT~~</option>
 				      	<option value="1">USA</option>
 				      	<option value="2">EU</option>
-						<option value="3">UK</option>
-						<option value="4">canada</option>
-						<option value="5">Singapore</option>
-						<option value="6">Hongkong</option>
-						<option value="7">Norway</option>
-						<option value="8">Switxerland</option>
-						<option value="9"> Alaska & Hawaii</option>
-						<option value="7">AUS</option>
-						
-						
+								<option value="3">UK</option>
+								<option value="4">canada</option>
+								<option value="5">Singapore</option>
+								<option value="6">Hongkong</option>
+								<option value="7">Norway</option>
+								<option value="8">Switxerland</option>
+								<option value="9"> Alaska & Hawaii</option>
+								<option value="10">AUS</option>
+								<option value="11">Other</option>
 				      </select>
+				      <div id="otherPlace" class="mt-3" style="display: none;">
+							  <label for="otherInput">Other Location:</label>
+							  <input type="text" class="form-control" id="otherInput" name="otherInput">
+							</div>
+							<script>
+							document.addEventListener("DOMContentLoaded", function() {
+							  var paymentPlaceSelect = document.getElementById("paymentPlace");
+							  var otherPlaceDiv = document.getElementById("otherPlace");
+							  var otherInput = document.getElementById("otherInput");
+
+							  paymentPlaceSelect.addEventListener("change", function() {
+							    if (paymentPlaceSelect.value === "11") {
+							      otherPlaceDiv.style.display = "block";
+							    } else {
+							      otherPlaceDiv.style.display = "none";
+							      otherInput.value = ""; // Reset the input field when not selecting "Other"
+							    }
+							  });
+							  
+							  // Add an event listener to the input field to update the select value
+							  otherInput.addEventListener("input", function() {
+							    if (paymentPlaceSelect.value === "11") {
+							      paymentPlaceSelect.value = otherInput.value;
+							    }
+							  });
+							});
+							</script>
 				    </div>
 				  </div> <!--/form-group-->							  
 			  </div> <!--/col-md-6-->
@@ -401,18 +427,18 @@ if($_GET['o'] == 'add') {
 		  						</select>
 			  					</div>
 			  				</td>
-                            <td style="padding-left:20px;">
-                                <div class="form-group">
-                                    <select class="form-control" name="price_type[]" id="price_type<?php echo $x; ?>"  onchange="getProductRateWiseData(this,<?php echo $x; ?>)">
-                                        <option value="">Select price type</option>
+                <td style="padding-left:20px;">
+                    <div class="form-group">
+                        <select class="form-control" name="price_type[]" id="price_type<?php echo $x; ?>"  onchange="getProductRateWiseData(this,<?php echo $x; ?>)">
+                            <option value="">Select price type</option>
 
-                                        <option value="rate"<?= $orderItemData['product_price_type'] === "rate"  ? "selected" : "" ?>>Rate</option>
-                                        <option value="wholesale"<?= $orderItemData['product_price_type'] === "wholesale"  ? "selected" : "" ?>>WholeSale</option>
-                                        <option value="thb"<?= $orderItemData['product_price_type'] === "thb"  ? "selected" : "" ?>>Thb</option>
-                                    </select>
+                            <option value="rate"<?= $orderItemData['product_price_type'] === "rate"  ? "selected" : "" ?>>Rate</option>
+                            <option value="wholesale"<?= $orderItemData['product_price_type'] === "wholesale"  ? "selected" : "" ?>>WholeSale</option>
+                            <option value="thb"<?= $orderItemData['product_price_type'] === "thb"  ? "selected" : "" ?>>Thb</option>
+                        </select>
 
-                                </div>
-                            </td>
+                    </div>
+                </td>
 			  				<td style="padding-left:20px;">			  					
 			  					<input type="text" name="rate[]" id="rate<?php echo $x; ?>" autocomplete="off" disabled="true" class="form-control" value="<?php echo $orderItemData['rate']; ?>" />
 			  					<input type="hidden" name="rateValue[]" id="rateValue<?php echo $x; ?>" autocomplete="off" class="form-control" value="<?php echo $orderItemData['rate']; ?>" />
@@ -484,7 +510,7 @@ if($_GET['o'] == 'add') {
 				  <div class="form-group">
 				    <label for="shipping" class="col-sm-3 control-label">Shipping</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="shipping" name="shipping" autocomplete="off" value="<?php echo $data[8] ?>" />
+				      <input type="number" class="form-control" id="shipping_cost" name="shipping" onkeyup="addShippingCostToTotal(this)" autocomplete="off" value="<?php echo $data[8] ?>" />
 				    </div>
 				  </div> <!--/form-group-->			  
 				  <div class="form-group">
@@ -544,10 +570,10 @@ if($_GET['o'] == 'add') {
 				      	<option value="3" <?php if($data[13] == 3) {
 				      		echo "selected";
 				      	} ?> >wise</option>
-				      	<option value="3" <?php if($data[13] == 4) {
+				      	<option value="4" <?php if($data[13] == 4) {
 				      		echo "selected";
 				      	} ?> >bank Transfer</option>
-				      	<option value="3" <?php if($data[13] == 5) {
+				      	<option value="5" <?php if($data[13] == 5) {
 				      		echo "selected";
 				      	} ?> >cash</option>
 				      </select>
@@ -570,6 +596,12 @@ if($_GET['o'] == 'add') {
 				      </select>
 				    </div>
 				  </div> <!--/form-group-->
+				  <!-- <div class="form-group">
+				  	<label class="col-sm-3">Payment Place:</label>
+				  	<div class="col-sm-9">
+				  	  <input type="disabled" value="<?php echo $data[13]; ?>" class="form-control" disabled>
+				  	</div>
+				  </div> -->
 				  <div class="form-group">
 				    <label for="clientContact" class="col-sm-3 control-label">Payment Place</label>
 				    <div class="col-sm-9">
@@ -581,31 +613,61 @@ if($_GET['o'] == 'add') {
 				      	<option value="2" <?php if($data[13] == 2) {
 				      		echo "selected";
 				      	} ?> >Eu</option>
-				      	<option value="2" <?php if($data[13] == 3) {
+				      	<option value="3" <?php if($data[13] == 3) {
 				      		echo "selected";
-				      	} ?> >uk</option>
-				      	<option value="2" <?php if($data[13] == 4) {
+				      	} ?> >Uk</option>
+				      	<option value="4" <?php if($data[13] == 4) {
 				      		echo "selected";
-				      	} ?> >canada</option>
-				      	<option value="2" <?php if($data[13] == 5) {
+				      	} ?> >Canada</option>
+				      	<option value="5" <?php if($data[13] == 5) {
 				      		echo "selected";
-				      	} ?> >signapore</option>
-				      	<option value="2" <?php if($data[13] == 6) {
+				      	} ?> >Signapore</option>
+				      	<option value="6" <?php if($data[13] == 6) {
 				      		echo "selected";
-				      	} ?> >hongkong</option>
-				      	<option value="2" <?php if($data[13] == 7) {
+				      	} ?> >Hongkong</option>
+				      	<option value="7" <?php if($data[13] == 7) {
 				      		echo "selected";
-				      	} ?> >norway</option>
-				      	<option value="2" <?php if($data[13] == 8) {
+				      	} ?> >Norway</option>
+				      	<option value="8" <?php if($data[13] == 8) {
 				      		echo "selected";
-				      	} ?> >switezerland</option>
-				      	<option value="2" <?php if($data[13] == 9) {
+				      	} ?> >Switezerland</option>
+				      	<option value="9" <?php if($data[13] == 9) {
 				      		echo "selected";
 				      	} ?> >Alaska & hawaii</option>
-				      	<option value="2" <?php if($data[13] == 10) {
+				      	<option value="10" <?php if($data[13] == 10) {
 				      		echo "selected";
 				      	} ?> >Aus</option>
+				      	<option value="11" <?php if($data[13] == 11) {
+				      		echo "selected";
+				      	} ?> >Other</option>
 				      </select>
+				      <div id="otherPlace" class="mt-3" style="display: none;">
+							  <label for="otherInput">Other Location:</label>
+							  <input type="text" class="form-control" id="otherInput" name="otherInput">
+							</div>
+							<script>
+							document.addEventListener("DOMContentLoaded", function() {
+							  var paymentPlaceSelect = document.getElementById("paymentPlace");
+							  var otherPlaceDiv = document.getElementById("otherPlace");
+							  var otherInput = document.getElementById("otherInput");
+
+							  paymentPlaceSelect.addEventListener("change", function() {
+							    if (paymentPlaceSelect.value === "11") {
+							      otherPlaceDiv.style.display = "block";
+							    } else {
+							      otherPlaceDiv.style.display = "none";
+							      otherInput.value = ""; // Reset the input field when not selecting "Other"
+							    }
+							  });
+							  
+							  // Add an event listener to the input field to update the select value
+							  otherInput.addEventListener("input", function() {
+							    if (paymentPlaceSelect.value === "11") {
+							      paymentPlaceSelect.value = otherInput.value;
+							    }
+							  });
+							});
+							</script>
 				    </div>
 				  </div>							  
 			  </div> <!--/col-md-6-->
