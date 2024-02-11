@@ -33,6 +33,8 @@ $(document).ready(function () {
             var orderDate = $("#orderDate").val();
             var clientName = $("#clientName").val();
             var clientContact = $("#clientContact").val();
+            var clientAddress = $("#clientAddress").val();
+            var clientEmail = $("#clientEmail").val();
             var paid = $("#paid").val();
             var discount = $("#discount").val();
             var paymentType = $("#paymentType").val();
@@ -58,6 +60,12 @@ $(document).ready(function () {
                 $('#clientContact').closest('.form-group').addClass('has-error');
             } else {
                 $('#clientContact').closest('.form-group').addClass('has-success');
+            } // /else
+            if (clientEmail == "") {
+                $("#clientEmail").after('<p class="text-danger"> The Email field is required </p>');
+                $('#clientEmail').closest('.form-group').addClass('has-error');
+            } else {
+                $('#clientEmail').closest('.form-group').addClass('has-success');
             } // /else
 
             if (paid == "") {
@@ -131,7 +139,7 @@ $(document).ready(function () {
             } // for
 
 
-            if (orderDate && clientName && clientContact && paid && discount && paymentType && paymentStatus) {
+            if (orderDate && clientName && clientContact && clientEmail && paid && discount && paymentType && paymentStatus) {
                 if (validateProduct == true && validateQuantity == true) {
                     // create order button
                     // $("#createOrderBtn").button('loading');
@@ -203,6 +211,7 @@ $(document).ready(function () {
             var clientName = $("#clientName").val();
             var clientContact = $("#clientContact").val();
             var clientAddress = $("#clientAddress").val();
+            var clientEmail = $("#clientEmail").val();
             var paid = $("#paid").val();
             var shipping = $("#shipping_cost").val();
             var discount = $("#discount").val();
@@ -235,6 +244,12 @@ $(document).ready(function () {
                 $('#clientAddress').closest('.form-group').addClass('has-error');
             } else {
                 $('#clientAddress').closest('.form-group').addClass('has-success');
+            } // /else
+            if (clientEmail == "") {
+                $("#clientEmail").after('<p class="text-danger"> The Email field is required </p>');
+                $('#clientEmail').closest('.form-group').addClass('has-error');
+            } else {
+                $('#clientEmail').closest('.form-group').addClass('has-success');
             } // /else
 
             if (paid == "") {
@@ -315,7 +330,7 @@ $(document).ready(function () {
             } // for
 
 
-            if (orderDate && clientName && clientContact && clientAddress && paid && shipping && discount && paymentType && paymentStatus) {
+            if (orderDate && clientName && clientContact && clientAddress && clientEmail && paid && shipping && discount && paymentType && paymentStatus) {
                 if (validateProduct == true && validateQuantity == true) {
                     // create order button
                     // $("#createOrderBtn").button('loading');
