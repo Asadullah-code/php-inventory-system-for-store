@@ -111,7 +111,8 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
             <p class="fw-semibold">Tel: <a href="tel: +94-71795-5888">+94-71795-5888</a></p>
             <p class="fw-semibold">Email: <a href="mailto: dilangamanoj@gmail.com">dilangamanoj@gmail.com</a></p>
             <br>
-            <p class="fw-semibold">Consignee: <span><?php echo $clientName; ?> and  <br><?php echo $clientAddress ?><br>california, 950513033<br>UNITED STATES</span></p>
+            <p class="fw-semibold">Consignee: <span><?php echo $clientName; ?> and  
+               Address:<br><?php echo $clientAddress ?></span></p>
             <p class="fw-semibold">Tel: <a href="tel: <?php echo $clientContact; ?>"><?php echo $clientContact; ?></a></p>
             <p class="fw-semibold">Email: <a href="mailto: <?php echo $clientEmail; ?>"><?php echo $clientEmail; ?></a></p>
          </div>
