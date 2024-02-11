@@ -15,10 +15,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             VALUES ('$contaminated_date', '$operator_number', '$product_name', '$contaminated_quantity')";
 
     if ($connect->query($sql) === TRUE) {
-        header("location: ../contaminated.php?status=1");
+        // SQL query to update operator_quantity in operators table
+        $update_sql = "UPDATE operators 
+                       SET operator_quantity = operator_quantity - $contaminated_quantity 
+                       WHERE operator_number = '$operator_number'";
+        
+        if ($connect->query($update_sql) === TRUE) {
+            header("location: ../contaminated.php?status=1");
+        } else {
+            echo "Error updating operator quantity: " . $connect->error;
+        }
     } else {
         echo "Error: " . $sql . "<br>" . $connect->error;
     }
-
 }
 ?>
