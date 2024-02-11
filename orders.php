@@ -143,14 +143,7 @@ if($_GET['o'] == 'add') {
 			  					<input type="text" name="rate[]" id="rate<?php echo $x; ?>" autocomplete="off" disabled="true" class="form-control" />			  					
 			  					<input type="hidden" name="rateValue[]" id="rateValue<?php echo $x; ?>" autocomplete="off" class="form-control" />			  					
 			  				</td>
-			  				<!-- <td style="padding-left:20px;">			  					
-										<select class="form-control" id="productSelection">
-										    <option id="rateInput" value="rate">Rate</option>
-										    <option id="thbInput" value="thb">THB</option>
-										    <option id="wholesaleInput" value="wholesale">Wholesale</option>
-										</select>			  					
-			  				</td> -->
-
+			  				
 							<td style="padding-left:20px;">
 			  					<div class="form-group form-control">
 									<p id="available_quantity<?php echo $x; ?>"></p>
@@ -205,6 +198,12 @@ if($_GET['o'] == 'add') {
 				    <label for="discount" class="col-sm-3 control-label">Discount</label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" />
+				    </div>
+				  </div> <!--/form-group-->	
+				  <div class="form-group">
+				    <label for="phytosanitary" class="col-sm-3 control-label">Phytosanitary</label>
+				    <div class="col-sm-9">
+				      <input type="number" class="form-control" id="phytosanitary" name="phytosanitary" autocomplete="off" />
 				    </div>
 				  </div> <!--/form-group-->	
 				<p>  <div class="form-group">

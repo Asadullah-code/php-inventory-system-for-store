@@ -134,20 +134,91 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row"><?php echo $counter; ?></th>
-                  <td><?php echo $productName; ?></td>
-                  <td><?php echo $quantity; ?></td>
-                  <td><?php echo $payment_type; ?></td>
-                  <td><?php echo $totalAmount; ?></td>
-                  <td><?php echo $shipping; ?></td>
-                  <td><?php echo $gstn; ?></td>
-                </tr>
-                <tr>
-                  <th class="text-center" scope="row" colspan="2">Total</th>
-                  <td></td>
-                  <td><?php echo $totalAmount; ?></td>
-                </tr>
+                
+
+                 <?php    
+
+require_once 'core.php';
+
+// Check if POST data is set
+if(isset($_POST['orderId'])) {
+    $orderId = $_POST['orderId'];
+
+    // Prepare and execute the SQL query
+    $sqlReport = "SELECT p.product_name,
+       oi.product_price_type,
+       SUM(oi.quantity) AS total_quantity,
+       oi.total,
+       o.order_date,
+       o.client_name,
+       o.client_contact,
+       o.client_address,
+       o.client_email,
+       o.sub_total,
+       o.vat,
+       o.total_amount,
+       o.shipping,
+       o.discount,
+       o.grand_total,
+       o.paid,
+       o.due,
+       o.payment_place,
+       o.gstn
+FROM order_item AS oi
+JOIN orders AS o ON oi.order_id = o.order_id
+JOIN product AS p ON oi.product_id = p.product_id
+WHERE oi.order_id = $orderId
+GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.client_contact, o.client_address, o.client_email, o.sub_total, o.vat, o.total_amount, o.shipping, o.discount, o.grand_total, o.paid, o.due, o.payment_place, o.gstn
+";
+
+    $orderResult = $connect->query($sqlReport); // Changed variable name from $orderResultOrder to $orderResult
+
+    // Check if the query executed successfully
+    if($orderResult) { // Changed variable name from $orderResultOrder to $orderResult
+        // Initialize counter variable
+        $counter = 0;
+
+        // Fetch each row from the result set
+        while($order = $orderResult->fetch_assoc()) { // Changed variable name from $orderResultOrder to $orderResult
+            // Increment the counter for each row
+            $counter++;
+
+            // Fetching values from the fetched row
+            $productName = $order['product_name'];
+            $quantity = $order['total_quantity'];
+            $payment_type = $order['product_price_type'];
+            $total = $order['total'];
+            $shipping = $order['shipping'];
+            $gstn = $order['gstn'];
+
+            // Outputting table rows
+            echo '<tr>';
+            echo '<td>' . $counter . '</td>';
+            echo '<td>' . $productName . '</td>';
+            echo '<td>' . $quantity . '</td>';
+            echo '<td>' . $payment_type . '</td>';
+            echo '<td>' . $total . '</td>';
+            echo '<td>' . $shipping . '</td>';
+            echo '<td>' . $gstn . '</td>';
+            echo '</tr>';
+        }
+        
+        // Outputting total row
+        echo '<tr>';
+        echo '<th class="text-center" scope="row" colspan="2">Total</th>';
+        echo '<td></td>';
+        echo '<td>' . $totalAmount . '</td>'; // Assuming $totalAmount is the total amount for the order
+        echo '</tr>';
+    } else {
+        // Query execution failed
+        echo 'Query execution failed.';
+    }
+} else {
+    // POST data not set
+    echo 'No order ID provided.';
+}
+?>
+
               </tbody>
             </table>
             <div class="col-12 d-flex align-items-start justify-content-start flex-column">
