@@ -155,7 +155,7 @@
 										        echo '<td>' . $rowOper["operator_number"] . '</td>';
 										        echo '<td>' . $rowOper["contaminated_quantity"] . '</td>';
 										        echo '<td>
-										                <a class="btn btn-sm btn-warning" href="editContaminated.php?id=' . $rowOper["contaminated_id"] . '">Edit</a>
+										                <a class="btn btn-sm btn-warning" href="editContaminated.php?id=' . $rowOper["contaminated_id"] . '& qua= '.$rowOper["contaminated_quantity"].'">Edit</a>
 										                <a class="btn btn-sm btn-danger" href="php_action/deleteContaminated.php?id=' . $rowOper["contaminated_id"] . '">Delete</a>
 										              </td>';
 										        echo '</tr>';

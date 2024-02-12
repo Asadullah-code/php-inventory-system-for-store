@@ -17,8 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($connect->query($sql) === TRUE) {
         // SQL query to update operator_quantity in operators table
         $update_sql = "UPDATE operators 
-                       SET operator_quantity = operator_quantity - $contaminated_quantity 
-                       WHERE operator_number = '$operator_number'";
+           SET operator_quantity = operator_quantity - $contaminated_quantity 
+           WHERE operator_number = '$operator_number'";
         
         if ($connect->query($update_sql) === TRUE) {
             header("location: ../contaminated.php?status=1");

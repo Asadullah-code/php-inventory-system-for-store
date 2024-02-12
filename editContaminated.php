@@ -2,6 +2,7 @@
 <?php require_once 'includes/header.php'; ?>
 <?php
     $contaminated_id = $_GET['id'];
+    $prevQuan = $_GET['qua'];
 
     $sqlEdit = "SELECT * FROM contaminated_plants WHERE contaminated_id = '$contaminated_id'";
     $resultEdit = $connect->query($sqlEdit);
@@ -52,6 +53,7 @@
 				<div>
 					<form method="post" action="php_action/editContaminatedSql.php">
 						<input type="hidden" value="<?php echo $contaminated_id; ?>" name="contaminated_id">
+						<input type="hidden" value="<?php echo $prevQuan; ?>" name="prevQuan">
 						<div class="row d-flex align-items-center justify-content-center">
 							<div class="col-sm-6 form-group">
 								<label for="date">Date:</label>

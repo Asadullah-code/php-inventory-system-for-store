@@ -200,12 +200,12 @@ if($_GET['o'] == 'add') {
 				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" />
 				    </div>
 				  </div> <!--/form-group-->	
-				  <div class="form-group">
+				  <!-- <div class="form-group">
 				    <label for="phytosanitary" class="col-sm-3 control-label">Phytosanitary</label>
 				    <div class="col-sm-9">
 				      <input type="number" class="form-control" id="phytosanitary" name="phytosanitary" autocomplete="off" />
 				    </div>
-				  </div> <!--/form-group-->	
+				  </div> --> <!--/form-group-->	
 				<p>  <div class="form-group">
 				    <label for="vat" class="col-sm-3 control-label gst">GST 5%</label>
 				    <div class="col-sm-9">
