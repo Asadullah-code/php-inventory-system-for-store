@@ -17,6 +17,7 @@ if($_POST) {
   //$totalAmountValue     = $_POST['totalAmountValue'];
   $shipping 						= $_POST['shipping'];
   $discount 						= $_POST['discount'];
+  $phytosanitary 						= $_POST['phytosanitary'];
   $grandTotalValue 			= $_POST['grandTotalValue'];
   $paid 								= $_POST['paid'];
   $dueValue 						= $_POST['dueValue'];
@@ -26,7 +27,7 @@ if($_POST) {
   //$gstn 				= $_POST['gstn'];
 	$userid 				= $_SESSION['userId'];
 				
-	$sql = "UPDATE orders SET order_date = '$orderDate', client_name = '$clientName', client_contact = '$clientContact', client_Address = '$clientAddress', client_email = '$clientEmail', sub_total = '$subTotalValue', vat = '$vatValue', shipping = '$shipping', discount = '$discount', grand_total = '$grandTotalValue', paid = '$paid', due = '$dueValue', payment_type = '$paymentType', payment_status = '$paymentStatus', order_status = 1 ,user_id = '$userid',payment_place = '$paymentPlace' WHERE order_id = {$orderId}";	
+	$sql = "UPDATE orders SET order_date = '$orderDate', client_name = '$clientName', client_contact = '$clientContact', client_Address = '$clientAddress', client_email = '$clientEmail', sub_total = '$subTotalValue', vat = '$vatValue', shipping = '$shipping', discount = '$discount', phytosanitary = '$phytosanitary', grand_total = '$grandTotalValue', paid = '$paid', due = '$dueValue', payment_type = '$paymentType', payment_status = '$paymentStatus', order_status = 1 ,user_id = '$userid',payment_place = '$paymentPlace' WHERE order_id = {$orderId}";	
 	$connect->query($sql);
 	
 	$readyToUpdateOrderItem = false;

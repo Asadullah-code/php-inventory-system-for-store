@@ -37,6 +37,7 @@ $(document).ready(function () {
             var clientEmail = $("#clientEmail").val();
             var paid = $("#paid").val();
             var discount = $("#discount").val();
+            var phytosanitary = $("#phytosanitary").val();
             var paymentType = $("#paymentType").val();
             var paymentStatus = $("#paymentStatus").val();
 
@@ -80,6 +81,13 @@ $(document).ready(function () {
                 $('#discount').closest('.form-group').addClass('has-error');
             } else {
                 $('#discount').closest('.form-group').addClass('has-success');
+            } // /else
+
+            if (phytosanitary == "") {
+                $("#phytosanitary").after('<p class="text-danger"> The phytosanitary field is required </p>');
+                $('#phytosanitary').closest('.form-group').addClass('has-error');
+            } else {
+                $('#phytosanitary').closest('.form-group').addClass('has-success');
             } // /else
 
             if (paymentType == "") {
@@ -139,7 +147,7 @@ $(document).ready(function () {
             } // for
 
 
-            if (orderDate && clientName && clientContact && clientEmail && paid && discount && paymentType && paymentStatus) {
+            if (orderDate && clientName && clientContact && clientEmail && paid && discount && phytosanitary && paymentType && paymentStatus) {
                 if (validateProduct == true && validateQuantity == true) {
                     // create order button
                     // $("#createOrderBtn").button('loading');
@@ -215,6 +223,7 @@ $(document).ready(function () {
             var paid = $("#paid").val();
             var shipping = $("#shipping_cost").val();
             var discount = $("#discount").val();
+            var phytosanitary = $("#phytosanitary").val();
             var paymentType = $("#paymentType").val();
             var paymentStatus = $("#paymentStatus").val();
 
@@ -271,6 +280,12 @@ $(document).ready(function () {
                 $('#discount').closest('.form-group').addClass('has-error');
             } else {
                 $('#discount').closest('.form-group').addClass('has-success');
+            } // /else
+            if (phytosanitary == "") {
+                $("#phytosanitary").after('<p class="text-danger"> The phytosanitary field is required </p>');
+                $('#phytosanitary').closest('.form-group').addClass('has-error');
+            } else {
+                $('#phytosanitary').closest('.form-group').addClass('has-success');
             } // /else
 
             if (paymentType == "") {
@@ -330,7 +345,7 @@ $(document).ready(function () {
             } // for
 
 
-            if (orderDate && clientName && clientContact && clientAddress && clientEmail && paid && shipping && discount && paymentType && paymentStatus) {
+            if (orderDate && clientName && clientContact && clientAddress && clientEmail && paid && shipping && discount && phytosanitary && paymentType && paymentStatus) {
                 if (validateProduct == true && validateQuantity == true) {
                     // create order button
                     // $("#createOrderBtn").button('loading');
@@ -620,17 +635,22 @@ function addShippingCostToTotal(shipping_input){
 function subAmount() {
     var tableProductLength = $("#productTable tbody tr").length;
     var totalSubAmount = 0;
-    for (x = 0; x < tableProductLength; x++) {
+
+    // Iterate through table rows and calculate totalSubAmount
+    for (var x = 0; x < tableProductLength; x++) {
         var tr = $("#productTable tbody tr")[x];
         var count = $(tr).attr('id');
         count = count.substring(3);
 
-        totalSubAmount = Number(totalSubAmount) + Number($("#total" + count).val());
-    } // /for
+        totalSubAmount += Number($("#total" + count).val());
+    }
 
+    // Add value of Phytosanitary input to totalSubAmount
+    var phytosanitaryValue = Number($("#phytosanitary").val()) || 0;
+    totalSubAmount += phytosanitaryValue;
+
+    // Update subTotal
     totalSubAmount = totalSubAmount.toFixed(2);
-
-    // sub total
     $("#subTotal").val(totalSubAmount);
     $("#subTotalValue").val(totalSubAmount);
 
@@ -673,6 +693,15 @@ function subAmount() {
     } // else
 
 } // /sub total amount
+
+$(document).ready(function() {
+    // Bind an event handler to the "input" event of the Phytosanitary input
+    $("#phytosanitary").on("input", function() {
+        // Call the subAmount function to recalculate totals
+        subAmount();
+    });
+});
+
 
 function discountFunc() {
     var discount = $("#discount").val();

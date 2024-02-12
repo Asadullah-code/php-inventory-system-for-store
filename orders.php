@@ -200,12 +200,13 @@ if($_GET['o'] == 'add') {
 				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" />
 				    </div>
 				  </div> <!--/form-group-->	
-				  <!-- <div class="form-group">
+				  <div class="form-group">
 				    <label for="phytosanitary" class="col-sm-3 control-label">Phytosanitary</label>
 				    <div class="col-sm-9">
 				      <input type="number" class="form-control" id="phytosanitary" name="phytosanitary" autocomplete="off" />
 				    </div>
-				  </div> --> <!--/form-group-->	
+				  </div>
+				   <!--/form-group-->	
 				<p>  <div class="form-group">
 				    <label for="vat" class="col-sm-3 control-label gst">GST 5%</label>
 				    <div class="col-sm-9">
@@ -351,7 +352,7 @@ if($_GET['o'] == 'add') {
 
   			<?php $orderId = $_GET['i'];
 
-  			$sql = "SELECT orders.order_id, orders.order_date, orders.client_name, orders.client_contact, orders.client_address, orders.client_email, orders.sub_total, orders.vat, orders.total_amount, orders.shipping, orders.discount, orders.grand_total, orders.paid, orders.due, orders.payment_type, orders.payment_status,orders.payment_place,orders.gstn FROM orders 	
+  			$sql = "SELECT orders.order_id, orders.order_date, orders.client_name, orders.client_contact, orders.client_address, orders.client_email, orders.sub_total, orders.vat, orders.total_amount, orders.shipping, orders.discount, orders.phytosanitary, orders.grand_total, orders.paid, orders.due, orders.payment_type, orders.payment_status,orders.payment_place,orders.gstn FROM orders 	
 					WHERE orders.order_id = {$orderId}";
 
 				$result = $connect->query($sql);
@@ -529,19 +530,25 @@ if($_GET['o'] == 'add') {
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" value="<?php echo $data[10] ?>" />
 				    </div>
+				  </div> <!--/form-group-->
+				  <div class="form-group">
+				    <label for="phytosanitary" class="col-sm-3 control-label">Phytosanitary</label>
+				    <div class="col-sm-9">
+				      <input type="number" class="form-control" id="phytosanitary" name="phytosanitary" autocomplete="off" value="<?php echo $data[11] ?>" />
+				    </div>
 				  </div> <!--/form-group-->	
 				  <div class="form-group">
 				    <label for="grandTotal" class="col-sm-3 control-label">Grand Total</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="grandTotal" name="grandTotal" disabled="true" value="<?php echo $data[11] ?>"  />
-				      <input type="hidden" class="form-control" id="grandTotalValue" name="grandTotalValue" value="<?php echo $data[11] ?>"  />
+				      <input type="text" class="form-control" id="grandTotal" name="grandTotal" disabled="true" value="<?php echo $data[12] ?>"  />
+				      <input type="hidden" class="form-control" id="grandTotalValue" name="grandTotalValue" value="<?php echo $data[12] ?>"  />
 				    </div>
 				  </div> <!--/form-group-->	
 				  <div class="form-group">
-				    <label for="vat" class="col-sm-3 control-label gst"><?php if($data[17] == 2) {echo "IGST 0%";} else echo "GST 5%"; ?></label>
+				    <label for="vat" class="col-sm-3 control-label gst"><?php if($data[18] == 2) {echo "IGST 0%";} else echo "GST 5%"; ?></label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="vat" name="vat" disabled="true" value="<?php echo $data[7] ?>"  />
-				      <input type="hidden" class="form-control" id="vatValue" name="vatValue" value="<?php echo $data[7] ?>"  />
+				      <input type="text" class="form-control" id="vat" name="vat" disabled="true" value="<?php echo $data[8] ?>"  />
+				      <input type="hidden" class="form-control" id="vatValue" name="vatValue" value="<?php echo $data[8] ?>"  />
 				    </div>
 				  </div> 
 				  <!-- <div class="form-group">
@@ -557,14 +564,14 @@ if($_GET['o'] == 'add') {
 			  	<div class="form-group">
 				    <label for="paid" class="col-sm-3 control-label">Paid Amount</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" value="<?php echo $data[12] ?>"  />
+				      <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" value="<?php echo $data[13] ?>"  />
 				    </div>
 				  </div> <!--/form-group-->			  
 				  <div class="form-group">
 				    <label for="due" class="col-sm-3 control-label">Due Amount</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="due" name="due" disabled="true" value="<?php echo $data[13] ?>"  />
-				      <input type="hidden" class="form-control" id="dueValue" name="dueValue" value="<?php echo $data[13] ?>"  />
+				      <input type="text" class="form-control" id="due" name="due" disabled="true" value="<?php echo $data[14] ?>"  />
+				      <input type="hidden" class="form-control" id="dueValue" name="dueValue" value="<?php echo $data[14] ?>"  />
 				    </div>
 				  </div> <!--/form-group-->		
 				  <div class="form-group">
@@ -572,19 +579,19 @@ if($_GET['o'] == 'add') {
 				    <div class="col-sm-9">
 				      <select class="form-control" name="paymentType" id="paymentType" >
 				      	<option value="">~~SELECT~~</option>
-				      	<option value="1" <?php if($data[14] == 1) {
+				      	<option value="1" <?php if($data[15] == 1) {
 				      		echo "selected";
 				      	} ?> >paypal</option>
-				      	<option value="2" <?php if($data[14] == 2) {
+				      	<option value="2" <?php if($data[15] == 2) {
 				      		echo "selected";
 				      	} ?>  >western union</option>
-				      	<option value="3" <?php if($data[14] == 3) {
+				      	<option value="3" <?php if($data[15] == 3) {
 				      		echo "selected";
 				      	} ?> >wise</option>
-				      	<option value="4" <?php if($data[14] == 4) {
+				      	<option value="4" <?php if($data[15] == 4) {
 				      		echo "selected";
 				      	} ?> >bank Transfer</option>
-				      	<option value="5" <?php if($data[14] == 5) {
+				      	<option value="5" <?php if($data[15] == 5) {
 				      		echo "selected";
 				      	} ?> >cash</option>
 				      </select>
@@ -595,13 +602,13 @@ if($_GET['o'] == 'add') {
 				    <div class="col-sm-9">
 				      <select class="form-control" name="paymentStatus" id="paymentStatus">
 				      	<option value="">~~SELECT~~</option>
-				      	<option value="1" <?php if($data[15] == 1) {
+				      	<option value="1" <?php if($data[16] == 1) {
 				      		echo "selected";
 				      	} ?>  >paid</option>
-				      	<option value="2" <?php if($data[15] == 2) {
+				      	<option value="2" <?php if($data[16] == 2) {
 				      		echo "selected";
 				      	} ?> >Payment processing</option>
-				      	<option value="3" <?php if($data[15] == 3) {
+				      	<option value="3" <?php if($data[16] == 3) {
 				      		echo "selected";
 				      	} ?> >No Payment</option>
 				      </select>
@@ -618,37 +625,37 @@ if($_GET['o'] == 'add') {
 				    <div class="col-sm-9">
 				      <select class="form-control" name="paymentPlace" id="paymentPlace">
 				      	<option value="">~~SELECT~~</option>
-				      	<option value="1" <?php if($data[16] == 1) {
+				      	<option value="1" <?php if($data[17] == 1) {
 				      		echo "selected";
 				      	} ?>  >USA</option>
-				      	<option value="2" <?php if($data[16] == 2) {
+				      	<option value="2" <?php if($data[17] == 2) {
 				      		echo "selected";
 				      	} ?> >Eu</option>
-				      	<option value="3" <?php if($data[16] == 3) {
+				      	<option value="3" <?php if($data[17] == 3) {
 				      		echo "selected";
 				      	} ?> >Uk</option>
-				      	<option value="4" <?php if($data[16] == 4) {
+				      	<option value="4" <?php if($data[17] == 4) {
 				      		echo "selected";
 				      	} ?> >Canada</option>
-				      	<option value="5" <?php if($data[16] == 5) {
+				      	<option value="5" <?php if($data[17] == 5) {
 				      		echo "selected";
 				      	} ?> >Signapore</option>
-				      	<option value="6" <?php if($data[16] == 6) {
+				      	<option value="6" <?php if($data[17] == 6) {
 				      		echo "selected";
 				      	} ?> >Hongkong</option>
-				      	<option value="7" <?php if($data[16] == 7) {
+				      	<option value="7" <?php if($data[17] == 7) {
 				      		echo "selected";
 				      	} ?> >Norway</option>
-				      	<option value="8" <?php if($data[16] == 8) {
+				      	<option value="8" <?php if($data[17] == 8) {
 				      		echo "selected";
 				      	} ?> >Switezerland</option>
-				      	<option value="9" <?php if($data[16] == 9) {
+				      	<option value="9" <?php if($data[17] == 9) {
 				      		echo "selected";
 				      	} ?> >Alaska & hawaii</option>
-				      	<option value="10" <?php if($data[16] == 10) {
+				      	<option value="10" <?php if($data[17] == 10) {
 				      		echo "selected";
 				      	} ?> >Aus</option>
-				      	<option value="11" <?php if($data[16] == 11) {
+				      	<option value="11" <?php if($data[17] == 11) {
 				      		echo "selected";
 				      	} ?> >Other</option>
 				      </select>

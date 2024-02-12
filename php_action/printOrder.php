@@ -20,6 +20,7 @@ if(isset($_POST['orderId'])) {
        o.total_amount,
        o.shipping,
        o.discount,
+       o.phytosanitary,
        o.grand_total,
        o.paid,
        o.due,
@@ -29,7 +30,7 @@ FROM order_item AS oi
 JOIN orders AS o ON oi.order_id = o.order_id
 JOIN product AS p ON oi.product_id = p.product_id
 WHERE oi.order_id = $orderId
-GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.client_contact, o.client_address, o.client_email, o.sub_total, o.vat, o.total_amount, o.shipping, o.discount, o.grand_total, o.paid, o.due, o.payment_place, o.gstn
+GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.client_contact, o.client_address, o.client_email, o.sub_total, o.vat, o.total_amount, o.shipping, o.discount, o.phytosanitary, o.grand_total, o.paid, o.due, o.payment_place, o.gstn
 ";
 
     $orderResult = $connect->query($sql);
@@ -56,6 +57,7 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
             $totalAmount = $orderData['total_amount']; 
             $shipping = $orderData['shipping'];
             $discount = $orderData['discount'];
+            $phytosanitary = $orderData['phytosanitary'];
             $quantity = $orderData['total_quantity'];
             $grandTotal = $orderData['grand_total'];
             $paid = $orderData['paid'];
@@ -128,8 +130,9 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
                   <th scope="col" style="width: 35% !important;">Description</th>
                   <th scope="col" style="width: 10% !important;">Qty<br>(Bag/Flask)</th>
                   <th scope="col" style="width: 10% !important;">Unit/<br>Price</th>
-                  <th scope="col" style="width: 15% !important;">Amount<br> USD</th>
+                  <th scope="col" style="width: 10% !important;">Amount<br> USD</th>
                   <th scope="col" style="width: 10% !important;">Shipping</th>
+                  <th scope="col" style="width: 10% !important;">Phytosanitary</th>
                   <th scope="col" style="width: 10% !important;">Paypal 5%<br> Charges</th>
                 </tr>
               </thead>
@@ -159,6 +162,7 @@ if(isset($_POST['orderId'])) {
        o.total_amount,
        o.shipping,
        o.discount,
+       o.phytosanitary,
        o.grand_total,
        o.paid,
        o.due,
@@ -168,7 +172,7 @@ FROM order_item AS oi
 JOIN orders AS o ON oi.order_id = o.order_id
 JOIN product AS p ON oi.product_id = p.product_id
 WHERE oi.order_id = $orderId
-GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.client_contact, o.client_address, o.client_email, o.sub_total, o.vat, o.total_amount, o.shipping, o.discount, o.grand_total, o.paid, o.due, o.payment_place, o.gstn
+GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.client_contact, o.client_address, o.client_email, o.sub_total, o.vat, o.total_amount, o.shipping, o.discount, o.phytosanitary, o.grand_total, o.paid, o.due, o.payment_place, o.gstn
 ";
 
     $orderResult = $connect->query($sqlReport); // Changed variable name from $orderResultOrder to $orderResult
@@ -189,6 +193,7 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
             $payment_type = $order['product_price_type'];
             $total = $order['total'];
             $shipping = $order['shipping'];
+            $phytosanitary = $order['phytosanitary'];
             $gstn = $order['gstn'];
 
             // Outputting table rows
@@ -199,6 +204,7 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
             echo '<td>' . $payment_type . '</td>';
             echo '<td>' . $total . '</td>';
             echo '<td>' . $shipping . '</td>';
+            echo '<td>' . $phytosanitary . '</td>';
             echo '<td>' . $gstn . '</td>';
             echo '</tr>';
         }
