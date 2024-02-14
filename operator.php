@@ -113,7 +113,7 @@
 							  <tbody>
 									<?php
 
-									$sqlOper = "SELECT * FROM operators";
+									$sqlOper = "SELECT * FROM operators WHERE operator_quantity>0";
 									$resultOper = $connect->query($sqlOper);
 
 									// Check if there are any results

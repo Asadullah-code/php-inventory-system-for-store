@@ -52,7 +52,7 @@
 									}
 
 									// SQL query to fetch data from the product table where status = 1 and active = 1
-									$sql = "SELECT * FROM product WHERE status = 1 AND active = 1";
+									$sql = "SELECT * FROM product WHERE status = 1 AND active = 1 AND quantity>0";
 									$result = $conn->query($sql);
 
 									// Check if there are any results
@@ -87,7 +87,7 @@
 									}
 
 									// SQL query to fetch data from the product table where status = 1 and active = 1
-									$sqlOperaC = "SELECT * FROM operators";
+									$sqlOperaC = "SELECT * FROM operators WHERE operator_quantity>0";
 									$resultOperaC = $conn->query($sqlOperaC);
 
 									// Check if there are any results
