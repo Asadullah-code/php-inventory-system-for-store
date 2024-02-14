@@ -622,11 +622,13 @@ function getTotal(row = null) {
 }
 
 $('#paymentType').change(function () {
-    var vat = (Number($("#subTotal").val()) / 100) * ($(this).val() == 1 ? 5 : defaultVat);
+    var totalAmount = Number($("#totalAmount").val()); // Assuming totalAmount is the ID of the input containing the total amount
+    var vat = (totalAmount / 100) * 5; // Calculate 5% of the total amount
     $("#vat").val(vat);
     $("#vatValue").val(vat);
     subAmount();
-})
+});
+
 
 function addShippingCostToTotal(shipping_input){
 	subAmount();
@@ -656,7 +658,7 @@ function subAmount() {
 
     //console.log($('#paymentType').val())
     // vat
-    var vat = (Number($("#subTotal").val()) / 100) * ($('#paymentType').val() == 1 ? 5 : defaultVat);
+    var vat = (Number($("#dueValue").val()) / 100) * ($('#paymentType').val() == 1 ? 5 : defaultVat);
     vat = vat.toFixed(2);
     $("#vat").val(vat);
     $("#vatValue").val(vat);

@@ -127,13 +127,13 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
               <thead>
                 <tr>
                   <th scope="col" style="width: 10% !important;">Item</th>
-                  <th scope="col" style="width: 35% !important;">Description</th>
-                  <th scope="col" style="width: 10% !important;">Qty<br>(Bag/Flask)</th>
-                  <th scope="col" style="width: 10% !important;">Unit/<br>Price</th>
-                  <th scope="col" style="width: 10% !important;">Amount<br> USD</th>
-                  <th scope="col" style="width: 10% !important;">Shipping</th>
+                  <th scope="col" style="width: 50% !important;">Description</th>
+                  <th scope="col" style="width: 15% !important;">Qty<br>(Bag/Flask)</th>
+                  <th scope="col" style="width: 15% !important;">Unit/<br>Price</th>
+                  <th scope="col" style="width: 20% !important;">Amount<br> USD</th>
+                  <!-- <th scope="col" style="width: 10% !important;">Shipping</th>
                   <th scope="col" style="width: 10% !important;">Phytosanitary</th>
-                  <th scope="col" style="width: 10% !important;">Paypal 5%<br> Charges</th>
+                  <th scope="col" style="width: 10% !important;">Paypal 5%<br> Charges</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -203,15 +203,37 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
             echo '<td>' . $quantity . '</td>';
             echo '<td>' . $payment_type . '</td>';
             echo '<td>' . $total . '</td>';
-            echo '<td>' . $shipping . '</td>';
-            echo '<td>' . $phytosanitary . '</td>';
-            echo '<td>' . $gstn . '</td>';
+            //echo '<td>' . $shipping . '</td>';
+            //echo '<td>' . $phytosanitary . '</td>';
+            //echo '<td>' . $gstn . '</td>';
             echo '</tr>';
         }
+
+        echo '<tr>';
+        echo '<th class="text-center" scope="row" colspan="2">phytosanitary</th>';
+        echo '<td></td>';
+        echo '<td></td>';
+        echo '<td>' . $phytosanitary . '</td>'; // Assuming $totalAmount is the total amount for the order
+        echo '</tr>';
+
+        echo '<tr>';
+        echo '<th class="text-center" scope="row" colspan="2">shipping</th>';
+        echo '<td></td>';
+        echo '<td></td>';
+        echo '<td>' . $shipping . '</td>'; // Assuming $totalAmount is the total amount for the order
+        echo '</tr>';
+
+        echo '<tr>';
+        echo '<th class="text-center" scope="row" colspan="2">paypal charges 5%</th>';
+        echo '<td></td>';
+        echo '<td></td>';
+        echo '<td>' . $gstn . '</td>'; // Assuming $totalAmount is the total amount for the order
+        echo '</tr>';
         
         // Outputting total row
         echo '<tr>';
         echo '<th class="text-center" scope="row" colspan="2">Total</th>';
+        echo '<td></td>';
         echo '<td></td>';
         echo '<td>' . $totalAmount . '</td>'; // Assuming $totalAmount is the total amount for the order
         echo '</tr>';

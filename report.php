@@ -22,6 +22,17 @@
 				      <input type="text" class="form-control" id="endDate" name="endDate" placeholder="End Date" />
 				    </div>
 				  </div>
+				  <!-- <div class="form-group">
+				    <label for="paymentType" class="col-sm-2 control-label">Specify Payment Type</label>
+				    <div class="col-sm-10">
+				        <select class="form-select form-control" name="payment_type" aria-label="Default select example">
+						  <option selected>Payment Type</option>
+						    <option value="rate">Rate</option>
+						    <option value="wholesale">Wholesale</option>
+						    <option value="thb">Thb</option>
+						</select>
+				    </div>
+				  </div> -->
 				  <div class="form-group">
 				    <div class="col-sm-offset-2 col-sm-10">
 				      <button type="submit" class="btn btn-success" id="generateReportBtn"> <i class="glyphicon glyphicon-ok-sign"></i> Generate Report</button>
