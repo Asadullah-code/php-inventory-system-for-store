@@ -81,35 +81,10 @@
 								<label for="operator_number">Choose Operator Number:</label>
 								
 								<select class="form-control" name="operator_number" id="operator_number" required>
-									<?php
-
-									// Establish a database connection
-									$conn = new mysqli($servername, $username, $password, $dbname);
-
-									// Check the connection
-									if ($conn->connect_error) {
-									    die("Connection failed: " . $conn->connect_error);
-									}
-
-									// SQL query to fetch data from the product table where status = 1 and active = 1
-									$sqlOperaC = "SELECT * FROM operators WHERE operator_quantity>0";
-									$resultOperaC = $conn->query($sqlOperaC);
-
-									// Check if there are any results
-									if ($resultOperaC->num_rows > 0) {
-									    // Output data of each row using a while loop
-									    while ($rowOperaC = $resultOperaC->fetch_assoc()) {
-									        // Generate <option> tags with product names as values
-									        echo '<option value="' . $rowOperaC["operator_number"] . '">' . $rowOperaC["operator_number"] . '</option>';
-									    }
-									} else {
-									    echo '<option value="">No products found</option>';
-									}
-
-									// Close the database connection
-									$conn->close();
-									?>
-
+									<option value="001">001</option>
+									<option value="002">002</option>
+									<option value="003">003</option>
+									<option value="004">004</option>
 								</select>
 							</div>
 							<div class="col-sm-6 form-group">
