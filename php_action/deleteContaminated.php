@@ -3,9 +3,10 @@
 include 'db_connect.php';
 
 // Check if the ID of the record to be deleted is provided in the URL
-if(isset($_GET['id'])) {
+if(isset($_GET['id']) && isset($_GET['pid'])) {
     // Sanitize the ID to prevent SQL injection
     $id = mysqli_real_escape_string($connect, $_GET['id']);
+    $pid = mysqli_real_escape_string($connect, $_GET['pid']); // Changed from 'product_id' to 'pid'
 
     // Retrieve the contaminated_quantity of the record to be deleted
     $get_contaminated_quantity_sql = "SELECT contaminated_quantity, operator_number FROM contaminated_plants WHERE contaminated_id = '$id'";
@@ -21,7 +22,7 @@ if(isset($_GET['id'])) {
 
         if ($connect->query($delete_sql) === TRUE) {
             // Add the contaminated_quantity back to operator_quantity
-            $update_operator_sql = "UPDATE operators SET operator_quantity = operator_quantity + $contaminated_quantity WHERE operator_number='$operator_number'";
+            $update_operator_sql = "UPDATE product SET quantity = quantity + $contaminated_quantity WHERE product_id='$pid'";
             if ($connect->query($update_operator_sql) === TRUE) {
                 header("location: ../contaminated.php?delete=1");
             } else {

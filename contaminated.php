@@ -23,6 +23,11 @@
 					}
 					?>
 					<?php 
+					if (isset($_GET['edit']) && $_GET['edit'] == 1) {
+					    echo '<div class="alert alert-success">Contaminated edit successfully</div>';
+					}
+					?>
+					<?php 
 					if (isset($_GET['delete']) && $_GET['delete'] == 1) {
 					    echo '<div class="alert alert-danger">Contaminated Delete successfully</div>';
 					}
@@ -158,7 +163,7 @@
 									            echo '<td>' . $rowOper["contaminated_quantity"] . '</td>';
 									            echo '<td>
 									                    <a class="btn btn-sm btn-warning" href="editContaminated.php?id=' . $rowOper["contaminated_id"] . '&qua=' . $rowOper["contaminated_quantity"] . '">Edit</a>
-									                    <a class="btn btn-sm btn-danger" href="php_action/deleteContaminated.php?id=' . $rowOper["contaminated_id"] . '">Delete</a>
+									                    <a class="btn btn-sm btn-danger" href="php_action/deleteContaminated.php?id=' . $rowOper["contaminated_id"] . '&pid='.$rowOper["product_id"].'">Delete</a>
 									                  </td>';
 									            echo '</tr>';
 									        }

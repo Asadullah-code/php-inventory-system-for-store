@@ -36,13 +36,13 @@ if ($connect->query($sql) === TRUE) {
                        WHERE product_id = '$product_id'";
         
         if ($connect->query($update_sql) === TRUE) {
-            header("Location: ../editContaminated.php?edit=1&id=$contaminated_id");
+            header("Location: ../contaminated.php?edit=1&id=$contaminated_id");
         } else {
             echo "Error updating operator quantity: " . $connect->error;
         }
     } else {
         // If previous_quantity is equal to contaminated_quantity, no need for update
-        header("Location: ../editContaminated.php?edit=1&id=$contaminated_id");
+        header("Location: ../contaminated.php?edit=1&id=$contaminated_id");
     }
 } else {
     echo "Error updating record: " . $connect->error;
