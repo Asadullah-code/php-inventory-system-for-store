@@ -545,10 +545,10 @@ if($_GET['o'] == 'add') {
 				    </div>
 				  </div> <!--/form-group-->	
 				  <div class="form-group">
-				    <label for="vat" class="col-sm-3 control-label gst"><?php if($data[18] == 2) {echo "IGST 0%";} else echo "GST 5%"; ?></label>
+				    <label for="vat" class="col-sm-3 control-label gst"><?php if($data[18] == 2) {echo "GST 0%";} else echo "GST 5%"; ?></label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="vat" name="vat" disabled="true" value="<?php echo $data[8] ?>"  />
-				      <input type="hidden" class="form-control" id="vatValue" name="vatValue" value="<?php echo $data[8] ?>"  />
+				      <input type="text" class="form-control" id="vat" name="vat" disabled="true" value="<?php echo $data[18] ?>"  />
+				      <input type="hidden" class="form-control" id="vatValue" name="vatValue" value="<?php echo $data[18] ?>"  />
 				    </div>
 				  </div> 
 				  <!-- <div class="form-group">

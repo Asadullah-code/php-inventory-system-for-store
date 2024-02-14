@@ -39,7 +39,13 @@
 							</div>
 							<div class="col-sm-6 form-group">
 								<label for="operaterNum">Operator Number:</label>
-								<input class="form-control" type="text" name="operator_number" placeholder="001/002/003/004" required>
+								<!-- <input class="form-control" type="text" name="operator_number" placeholder="001/002/003/004" required> -->
+								<select class="form-control" name="operator_number" id="operaterNum">
+									<option value="001">001</option>
+									<option value="002">002</option>
+									<option value="003">003</option>
+									<option value="004">004</option>
+								</select>
 							</div>
 							<div class="col-sm-6 form-group">
 								<label for="product">Choose Product:</label>
