@@ -40,7 +40,7 @@
 							<div class="col-sm-6 form-group">
 								<label for="product">Choose Product:</label>
 								
-								<select class="form-control" name="product_name" id="product" required>
+								<select class="form-control" name="product_id" id="product" required>
 									<?php
 
 									// Establish a database connection
@@ -59,15 +59,15 @@
 									if ($result->num_rows > 0) {
 									    // Output data of each row using a while loop
 									    while ($row = $result->fetch_assoc()) {
+										$product_name = $row['product_name'];
 									        // Generate <option> tags with product names as values
-									        echo '<option value="' . $row["product_name"] . '">' . $row["product_name"] . '</option>';
+									        echo '<option value="' . $row["product_id"] . '">' . $row["product_name"] . '</option>';
 									    }
 									} else {
 									    echo '<option value="">No products found</option>';
 									}
 
-									// Close the database connection
-									$conn->close();
+									
 									?>
 
 								</select>
@@ -143,28 +143,31 @@
 							  </thead>
 							  <tbody>
 									<?php
-										$sqlOper = "SELECT * FROM contaminated_plants";
+									    $sqlOper = "SELECT cp.contaminated_id, cp.contaminated_date, cp.product_id, cp.operator_number, cp.contaminated_quantity, p.product_name 
+									                FROM contaminated_plants cp 
+									                INNER JOIN product p ON p.product_id = cp.product_id";
 
-										$resultOper = $connect->query($sqlOper);
-										if ($resultOper->num_rows > 0) {
-										    // Output data of each row using a while loop
-										    while ($rowOper = $resultOper->fetch_assoc()) {
-										        echo '<tr>';
-										        echo '<th scope="row">' . $rowOper["contaminated_date"] . '</th>';
-										        echo '<td>' . $rowOper["product_name"] . '</td>';
-										        echo '<td>' . $rowOper["operator_number"] . '</td>';
-										        echo '<td>' . $rowOper["contaminated_quantity"] . '</td>';
-										        echo '<td>
-										                <a class="btn btn-sm btn-warning" href="editContaminated.php?id=' . $rowOper["contaminated_id"] . '& qua= '.$rowOper["contaminated_quantity"].'">Edit</a>
-										                <a class="btn btn-sm btn-danger" href="php_action/deleteContaminated.php?id=' . $rowOper["contaminated_id"] . '">Delete</a>
-										              </td>';
-										        echo '</tr>';
-										    }
-										} else {
-										    echo '';
-										}
-										$connect->close();
-										?>
+									    $resultOper = $connect->query($sqlOper);
+									    if ($resultOper->num_rows > 0) {
+									        // Output data of each row using a while loop
+									        while ($rowOper = $resultOper->fetch_assoc()) {
+									            echo '<tr>';
+									            echo '<th scope="row">' . $rowOper["contaminated_date"] . '</th>';
+									            echo '<td>' . $rowOper["product_name"] . '</td>';
+									            echo '<td>' . $rowOper["operator_number"] . '</td>';
+									            echo '<td>' . $rowOper["contaminated_quantity"] . '</td>';
+									            echo '<td>
+									                    <a class="btn btn-sm btn-warning" href="editContaminated.php?id=' . $rowOper["contaminated_id"] . '&qua=' . $rowOper["contaminated_quantity"] . '">Edit</a>
+									                    <a class="btn btn-sm btn-danger" href="php_action/deleteContaminated.php?id=' . $rowOper["contaminated_id"] . '">Delete</a>
+									                  </td>';
+									            echo '</tr>';
+									        }
+									    } else {
+									        echo '';
+									    }
+									    $connect->close();
+									?>
+
 
 					  
 								</tbody>

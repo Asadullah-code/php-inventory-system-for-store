@@ -11,7 +11,7 @@
         // Fetch the row from the result set
         $rowEdit = $resultEdit->fetch_assoc();
         
-        $product_name = $rowEdit['product_name'];
+        $product_id = $rowEdit['product_id'];
         $contaminated_id = $rowEdit['contaminated_id'];
         $contaminated_date = $rowEdit['contaminated_date'];
         $operator_number = $rowEdit['operator_number'];
@@ -62,7 +62,7 @@
 							<div class="col-sm-6 form-group">
 								<label for="product">Choose Product:</label>
 								
-								<select class="form-control" value="<?php echo $product_name; ?>" name="product_name" id="product" required>
+								<select class="form-control" value="<?php echo $product_name; ?>" name="product_id" id="product" required>
 									<?php
 
 									// Establish a database connection
@@ -82,7 +82,7 @@
 									    // Output data of each row using a while loop
 									    while ($row = $result->fetch_assoc()) {
 									        // Generate <option> tags with product names as values
-									        echo '<option value="' . $row["product_name"] . '">' . $row["product_name"] . '</option>';
+									        echo '<option value="' . $row["product_id"] . '">' . $row["product_name"] . '</option>';
 									    }
 									} else {
 									    echo '<option value="">No products found</option>';
@@ -109,7 +109,7 @@
 									}
 
 									// SQL query to fetch data from the product table where status = 1 and active = 1
-									$sqlOperaC = "SELECT * FROM operators";
+									$sqlOperaC = "SELECT * FROM operators WHERE operator_quantity>0";
 									$resultOperaC = $conn->query($sqlOperaC);
 
 									// Check if there are any results
