@@ -132,7 +132,7 @@ if($_GET['o'] == 'add') {
 			  				<td style="padding-left:30px;">
 			  					<div class="form-group">
 			  					<select class="form-control" name="price_type[]" id="price_type<?php echo $x; ?>"  onchange="getProductRateWiseData(this,<?php echo $x; ?>)">
-			  						<option value="">price type</option>
+			  						<!-- <option value="">price type</option> -->
                         <option value="rate">Rate</option>
                         <option value="wholesale">WholeSale</option>
                         <option value="thb">Thb</option>

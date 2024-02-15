@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $operator_number = $_POST['operator_number'];
 
     // Prepare SQL query to fetch products within the specified date range
-    $sql = "SELECT * FROM contaminated_plants WHERE contaminated_date >= '$startDate' AND contaminated_date <= '$endDate' AND operator_number = '$operator_number'";
+    $sql = "SELECT contaminated_plants.*, product.product_name FROM contaminated_plants JOIN product ON contaminated_plants.product_id = product.product_id WHERE contaminated_date >= '$startDate' AND contaminated_date <= '$endDate' AND operator_number = '$operator_number'";
 
     // Execute the query
     $result = $connect->query($sql);

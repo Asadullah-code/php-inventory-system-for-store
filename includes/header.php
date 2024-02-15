@@ -95,9 +95,20 @@ function dd($variable)
             <li id="topNavManageOrder"><a href="orders.php?o=manord"> <i class="glyphicon glyphicon-edit"></i> Manage Orders</a></li>            
           </ul>
         </li> 
+
+
+        
 		
 		<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
-        <li id="navReport"><a href="report.php"> <i class="glyphicon glyphicon-check"></i> Report </a></li>
+
+            <li class="dropdown" id="navOrder">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-check"></i> Reports <span class="caret"></span></a>
+          <ul class="dropdown-menu">            
+            <li id=""><a href="report.php"> <i class="glyphicon glyphicon-check"></i> Overall Report</a></li>            
+            <li id=""><a href="reportC.php"> <i class="glyphicon glyphicon-check"></i>  Choose Report</a></li>            
+          </ul>
+        </li> 
+        <!-- <li id="navReport"><a href="report.php"> <i class="glyphicon glyphicon-check"></i> Report </a></li> -->
 		<?php } ?> 
     <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
         <li id="importbrand"><a href="importbrand.php"> <i class="glyphicon glyphicon-check"></i> Import Brand </a></li>

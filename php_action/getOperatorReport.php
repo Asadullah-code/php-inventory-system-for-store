@@ -8,10 +8,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get start date and end date from the form
     $startDate = $_POST['startDate'];
     $endDate = $_POST['endDate'];
-    $operator_id = $_POST['operator_id'];
+    $operator_number = $_POST['operator_number'];
 
     // Prepare SQL query to fetch products within the specified date range
-    $sql = "SELECT * FROM operators WHERE operator_date >= '$startDate' AND operator_date <= '$endDate' AND operator_id = '$operator_id'";
+    $sql = "SELECT * FROM operators WHERE operator_date >= '$startDate' AND operator_date <= '$endDate' AND operator_number = '$operator_number'";
 
     // Execute the query
     $result = $connect->query($sql);
