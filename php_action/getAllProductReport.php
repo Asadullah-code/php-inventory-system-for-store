@@ -47,13 +47,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo '<div class="container my-4" style="padding: 16px 16px">';
     echo '<h2>Edit Product Detail</h2>';
     echo '<table class="table" border="1">';
-    echo '<tr><th style="padding: 6px 10px;">Product Name</th><th style="padding: 6px 10px;">Rate Difference</th><th style="padding: 6px 10px;">Wholesale Difference</th><th style="padding: 6px 10px;">THB Difference</th></tr>';
+    echo '<tr><th style="padding: 6px 10px;">Product Name</th><th style="padding: 6px 10px;">New Quantity</th><th style="padding: 6px 10px;">New Rate</th><th style="padding: 6px 10px;">New Wholesale</th><th style="padding: 6px 10px;">New THB</th><th style="padding: 6px 10px;">Edit Date</th></tr>';
     while ($edit_detail = $result_edit_details->fetch_assoc()) {
         echo '<tr>';
         echo '<td style="padding: 6px 10px;">' . $edit_detail['product_name'] . '</td>';
+        echo '<td style="padding: 6px 10px;">' . $edit_detail['quan_difference'] . '</td>';
         echo '<td style="padding: 6px 10px;">' . $edit_detail['rate_difference'] . '</td>';
         echo '<td style="padding: 6px 10px;">' . $edit_detail['wholesale_difference'] . '</td>';
         echo '<td style="padding: 6px 10px;">' . $edit_detail['thb_difference'] . '</td>';
+        echo '<td style="padding: 6px 10px;">' . $edit_detail['timeDate'] . '</td>';
         echo '</tr>';
     }
     echo '</table>';

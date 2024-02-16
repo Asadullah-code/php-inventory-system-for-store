@@ -2,7 +2,8 @@
 
 require_once 'core.php';
 
-$valid['success'] = array('success' => false, 'messages' => array());
+$valid['success'] = false;
+$valid['messages'] = array();
 
 if ($_POST) {
     $productId = $_POST['productId'];
@@ -19,22 +20,23 @@ if ($_POST) {
 
     if ($connect->query($sql) === TRUE) {
         $valid['success'] = true;
-        $valid['messages'] = "Successfully Update";
+        $valid['messages'][] = "Successfully updated product";
 
         // Store differences in edit_pdetailtable
-        $sql_diff = "INSERT INTO edit_pdetail (product_id, rate_difference, wholesale_difference, thb_difference) VALUES ('$productId', '$rate', '$wholesale', '$thb')";
+        $sql_diff = "INSERT INTO edit_pdetail (product_id, quan_difference, rate_difference, wholesale_difference, thb_difference) VALUES ('$productId', '$quantity', '$rate', '$wholesale', '$thb')";
         if ($connect->query($sql_diff) === TRUE) {
-            // Differences stored successfully
+            $valid['messages'][] = "";
         } else {
-            $valid['success'] = false;
-            $valid['messages'] = "Error while storing differences";
+            $valid['messages'][] = "Error while storing differences: " . $connect->error;
         }
     } else {
-        $valid['success'] = false;
-        $valid['messages'] = "Error while updating product info";
+        $valid['messages'][] = "Error while updating product info: " . $connect->error;
     }
+} else {
+    $valid['messages'][] = "No POST data received";
 }
 
 $connect->close();
 
 echo json_encode($valid);
+?>
