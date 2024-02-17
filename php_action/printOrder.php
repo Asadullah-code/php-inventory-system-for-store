@@ -195,6 +195,8 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
             $shipping = $order['shipping'];
             $phytosanitary = $order['phytosanitary'];
             $gstn = $order['gstn'];
+            $grand_total = $order['grand_total'];
+            $vat = $order['vat'];
 
             // Outputting table rows
             echo '<tr>';
@@ -227,7 +229,7 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
         echo '<th class="text-center" scope="row" colspan="2">paypal charges 5%</th>';
         echo '<td></td>';
         echo '<td></td>';
-        echo '<td>' . $gstn . '</td>'; // Assuming $totalAmount is the total amount for the order
+        echo '<td>' . $vat . '</td>'; // Assuming $totalAmount is the total amount for the order
         echo '</tr>';
         
         // Outputting total row
@@ -235,7 +237,7 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
         echo '<th class="text-center" scope="row" colspan="2">Total</th>';
         echo '<td></td>';
         echo '<td></td>';
-        echo '<td>' . $totalAmount . '</td>'; // Assuming $totalAmount is the total amount for the order
+        echo '<td>' . $grand_total . '</td>'; // Assuming $totalAmount is the total amount for the order
         echo '</tr>';
     } else {
         // Query execution failed

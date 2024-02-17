@@ -16,19 +16,14 @@ if ($_POST) {
     $productStatus = $_POST['editProductStatus'];
 
     // Update the product
-    $sql = "UPDATE product SET product_date = '$productDate', product_name = '$productName', quantity = '$quantity', rate = '$rate', wholesale = '$wholesale', thb = '$thb', active = '$productStatus', status = 1 WHERE product_id = $productId";
+    $sql = "UPDATE product SET product_date = '$productDate', product_name = '$productName', quantity = '$quantity', rate = '$rate', wholesale = '$wholesale', thb = '$thb', active = '$productStatus', status = 1, add_quantity = '$quantity' WHERE product_id = $productId";
 
     if ($connect->query($sql) === TRUE) {
         $valid['success'] = true;
         $valid['messages'][] = "Successfully updated product";
 
-        // Store differences in edit_pdetailtable
-        $sql_diff = "INSERT INTO edit_pdetail (product_id, quan_difference, rate_difference, wholesale_difference, thb_difference) VALUES ('$productId', '$quantity', '$rate', '$wholesale', '$thb')";
-        if ($connect->query($sql_diff) === TRUE) {
-            $valid['messages'][] = "";
-        } else {
-            $valid['messages'][] = "Error while storing differences: " . $connect->error;
-        }
+        // No need to store differences in edit_pdetailtable
+
     } else {
         $valid['messages'][] = "Error while updating product info: " . $connect->error;
     }
