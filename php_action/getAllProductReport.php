@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<div class="container my-4" style="padding: 16px 16px">';
         echo '<h2>Product Report</h2>';
         echo '<table class="table" border="1">';
-        echo '<tr><th style="padding: 6px 10px;">Product Name</th><th style="padding: 6px 10px;">Product Date</th><th style="padding: 6px 10px;">Quantity</th><th style="padding: 6px 10px;">Rate</th><th style="padding: 6px 10px;">Wholesale</th><th style="padding: 6px 10px;">Thb</th><th style="padding: 6px 10px;">Add Quantity</th></tr>';
+        echo '<tr><th style="padding: 6px 10px;">Product Name</th><th style="padding: 6px 10px;">Product Date</th><th style="padding: 6px 10px;">Quantity</th><th style="padding: 6px 10px;">Rate</th><th style="padding: 6px 10px;">Wholesale</th><th style="padding: 6px 10px;">Thb</th></tr>';
         while ($row = $result_products->fetch_assoc()) {
             echo '<tr>';
             echo '<td style="padding: 6px 10px;">' . $row['product_name'] . '</td>';
@@ -30,7 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo '<td style="padding: 6px 10px;">' . $row['rate'] . '</td>';
             echo '<td style="padding: 6px 10px;">' . $row['wholesale'] . '</td>';
             echo '<td style="padding: 6px 10px;">' . $row['thb'] . '</td>';
-            echo '<td style="padding: 6px 10px;">' . $row['add_quantity'] . '</td>';
             echo '</tr>';
         }
         echo '</table>';

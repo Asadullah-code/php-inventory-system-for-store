@@ -23,7 +23,7 @@ if ($_POST) {
         $valid['messages'][] = "Successfully updated product";
 
         // Insert into edit_pdetail table
-        $editPDetailSql = "INSERT INTO edit_pdetail (product_name, quantity) VALUES ('$productName', '$quantity')";
+        $editPDetailSql = "INSERT INTO edit_pdetail (product_id, product_name, quantity) VALUES ('$productId', '$productName', '$quantity')";
         if ($connect->query($editPDetailSql) === TRUE) {
             $valid['messages'][] = "";
         } else {
