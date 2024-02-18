@@ -20,23 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         // Display product report
         echo'<div class="container my-4" style="padding: 16px 16px">';
-        echo '<h2>Product Report</h2>';
+        echo '<h2>Product Report Datewise</h2>';
         echo '<table class="table" border="1">';
-        echo '<tr><th style="padding: 6px 10px;">Product Name</th><th style="padding: 6px 10px;">Product Date</th><th style="padding: 6px 10px;">Quantity</th><th style="padding: 6px 10px;">Rate</th><th style="padding: 6px 10px;">Wholesale</th><th style="padding: 6px 10px;">Thb</th></tr>';
+        echo '<tr><th colspan="2" style="padding: 6px 10px;">Product Name</th><th colspan="2" style="padding: 6px 10px;">Quantity</th><th colspan="2" style="padding: 6px 10px;">Product Date</th></tr>';
         
         // Fetch data from "product" table
         while ($row = $result->fetch_assoc()) {
-            echo '<tr>';
-            echo '<td style="padding: 6px 10px;">' . $row['product_name'] . '</td>';
-            echo '<td style="padding: 6px 10px;">' . $row['quantity'] . '</td>';
-            echo '<td style="padding: 6px 10px;">' . $row['product_date'] . '</td>';
-            echo '<td style="padding: 6px 10px;">' . $row['rate'] . '</td>';
-            echo '<td style="padding: 6px 10px;">' . $row['wholesale'] . '</td>';
-            echo '<td style="padding: 6px 10px;">' . $row['thb'] . '</td>';
-            echo '</tr>';
-            echo '</tr>';
-            echo '</tr>';
-            echo '</tr>';
+           
         }
 
         // Fetch data from "edit_pdetail" table
@@ -45,13 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         // Check if any products are found in "edit_pdetail" table
         if ($result_edit_pdetail->num_rows > 0) {
-                echo'<tr><tr>';
-                echo'<td colspan="6" align="center" style="padding: 8px; font-size: 18px; font-weight: 600; text-align: center;">Later Add Qauntity Of Product Date wise</td>';
+               
             while ($row_edit_pdetail = $result_edit_pdetail->fetch_assoc()) {
                 echo '<tr>';
                 echo '<td colspan="2" style="padding: 6px 10px;">' . $row_edit_pdetail['product_name'] . '</td>';
                 echo '<td colspan="2" style="padding: 6px 10px;">' . $row_edit_pdetail['quantity'] . '</td>';
-                echo '<td colspan="2" style="padding: 6px 10px;">' . $row_edit_pdetail['timeDate'] . '</td>';
+                echo '<td colspan="2" style="padding: 6px 10px;">' . $row_edit_pdetail['product_date'] . '</td>';
                 echo '</tr>';
             }
         }

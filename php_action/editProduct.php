@@ -9,29 +9,43 @@ if ($_POST) {
     $productId = $_POST['productId'];
     $productDate = $_POST['editProductDate'];
     $productName = $_POST['editProductName'];
-    $quantity = $_POST['editQuantity'];
+    $newQuantity = $_POST['editQuantity'];
     $rate = $_POST['editRate'];
     $wholesale = $_POST['editWholesale'];
     $thb = $_POST['editThb'];
     $productStatus = $_POST['editProductStatus'];
 
-    // Update the product
-    $sql = "UPDATE product SET product_date = '$productDate', product_name = '$productName', quantity = '$quantity', rate = '$rate', wholesale = '$wholesale', thb = '$thb', active = '$productStatus', status = 1 WHERE product_id = $productId";
+    // Query the old quantity from the database
+    $oldQuantityQuery = "SELECT quantity FROM product WHERE product_id = $productId";
+    $oldQuantityResult = $connect->query($oldQuantityQuery);
 
-    if ($connect->query($sql) === TRUE) {
-        $valid['success'] = true;
-        $valid['messages'][] = "Successfully updated product";
+    if ($oldQuantityResult && $oldQuantityResult->num_rows > 0) {
+        $row = $oldQuantityResult->fetch_assoc();
+        $oldQuantity = $row['quantity'];
 
-        // Insert into edit_pdetail table
-        $editPDetailSql = "INSERT INTO edit_pdetail (product_id, product_name, quantity) VALUES ('$productId', '$productName', '$quantity')";
-        if ($connect->query($editPDetailSql) === TRUE) {
-            $valid['messages'][] = "";
+        // Calculate the difference between old and new quantities
+        $quantityDifference = $newQuantity - $oldQuantity;
+
+        // Update the product
+        $sql = "UPDATE product SET product_date = '$productDate', product_name = '$productName', quantity = '$newQuantity', rate = '$rate', wholesale = '$wholesale', thb = '$thb', active = '$productStatus', status = 1 WHERE product_id = $productId";
+
+        if ($connect->query($sql) === TRUE) {
+            $valid['success'] = true;
+            $valid['messages'][] = "Successfully updated product";
+
+            // Insert into edit_pdetail table
+            $editPDetailSql = "INSERT INTO edit_pdetail (product_id, product_name, quantity, product_date) VALUES ('$productId', '$productName', '$quantityDifference', '$productDate')";
+            if ($connect->query($editPDetailSql) === TRUE) {
+                $valid['messages'][] = "";
+            } else {
+                $valid['messages'][] = "Error while inserting data into edit_pdetail table: " . $connect->error;
+            }
+
         } else {
-            $valid['messages'][] = "Error while inserting data into edit_pdetail table: " . $connect->error;
+            $valid['messages'][] = "Error while updating product info: " . $connect->error;
         }
-
     } else {
-        $valid['messages'][] = "Error while updating product info: " . $connect->error;
+        $valid['messages'][] = "Error: Product not found";
     }
 } else {
     $valid['messages'][] = "No POST data received";
