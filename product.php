@@ -27,7 +27,7 @@
 							<th>Date</th>
 							<th>Product Name</th>
 							<th>Quantity</th>
-							<th>Rate</th>							
+							<th>Retail Price</th>							
 							<th>Wholesale</th>
 							<th>THB</th>
 							<th>Status</th>

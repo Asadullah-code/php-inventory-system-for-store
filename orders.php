@@ -309,7 +309,7 @@ if($_GET['o'] == 'add') {
 				  </div> <!--/form-group-->		
 				  <div>
 			    <div>
-					    <input type="text" name="invNum" id="invNum" value="SE">
+					    <input type="hidden" name="invNum" id="invNum" value="SE">
 					</div>
 
 					<script>

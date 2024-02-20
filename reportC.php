@@ -28,7 +28,7 @@
 				    <div class="col-sm-10">
 				        <select class="form-select form-control" name="product_price_type" aria-label="Default select example">
 						  <!-- <option selected>Price Type</option> -->
-						    <option value="rate">Rate</option>
+						    <option value="rate">Retail Price</option>
 						    <option value="wholesale">Wholesale</option>
 						    <option value="thb">THB</option>
 						</select>
