@@ -40,7 +40,6 @@ $(document).ready(function () {
             var phytosanitary = $("#phytosanitary").val();
             var paymentType = $("#paymentType").val();
             var paymentStatus = $("#paymentStatus").val();
-            var invNum = $("#invNum").val();
 
             // form validation
             if (orderDate == "") {
@@ -104,12 +103,6 @@ $(document).ready(function () {
             } else {
                 $('#paymentStatus').closest('.form-group').addClass('has-success');
             } // /else
-            if (invNum == "") {
-                $("#invNum").after('<p class="text-danger"> The invNum is required </p>');
-                $('#invNum').closest('.form-group').addClass('has-error');
-            } else {
-                $('#invNum').closest('.form-group').addClass('has-success');
-            } // /else
 
 
             // array validation
@@ -154,7 +147,7 @@ $(document).ready(function () {
             } // for
 
 
-            if (orderDate && clientName && clientContact && clientEmail && paid && discount && phytosanitary && paymentType && paymentStatus && invNum) {
+            if (orderDate && clientName && clientContact && clientEmail && paid && discount && phytosanitary && paymentType && paymentStatus) {
                 if (validateProduct == true && validateQuantity == true) {
                     // create order button
                     // $("#createOrderBtn").button('loading');
@@ -233,7 +226,6 @@ $(document).ready(function () {
             var phytosanitary = $("#phytosanitary").val();
             var paymentType = $("#paymentType").val();
             var paymentStatus = $("#paymentStatus").val();
-            var invNum = $("#invNum").val();
 
             // form validation
             if (orderDate == "") {
@@ -309,12 +301,6 @@ $(document).ready(function () {
             } else {
                 $('#paymentStatus').closest('.form-group').addClass('has-success');
             } // /else
-            if (invNum == "") {
-                $("#invNum").after('<p class="text-danger"> The invNum field is required </p>');
-                $('#invNum').closest('.form-group').addClass('has-error');
-            } else {
-                $('#invNum').closest('.form-group').addClass('has-success');
-            } // /else
 
 
             // array validation
@@ -359,7 +345,7 @@ $(document).ready(function () {
             } // for
 
 
-            if (orderDate && clientName && clientContact && clientAddress && clientEmail && paid && shipping && discount && phytosanitary && paymentType && paymentStatus && invNum) {
+            if (orderDate && clientName && clientContact && clientAddress && clientEmail && paid && shipping && discount && phytosanitary && paymentType && paymentStatus) {
                 if (validateProduct == true && validateQuantity == true) {
                     // create order button
                     // $("#createOrderBtn").button('loading');

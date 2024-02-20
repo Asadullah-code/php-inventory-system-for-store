@@ -307,23 +307,6 @@ if($_GET['o'] == 'add') {
 							</script>
 				    </div>
 				  </div> <!--/form-group-->		
-				  <div>
-			    <div>
-					    <input type="hidden" name="invNum" id="invNum" value="SE">
-					</div>
-
-					<script>
-					    // Generate a random number
-					    var randomNum = Math.floor(Math.random() * 1000);
-
-					    // Append the random number to "SE"
-					    var invNumValue = document.getElementById('invNum').value;
-					    invNumValue += randomNum;
-
-					    // Set the combined value as the value for the input field
-					    document.getElementById('invNum').value = invNumValue;
-					</script>
-
 					  
 			  </div> <!--/col-md-6-->
 
@@ -563,7 +546,7 @@ if($_GET['o'] == 'add') {
 				    </div>
 				  </div> <!--/form-group-->	
 				  <div class="form-group">
-				    <label for="vat" class="col-sm-3 control-label gst"><?php if($data[18] == 2) {echo "GST 0%";} else echo "GST 5%"; ?></label>
+				    <label for="vat" class="col-sm-3 control-label gst"><?php if($data[18] == 2) {echo "Paypal 0%";} else echo "Paypal 5%"; ?></label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="vat" name="vat" disabled="true" value="<?php echo $data[18] ?>"  />
 				      <input type="hidden" class="form-control" id="vatValue" name="vatValue" value="<?php echo $data[18] ?>"  />

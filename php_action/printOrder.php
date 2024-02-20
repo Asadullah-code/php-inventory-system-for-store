@@ -26,13 +26,12 @@ if(isset($_POST['orderId'])) {
        o.paid,
        o.due,
        o.payment_place,
-       o.gstn,
-       o.invNum
+       o.gstn
 FROM order_item AS oi
 JOIN orders AS o ON oi.order_id = o.order_id
 JOIN product AS p ON oi.product_id = p.product_id
 WHERE oi.order_id = $orderId
-GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.client_contact, o.client_address, o.client_email, o.sub_total, o.vat, o.total_amount, o.shipping, o.discount, o.phytosanitary, o.grand_total, o.paid, o.due, o.payment_place, o.gstn, o.invNum
+GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.client_contact, o.client_address, o.client_email, o.sub_total, o.vat, o.total_amount, o.shipping, o.discount, o.phytosanitary, o.grand_total, o.paid, o.due, o.payment_place, o.gstn
 ";
 
     $orderResult = $connect->query($sql);
@@ -68,7 +67,6 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
             $payment_type = $orderData['product_price_type'];
             $payment_place = $orderData['payment_place'];
             $gstn = $orderData['gstn'];
-            $invNum = $orderData['invNum'];
 
     }
 

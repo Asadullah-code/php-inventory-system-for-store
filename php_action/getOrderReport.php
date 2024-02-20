@@ -28,7 +28,7 @@ if($_POST) {
                 <th>Order Date</th>
                 <th>Client Name</th>
                 <th>Contact</th>
-                <th>Shipping</th>
+                <th>Price</th>
                 <th>Price Type</th>
             </tr>
             <?php while ($result = $query->fetch_assoc()) { ?>
@@ -36,7 +36,7 @@ if($_POST) {
                     <td><center><?php echo $result['order_date'] ; ?></center></td>
                     <td><center><?php echo $result['client_name'] ; ?></center></td>
                     <td><center><?php echo $result['client_contact'] ; ?></center></td>
-                    <td><center><?php echo $result['shipping'] ; ?></center></td>
+                    <td><center><?php echo $result['grand_total'] ; ?></center></td>
                     <td><center><?php echo $result['product_price_type'] ; ?></center></td>
                 </tr>
             <?php } ?>
