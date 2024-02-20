@@ -124,7 +124,7 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
          </div>
          <div class="col-md-6 col-12 d-flex flex-column" style="border-left: 2px solid #000;">
             <p class="fw-semibold text-end">Date: <span class="text-danger"><?php echo $orderDate; ?></span></p>
-            <p class="fw-semibold text-end">Inv No: <span class="text-danger">SE <?php echo $orderId; ?></span></p>
+            <p class="fw-semibold text-end">Inv No: <span class="text-danger">SE<?php echo $orderId; ?></span></p>
          </div>
          <div class="col-12">
             <table class="table">
