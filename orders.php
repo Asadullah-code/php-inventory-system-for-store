@@ -133,7 +133,7 @@ if($_GET['o'] == 'add') {
 			  					<div class="form-group">
 			  					<select class="form-control" name="price_type[]" id="price_type<?php echo $x; ?>"  onchange="getProductRateWiseData(this,<?php echo $x; ?>)">
 			  						<!-- <option value="">price type</option> -->
-                        <option value="rate">Rate</option>
+                        <option value="rate">Retail Price</option>
                         <option value="wholesale">WholeSale</option>
                         <option value="thb">THB</option>
                     </select>
@@ -208,7 +208,7 @@ if($_GET['o'] == 'add') {
 				  </div>
 				   <!--/form-group-->	
 				<p>  <div class="form-group">
-				    <label for="vat" class="col-sm-3 control-label gst">GST 5%</label>
+				    <label for="vat" class="col-sm-3 control-label gst">Paypal 5%</label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="vat" name="gstn" readonly="true" />
 				      <input type="hidden" class="form-control" id="vatValue" name="vatValue" />
@@ -462,7 +462,7 @@ if($_GET['o'] == 'add') {
                         <select class="form-control" name="price_type[]" id="price_type<?php echo $x; ?>"  onchange="getProductRateWiseData(this,<?php echo $x; ?>)">
                             <option value="">Select price type</option>
 
-                            <option value="rate"<?= $orderItemData['product_price_type'] === "rate"  ? "selected" : "" ?>>Rate</option>
+                            <option value="rate"<?= $orderItemData['product_price_type'] === "rate"  ? "selected" : "" ?>>Retail Price</option>
                             <option value="wholesale"<?= $orderItemData['product_price_type'] === "wholesale"  ? "selected" : "" ?>>WholeSale</option>
                             <option value="thb"<?= $orderItemData['product_price_type'] === "thb"  ? "selected" : "" ?>>THB</option>
                         </select>

@@ -4,9 +4,9 @@ let selectedProductId = null;
 $(document).ready(function () {
     $("#paymentPlace").change(function () {
         if ($("#paymentPlace").val() == 2) {
-            $(".gst").text("IGST 5%");
+            $(".gst").text("Paypal 5%");
         } else {
-            $(".gst").text("GST 5%");
+            $(".gst").text("Paypal 5%");
         }
     });
 

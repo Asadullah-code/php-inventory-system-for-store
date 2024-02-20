@@ -10,6 +10,7 @@ if(isset($_POST['orderId'])) {
     $sql = "SELECT p.product_name,
        oi.product_price_type,
        SUM(oi.quantity) AS total_quantity,
+       o.order_id,
        o.order_date,
        o.client_name,
        o.client_contact,
@@ -47,6 +48,7 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
             $counter++;
 
             // Retrieve data from the current row
+            $orderId = $orderData['order_id'];
             $orderDate = $orderData['order_date'];
             $productName = $orderData['product_name'];
             $clientName = $orderData['client_name'];
@@ -122,7 +124,7 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
          </div>
          <div class="col-md-6 col-12 d-flex flex-column" style="border-left: 2px solid #000;">
             <p class="fw-semibold text-end">Date: <span class="text-danger"><?php echo $orderDate; ?></span></p>
-            <p class="fw-semibold text-end">Inv No: <span class="text-danger"><?php echo $invNum; ?></span></p>
+            <p class="fw-semibold text-end">Inv No: <span class="text-danger">SE <?php echo $orderId; ?></span></p>
          </div>
          <div class="col-12">
             <table class="table">
