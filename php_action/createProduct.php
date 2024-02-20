@@ -23,8 +23,23 @@ if ($_POST) {
 
   // Execute the statement
   if ($stmt->execute()) {
-    $valid['success'] = true;
-    $valid['messages'] = "Successfully Added";
+    // Insert into edit_pdetail table
+    $editStmt = $connect->prepare("INSERT INTO edit_pdetail (product_name, quantity, product_date) 
+                                    VALUES (?, ?, ?)");
+    
+    // Bind parameters
+    $editStmt->bind_param("sss", $productName, $quantity, $productDate);
+    
+    // Execute the statement
+    if ($editStmt->execute()) {
+      $valid['success'] = true;
+      $valid['messages'] = "Successfully Added";
+    } else {
+      $valid['success'] = false;
+      $valid['messages'] = "Error while adding details to edit_pdetail table";
+    }
+    
+    $editStmt->close();
   } else {
     $valid['success'] = false;
     $valid['messages'] = "Error while adding the members";

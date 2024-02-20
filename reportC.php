@@ -30,7 +30,7 @@
 						  <!-- <option selected>Price Type</option> -->
 						    <option value="rate">Rate</option>
 						    <option value="wholesale">Wholesale</option>
-						    <option value="thb">Thb</option>
+						    <option value="thb">THB</option>
 						</select>
 				    </div>
 				  </div>
@@ -72,13 +72,13 @@
 				  <div class="form-group">
 				    <label for="endDate" class="col-sm-2 control-label">Specify Product</label>
 				    <div class="col-sm-10">
-				        <select class="form-select form-control" name="product_id" aria-label="Default select example">
+				        <select class="form-select form-control" name="product_name" aria-label="Default select example">
 						  <!-- <option selected>Specify Product</option> -->
 						    <?php
 	  							$productSql = "SELECT * FROM product WHERE active = 1 AND status = 1 AND quantity != 0";
 	  							$productData = $connect->query($productSql);
 	  							while($row = $productData->fetch_array()) {
-								echo "<option value='".$row['product_id']."' id='changeProduct".$row['product_id']."'>".$row['product_name']."</option>";
+								echo "<option value='".$row['product_name']."' id='changeProduct".$row['product_name']."'>".$row['product_name']."</option>";
 								 	}  
 	  						?>
 						</select>

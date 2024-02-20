@@ -8,10 +8,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get start date and end date from the form
     $startDate = $_POST['startDate'];
     $endDate = $_POST['endDate'];
-    $product_id = $_POST['product_id'];
+    $product_name = $_POST['product_name'];
 
     // Prepare SQL query to fetch products from "product" table within the specified date range
-    $sql = "SELECT * FROM product WHERE product_date >= '$startDate' AND product_date <= '$endDate' AND product_id= '$product_id'";
+    $sql = "SELECT * FROM product WHERE product_date >= '$startDate' AND product_date <= '$endDate' AND product_name= '$product_name'";
 
     // Execute the query for "product" table
     $result = $connect->query($sql);
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Fetch data from "edit_pdetail" table
-        $sql_edit_pdetail = "SELECT * FROM edit_pdetail WHERE product_id = '$product_id'";
+        $sql_edit_pdetail = "SELECT * FROM edit_pdetail WHERE product_name = '$product_name'";
         $result_edit_pdetail = $connect->query($sql_edit_pdetail);
         
         // Check if any products are found in "edit_pdetail" table

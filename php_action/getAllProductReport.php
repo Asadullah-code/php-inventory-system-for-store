@@ -21,22 +21,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<div class="container my-4" style="padding: 16px 16px">';
         echo '<h2>Product Report</h2>';
         echo '<table class="table" border="1">';
-        echo '<tr><th style="padding: 6px 10px;">Product Name</th><th style="padding: 6px 10px;">Product Date</th><th style="padding: 6px 10px;">Quantity</th><th style="padding: 6px 10px;">Rate</th><th style="padding: 6px 10px;">Wholesale</th><th style="padding: 6px 10px;">Thb</th></tr>';
+        echo '<tr><th colspan="2" style="padding: 6px 10px;">Product Name</th><th colspan="2" style="padding: 6px 10px;">Quantity</th><th colspan="2" style="padding: 6px 10px;">Product Date</th></tr>';
         // Loop through each product fetched from product table
         while ($row = $result_products->fetch_assoc()) {
-            echo '<tr>';
-            echo '<td style="padding: 6px 10px;">' . $row['product_name'] . '</td>';
-            echo '<td style="padding: 6px 10px;">' . $row['product_date'] . '</td>';
-            echo '<td style="padding: 6px 10px;">' . $row['quantity'] . '</td>';
-            echo '<td style="padding: 6px 10px;">' . $row['rate'] . '</td>';
-            echo '<td style="padding: 6px 10px;">' . $row['wholesale'] . '</td>';
-            echo '<td style="padding: 6px 10px;">' . $row['thb'] . '</td>';
-            echo '</tr>';
+            //echo '<tr>';
+            //echo '<td style="padding: 6px 10px;">' . $row['product_name'] . '</td>';
+            //echo '<td style="padding: 6px 10px;">' . $row['product_date'] . '</td>';
+            //echo '<td style="padding: 6px 10px;">' . $row['quantity'] . '</td>';
+            //echo '<td style="padding: 6px 10px;">' . $row['rate'] . '</td>';
+            //echo '<td style="padding: 6px 10px;">' . $row['wholesale'] . '</td>';
+            //echo '<td style="padding: 6px 10px;">' . $row['thb'] . '</td>';
+            //echo '</tr>';
         }
         // Additional row for editing quantity of product Datewise
-        echo '<tr>';
-        echo '<th colspan="6" style="padding: 6px 10px;">Added/Remove Quantity of product Datewise</th>';
-        echo '</tr>';
+        //echo '<tr>';
+       // echo '<th colspan="6" style="padding: 6px 10px;">Added/Remove Quantity of product Datewise</th>';
+        //echo '</tr>';
 
         // Prepare SQL query to fetch data from edit_pdetail table
         $sql_edit_pdetail = "SELECT product_name, quantity, product_date FROM edit_pdetail";

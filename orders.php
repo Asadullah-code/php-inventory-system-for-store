@@ -135,7 +135,7 @@ if($_GET['o'] == 'add') {
 			  						<!-- <option value="">price type</option> -->
                         <option value="rate">Rate</option>
                         <option value="wholesale">WholeSale</option>
-                        <option value="thb">Thb</option>
+                        <option value="thb">THB</option>
                     </select>
 			  					</div>
 			  				</td>
@@ -306,7 +306,25 @@ if($_GET['o'] == 'add') {
 							});
 							</script>
 				    </div>
-				  </div> <!--/form-group-->							  
+				  </div> <!--/form-group-->		
+				  <div>
+			    <div>
+					    <input type="text" name="invNum" id="invNum" value="SE">
+					</div>
+
+					<script>
+					    // Generate a random number
+					    var randomNum = Math.floor(Math.random() * 1000);
+
+					    // Append the random number to "SE"
+					    var invNumValue = document.getElementById('invNum').value;
+					    invNumValue += randomNum;
+
+					    // Set the combined value as the value for the input field
+					    document.getElementById('invNum').value = invNumValue;
+					</script>
+
+					  
 			  </div> <!--/col-md-6-->
 
 
@@ -446,7 +464,7 @@ if($_GET['o'] == 'add') {
 
                             <option value="rate"<?= $orderItemData['product_price_type'] === "rate"  ? "selected" : "" ?>>Rate</option>
                             <option value="wholesale"<?= $orderItemData['product_price_type'] === "wholesale"  ? "selected" : "" ?>>WholeSale</option>
-                            <option value="thb"<?= $orderItemData['product_price_type'] === "thb"  ? "selected" : "" ?>>Thb</option>
+                            <option value="thb"<?= $orderItemData['product_price_type'] === "thb"  ? "selected" : "" ?>>THB</option>
                         </select>
 
                     </div>

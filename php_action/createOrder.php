@@ -11,24 +11,25 @@ if($_POST) {
   $clientName 					= $_POST['clientName'];
   $clientContact 				= $_POST['clientContact'];
   $clientAddress 				= $_POST['clientAddress'];
-  $clientEmail 				= $_POST['clientEmail'];
+  $clientEmail 				  = $_POST['clientEmail'];
   $subTotalValue 				= $_POST['subTotalValue'];
   $vatValue 						=	$_POST['vatValue'];
   $totalAmountValue     = $_POST['totalAmountValue'];
-  $shipping     = $_POST['shipping'];
+  $shipping             = $_POST['shipping'];
   $discount 						= $_POST['discount'];
-  $phytosanitary 						= $_POST['phytosanitary'];
+  $phytosanitary 				= $_POST['phytosanitary'];
   $grandTotalValue 			= $_POST['grandTotalValue'];
   $paid 								= $_POST['paid'];
   $dueValue 						= $_POST['dueValue'];
   $paymentType 					= $_POST['paymentType'];
   $paymentStatus 				= $_POST['paymentStatus'];
   $paymentPlace 				= $_POST['paymentPlace'];
-  $gstn 				= $_POST['gstn'];
-  $userid 				= $_SESSION['userId'];
+  $gstn 				        = $_POST['gstn'];
+  $userid 				      = $_SESSION['userId'];
+  $invNum								= $_POST['invNum'];
 
 
-    $sql = "INSERT INTO orders (order_date, client_name, client_contact, client_address, client_email, sub_total, vat, total_amount, shipping, discount, phytosanitary, grand_total, paid, due, payment_type, payment_status, payment_place, gstn, order_status, user_id) VALUES ('$orderDate', '$clientName', '$clientContact', '$clientAddress', '$clientEmail', '$subTotalValue', '$vatValue', '$totalAmountValue', '$shipping', '$discount', '$phytosanitary', '$grandTotalValue', '$paid', '$dueValue', '$paymentType', '$paymentStatus', '$paymentPlace', '$gstn', 1, '$userid')";
+    $sql = "INSERT INTO orders (order_date, client_name, client_contact, client_address, client_email, sub_total, vat, total_amount, shipping, discount, phytosanitary, grand_total, paid, due, payment_type, payment_status, payment_place, gstn, order_status, user_id, invNum) VALUES ('$orderDate', '$clientName', '$clientContact', '$clientAddress', '$clientEmail', '$subTotalValue', '$vatValue', '$totalAmountValue', '$shipping', '$discount', '$phytosanitary', '$grandTotalValue', '$paid', '$dueValue', '$paymentType', '$paymentStatus', '$paymentPlace', '$gstn', 1, '$userid', '$invNum')";
 	
 	$order_id;
 	$orderStatus = false;

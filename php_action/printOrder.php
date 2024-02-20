@@ -25,12 +25,13 @@ if(isset($_POST['orderId'])) {
        o.paid,
        o.due,
        o.payment_place,
-       o.gstn
+       o.gstn,
+       o.invNum
 FROM order_item AS oi
 JOIN orders AS o ON oi.order_id = o.order_id
 JOIN product AS p ON oi.product_id = p.product_id
 WHERE oi.order_id = $orderId
-GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.client_contact, o.client_address, o.client_email, o.sub_total, o.vat, o.total_amount, o.shipping, o.discount, o.phytosanitary, o.grand_total, o.paid, o.due, o.payment_place, o.gstn
+GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.client_contact, o.client_address, o.client_email, o.sub_total, o.vat, o.total_amount, o.shipping, o.discount, o.phytosanitary, o.grand_total, o.paid, o.due, o.payment_place, o.gstn, o.invNum
 ";
 
     $orderResult = $connect->query($sql);
@@ -65,6 +66,7 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
             $payment_type = $orderData['product_price_type'];
             $payment_place = $orderData['payment_place'];
             $gstn = $orderData['gstn'];
+            $invNum = $orderData['invNum'];
 
     }
 
@@ -120,7 +122,7 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
          </div>
          <div class="col-md-6 col-12 d-flex flex-column" style="border-left: 2px solid #000;">
             <p class="fw-semibold text-end">Date: <span class="text-danger"><?php echo $orderDate; ?></span></p>
-            <p class="fw-semibold text-end">Inv No: <span class="text-danger">SE11</span></p>
+            <p class="fw-semibold text-end">Inv No: <span class="text-danger"><?php echo $invNum; ?></span></p>
          </div>
          <div class="col-12">
             <table class="table">
