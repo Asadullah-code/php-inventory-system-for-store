@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2024 at 07:30 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Feb 21, 2024 at 05:09 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -84,8 +84,7 @@ INSERT INTO `contaminated_plants` (`contaminated_id`, `contaminated_date`, `prod
 (37, '2024-02-15', 18, '002', 50),
 (38, '2024-02-15', 19, '003', 50),
 (39, '2024-02-15', 17, '001', 20),
-(40, '2024-02-16', 18, '003', 20),
-(41, '2024-02-20', 39, '002', 200);
+(40, '2024-02-16', 18, '003', 20);
 
 -- --------------------------------------------------------
 
@@ -114,20 +113,7 @@ INSERT INTO `edit_pdetail` (`id`, `product_id`, `product_name`, `quantity`, `pro
 (39, '29', 'velvet', 5700.00, '2024-02-18'),
 (40, '17', 'Toshiba', 82000.00, '2024-02-18'),
 (41, '17', 'Toshiba', -10000.00, '2024-02-21'),
-(42, '29', 'velvet', 3000.00, '2024-02-22'),
-(43, '17', 'Toshiba', -70000.00, '2024-02-19'),
-(44, '17', 'Toshiba', -5000.00, '2024-02-19'),
-(59, '', 'velvet', 100.00, '2024-02-10'),
-(60, '37', 'velvet', 200.00, '2024-02-10'),
-(61, '37', 'velvet', 200.00, '2024-02-12'),
-(62, '37', 'velvet', 200.00, '2024-02-14'),
-(63, '', 'jack', 100.00, '2024-02-10'),
-(64, '38', 'jack', 200.00, '2024-02-12'),
-(65, '38', 'jack', 0.00, '2024-02-12'),
-(66, '38', 'jack', 300.00, '2024-02-12'),
-(67, '', 'hello', 200.00, '2024-02-10'),
-(68, '39', 'hello', 100.00, '2024-02-10'),
-(69, '39', 'hello', 300.00, '2024-02-13');
+(42, '29', 'velvet', 3000.00, '2024-02-22');
 
 -- --------------------------------------------------------
 
@@ -182,19 +168,18 @@ CREATE TABLE `orders` (
   `payment_place` int(11) NOT NULL,
   `gstn` varchar(255) NOT NULL,
   `order_status` int(11) NOT NULL DEFAULT 0,
-  `user_id` int(11) NOT NULL,
-  `invNum` varchar(50) NOT NULL
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `order_date`, `client_name`, `client_contact`, `client_address`, `client_email`, `sub_total`, `vat`, `total_amount`, `shipping`, `discount`, `phytosanitary`, `grand_total`, `paid`, `due`, `payment_type`, `payment_status`, `payment_place`, `gstn`, `order_status`, `user_id`, `invNum`) VALUES
-(58, '2024-02-14', 'Asad', '0343434', 'asadullah lahore', 'asad@gmail.com', '850.00', '47.50', '99.68', 100, '0', '45', '997.50', '997.50', '0.00', 1, 2, 3, '4.68', 1, 1, ''),
-(59, '2024-02-14', 'asd', '5434', 'lahore', 'asadullah@gmail.com', '75.00', '4.50', '99.50', 20, '0', '40', '99.50', '5', '94.50', 1, 2, 7, '4.50', 1, 1, ''),
-(60, '2024-02-14', 'asadullah', '85685096', 'gujranwala', 'ahmad@gmail.com', '200.00', '10.00', '220.00', 10, '0', '50', '220.00', '10', '210.00', 1, 2, 4, '10.00', 1, 1, ''),
-(61, '2024-02-20', 'asad', '56455', 'asad', 'asad@gmail.com', '54.00', '0.00', '63.00', 9, '9', '9', '54.00', '9', '45.00', 2, 2, 5, '0.00', 1, 1, 'SE589');
+INSERT INTO `orders` (`order_id`, `order_date`, `client_name`, `client_contact`, `client_address`, `client_email`, `sub_total`, `vat`, `total_amount`, `shipping`, `discount`, `phytosanitary`, `grand_total`, `paid`, `due`, `payment_type`, `payment_status`, `payment_place`, `gstn`, `order_status`, `user_id`) VALUES
+(58, '2024-02-14', 'Asadullah', '0343434', 'asadullah lahore', 'asad@gmail.com', '350.00', '4.68', '99.68', 100, '0', '45', '472.50', '472.50', '0.00', 1, 2, 3, '4.68', 1, 1),
+(59, '2024-02-14', 'asd', '5434', 'lahore', 'asadullah@gmail.com', '75.00', '4.75', '99.50', 20, '0', '40', '99.75', '99.75', '0', 1, 1, 7, '4.50', 1, 1),
+(60, '2024-02-20', 'asadullah', '85685096', 'gujranwala', 'ahmad@gmail.com', '200.00', '10.00', '220.00', 10, '0', '50', '220.00', '10', '210.00', 1, 2, 4, '10.00', 1, 1),
+(61, '2024-02-20', 'Dilangam', '769787`', 'hjsfdjsid', 'dialagam@gmail.com', '550.00', '27.50', '251.30', 10, '10', '10', '577.50', '577.50', '0.00', 1, 2, 5, '11.30', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -218,12 +203,14 @@ CREATE TABLE `order_item` (
 --
 
 INSERT INTO `order_item` (`order_item_id`, `order_id`, `product_id`, `quantity`, `rate`, `total`, `order_item_status`, `product_price_type`) VALUES
-(86, 59, 18, '1', '35', '35.00', 1, 'wholesale'),
 (87, 60, 19, '3', '50', '150.00', 1, 'thb'),
 (90, 58, 17, '1', '55', '55.00', 1, 'rate'),
 (91, 58, 28, '10', '25', '250.00', 1, 'rate'),
-(92, 58, 39, '10', '50', '500.00', 1, 'rate'),
-(93, 61, 18, '1', '45', '45.00', 1, 'rate');
+(97, 61, 19, '4', '50', '200.00', 1, 'thb'),
+(98, 61, 27, '4', '5', '20.00', 1, 'rate'),
+(99, 61, 19, '12', '10', '120.00', 1, 'wholesale'),
+(100, 61, 29, '10', '20', '200.00', 1, 'rate'),
+(101, 59, 18, '1', '35', '35.00', 1, 'wholesale');
 
 -- --------------------------------------------------------
 
@@ -248,23 +235,13 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `product_date`, `product_name`, `quantity`, `rate`, `wholesale`, `thb`, `active`, `status`) VALUES
-(17, '2024-02-19', 'Toshiba', '5000', '55', '45', '35', 1, 1),
-(18, '2024-02-11', 'Nike', '998', '45', '35', '25', 1, 1),
-(19, '2024-02-13', 'alocasia ', '50', '20', '10', '50', 1, 1),
+(17, '2024-02-21', 'Toshiba', '80000', '55', '45', '35', 1, 1),
+(18, '2024-02-11', 'Nike', '999', '45', '35', '25', 1, 1),
+(19, '2024-02-13', 'alocasia ', '30', '20', '10', '50', 1, 1),
 (26, '2024-02-16', 'asadullah', '8', '8', '8', '8', 2, 2),
-(27, '2024-02-16', 'han', '555', '5', '5', '5', 1, 1),
+(27, '2024-02-16', 'han', '551', '5', '5', '5', 1, 1),
 (28, '2024-02-18', 'frydek', '8879', '25', '20', '100', 1, 1),
-(29, '2024-02-22', 'velvet', '9000', '20', '10', '100', 2, 2),
-(30, '2024-02-19', 'monstera', '1500', '10', '15', '10', 2, 2),
-(31, '2024-02-20', 'asad', '2000', '55', '55', '55', 2, 2),
-(32, '2024-02-19', 'abd', '555', '5', '5', '5', 2, 2),
-(33, '2024-02-20', 'Dilanga ', '1500', '55', '45', '35', 2, 2),
-(34, '2024-02-14', 'dm', '600', '10', '10', '10', 2, 2),
-(35, '2024-02-19', 'ikram', '55', '5', '5', '5', 2, 2),
-(36, '2024-02-01', 'dilanga', '55', '55', '55', '55', 2, 2),
-(37, '2024-02-14', 'velvet', '700', '10', '20', '30', 1, 1),
-(38, '2024-02-12', 'jack', '600', '10', '10', '10', 1, 1),
-(39, '2024-02-13', 'hello', '391', '50', '50', '50', 1, 1);
+(29, '2024-02-22', 'velvet', '8994', '20', '10', '100', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -397,13 +374,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `contaminated_plants`
 --
 ALTER TABLE `contaminated_plants`
-  MODIFY `contaminated_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `contaminated_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `edit_pdetail`
 --
 ALTER TABLE `edit_pdetail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `operators`
@@ -421,13 +398,13 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `order_item`
 --
 ALTER TABLE `order_item`
-  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `roles`
