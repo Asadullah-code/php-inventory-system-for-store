@@ -141,7 +141,7 @@ $connect->close();
 								        if ($row["product_price_type"] == 'thb') {
 								            echo $row["total"];
 								        } else {
-								            echo "0";
+								            echo "";
 								        }
 								        echo "</td>";
 							        echo "</tr>";
