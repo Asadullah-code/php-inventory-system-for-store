@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Fetch data from "edit_pdetail" table
-        $sql_edit_pdetail = "SELECT * FROM edit_pdetail WHERE product_name = '$product_name'";
+        $sql_edit_pdetail = "SELECT * FROM edit_pdetail WHERE product_name = '$product_name' AND product_date >= '$startDate' AND product_date <= '$endDate'";
         $result_edit_pdetail = $connect->query($sql_edit_pdetail);
         
         // Check if any products are found in "edit_pdetail" table

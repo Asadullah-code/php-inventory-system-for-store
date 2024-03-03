@@ -12,7 +12,7 @@ if($_POST) {
     $end_date = date('Y-m-d', strtotime($endDate));
 
     // Fetch data from the database
-    $sql = "SELECT * FROM orders WHERE order_status = 1";
+    $sql = "SELECT * FROM orders WHERE order_status = 1 AND order_date >= '$start_date' AND order_date <= '$end_date'";
 
     $query = $connect->query($sql);
 

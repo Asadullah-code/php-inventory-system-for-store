@@ -105,7 +105,7 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
 </head>
 <body>
    <div class="container-fluid" style="border: 2px solid #000;">
-      <div class="row">
+      <div class="row" style="margin: 0px !important;">
          <div class="col-12 d-flex align-items-center justify-content-center" style="border: 2px solid #000;">
             <h2 class="text-dark text-center">Invoice</h2>
          </div>
