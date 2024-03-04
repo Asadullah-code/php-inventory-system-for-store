@@ -97,6 +97,9 @@ if ($_POST) {
 	<div class="container">
 		<div class="row vertical">
 			<div class="col-md-5 col-md-offset-4">
+			<div class="logo" align="center">
+				<img src="assests/images/logo.png" style="margin-bottom: 10px;" height="150" width="150" class="img-fluid" style="">
+			</div>
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						<h3 class="panel-title">Please Sign in</h3>
@@ -148,6 +151,7 @@ if ($_POST) {
 									}
 								} ?>
 						</div>
+						
 
 						<form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" id="loginForm">
 							<fieldset>
