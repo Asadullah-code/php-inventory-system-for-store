@@ -41,7 +41,7 @@ if($_POST) {
                     <td><center><?php echo $result['discount'] ; ?></center></td>
                     <td><center><?php echo $result['phytosanitary'] ; ?></center></td>
                     <td><center><?php echo $result['gstn'] ; ?></center></td>
-                    <td><center><?php echo $result['total_amount'] ; ?></center></td>
+                    <td><center><?php echo $result['grand_total'] ; ?></center></td>
                 </tr>
             <?php } ?>
             <tr>
@@ -52,7 +52,7 @@ if($_POST) {
                     $total_amount = 0;
                     $query->data_seek(0); // Reset pointer to first row
                     while ($result = $query->fetch_assoc()) {
-                        $total_amount += $result['total_amount'];
+                        $total_amount += $result['grand_total'];
                     }
                     echo $total_amount;
                     ?>
