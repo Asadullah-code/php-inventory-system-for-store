@@ -460,17 +460,17 @@ function addRow() {
                                 <div class="form-group">
                                     <select class="form-control" name="productName[]" id="productName${count}" onchange="getProductData(${count})">
                                         <option value="">~~SELECT~~</option>`;
-            // console.log(response);
-            $.each(response, function (index, value) {
-                tr += `<option value="${value[0]}">${value[1]}</option>`;
-            });
-            tr += `</select>
+                        // console.log(response);
+                        $.each(response, function (index, value) {
+                            tr += `<option value="${value[0]}">${value[1]}</option>`;
+                        });
+                        tr += `</select>
                                 </div>
                             </td>
                             <td style="padding-left:30px;">
                                <div class="form-group">
 			  					<select class="form-control" name="price_type[]" id="price_type${count}"  onchange="getProductRateWiseData(this,${count})">
-                                    <option value="rate">Rate</option>
+                                    <option value="rate">Retail Price</option>
                                     <option value="wholesale">WholeSale</option>
                                     <option value="thb">Thb</option>
                                 </select>

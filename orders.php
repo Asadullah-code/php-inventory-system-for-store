@@ -443,7 +443,7 @@ if($_GET['o'] == 'add') {
                 <td style="padding-left:20px;">
                     <div class="form-group">
                         <select class="form-control" name="price_type[]" id="price_type<?php echo $x; ?>"  onchange="getProductRateWiseData(this,<?php echo $x; ?>)">
-                            <option value="">Select price type</option>
+                            <!-- <option value="">Select price type</option> -->
 
                             <option value="rate"<?= $orderItemData['product_price_type'] === "rate"  ? "selected" : "" ?>>Retail Price</option>
                             <option value="wholesale"<?= $orderItemData['product_price_type'] === "wholesale"  ? "selected" : "" ?>>WholeSale</option>
