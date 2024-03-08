@@ -818,6 +818,11 @@ function removeOrder(orderId = null) {
 
 // /remove order from server
 
+// cancel the edit order
+$('#cancelEdit').click(function(){
+    window.location.href = 'orders.php?o=manord';
+});
+
 // Payment ORDER
 function paymentOrder(orderId = null) {
     if (orderId) {

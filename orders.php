@@ -700,7 +700,7 @@ if($_GET['o'] == 'add') {
 
 			    <button type="submit" id="editOrderBtn" data-loading-text="Loading..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
 
-			    <button type="submit" id="cancelEdit" data-loading-text="Loading..." class="btn btn-default"><i class="glyphicon glyphicon-ok-sign"></i> Cancel</button>
+			    <button type="button" id="cancelEdit" class="btn"><i class="glyphicon glyphicon-ok-sign"></i> Cancel</button>
 			      
 			    </div>
 			  </div>
