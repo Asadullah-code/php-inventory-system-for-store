@@ -115,44 +115,49 @@ $connect->close();
 			  	</thead>
 			  	<tbody>
 						<?php
-							include 'php_action/db_connect.php';
-							$sqlOrder = "SELECT o.order_date, o.client_name, o.total_amount, oi.total, oi.product_price_type
-	             FROM orders AS o
-	             JOIN order_item AS oi ON o.order_id = oi.order_id
-	             WHERE o.order_date = '$currentDate'";
+include 'php_action/db_connect.php';
 
-							$resultOrder = $connect->query($sqlOrder);
+$sqlOrder = "SELECT o.order_date, o.client_name, o.total_amount, 
+                    SUM(CASE WHEN oi.product_price_type != 'thb' THEN oi.total ELSE 0 END) AS total_amount_thb,
+                    SUM(CASE WHEN oi.product_price_type = 'thb' THEN oi.total ELSE 0 END) AS total_thb
+             FROM orders AS o
+             JOIN order_item AS oi ON o.order_id = oi.order_id
+             WHERE o.order_date = '$currentDate'
+             GROUP BY o.order_id";
 
-							if ($resultOrder->num_rows > 0) {
-							    // Output data of each row
-							    while ($row = $resultOrder->fetch_assoc()) {
-							        echo "<tr>";
-							        echo "<td>" . $row["order_date"] . "</td>";
-							        echo "<td>" . $row["client_name"] . "</td>";
-							        echo "<td>";
-								        if ($row["product_price_type"] !== 'thb') {
-								        	echo  $row["total_amount"] ;
-								        }else{
-								        	echo "";
-								        }
-							        echo "</td>";
-							        
-							        echo "<td>";
-								        if ($row["product_price_type"] == 'thb') {
-								            echo $row["total"];
-								        } else {
-								            echo "";
-								        }
-								        echo "</td>";
-							        echo "</tr>";
-							    }
-							} else {
-							    echo "<tr><td colspan='4'>No records found for today's date</td></tr>";
-							}
+$resultOrder = $connect->query($sqlOrder);
 
-							// Close connection
-							$connect->close();
-							?>
+if ($resultOrder->num_rows > 0) {
+    // Output data of each row
+    while ($row = $resultOrder->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . $row["order_date"] . "</td>";
+        echo "<td>" . $row["client_name"] . "</td>";
+        echo "<td>";
+            if ($row["total_amount_thb"] != 0) {
+                echo $row["total_amount_thb"];
+            } else {
+                echo "";
+            }
+        echo "</td>";
+        
+        echo "<td>";
+            if ($row["total_thb"] != 0) {
+                echo $row["total_thb"];
+            } else {
+                echo "";
+            }
+        echo "</td>";
+        echo "</tr>";
+    }
+} else {
+    echo "<tr><td colspan='4'>No records found for today's date</td></tr>";
+}
+
+// Close connection
+$connect->close();
+?>
+
 
 
 

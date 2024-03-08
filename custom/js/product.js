@@ -43,7 +43,7 @@ $(document).ready(function() {
 			var productDate = $("#productDate").val();
 			var productName = $("#productName").val();
 			var quantity = $("#quantity").val();
-			var rate = $("#rate").val();
+			var Retail Price = $("#rate").val();
 			var wholesale = $("#wholesale").val();
 			var thb = $("#thb").val();
 			var productStatus = $("#productStatus").val();

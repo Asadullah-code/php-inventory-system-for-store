@@ -699,6 +699,8 @@ if($_GET['o'] == 'add') {
 			    <input type="hidden" name="orderId" id="orderId" value="<?php echo $_GET['i']; ?>" />
 
 			    <button type="submit" id="editOrderBtn" data-loading-text="Loading..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+
+			    <button type="submit" id="cancelEdit" data-loading-text="Loading..." class="btn btn-default"><i class="glyphicon glyphicon-ok-sign"></i> Cancel</button>
 			      
 			    </div>
 			  </div>
