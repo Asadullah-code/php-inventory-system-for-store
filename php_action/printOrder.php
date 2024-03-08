@@ -97,7 +97,7 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
       th, td {
          border: 2px solid #000 !important;
          padding: 4px;
-         text-align: left;
+         text-align: left !important;
          font-size: 11px !important;
       }
    </style>
@@ -110,10 +110,10 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
             <h2 class="text-dark text-center">Invoice</h2>
          </div>
          <div class="col-md-6 col-12 d-flex flex-column">
-            <p class="fw-semibold">Shipper: <span>Company Address and Address</span></p>
+            <p class="fw-semibold">Shipper: <span>Growth Revolution Co. Ltd 05755650008533855<br>Thasud Sub District, Muang-Chiangrai District, Chiangrai 57100<br> Thailand</span></p>
             <br>
             <p class="fw-semibold">Tel: <a href="tel: +94-71795-5888">+94-71795-5888</a></p>
-            <p class="fw-semibold">Email: <a href="mailto: dilangamanoj@gmail.com">dilangamanoj@gmail.com</a></p>
+            <p class="fw-semibold">Email: <a href="mailto: growthrevolution1@gmail.com">growthrevolution1@gmail.com</a></p>
             <br>
             <p class="fw-semibold">Consignee: <span><?php echo $clientName; ?></span><br>
                Address:<span> <?php echo $clientAddress ?></span></p>
@@ -132,7 +132,7 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
                   <th scope="col" style="width: 50% !important;">Description</th>
                   <th scope="col" style="width: 15% !important;">Qty<br>(Bag/Flask)</th>
                   <th scope="col" style="width: 15% !important;">Unit/<br>Price</th>
-                  <th scope="col" style="width: 20% !important;">Amount<br> USD</th>
+                  <th scope="col" style="width: 20% !important;">Amount<br> <span class="text-uppercase"><?php echo $payment_type; ?></span></th>
                   <!-- <th scope="col" style="width: 10% !important;">Shipping</th>
                   <th scope="col" style="width: 10% !important;">Phytosanitary</th>
                   <th scope="col" style="width: 10% !important;">Paypal 5%<br> Charges</th> -->
@@ -151,7 +151,7 @@ if(isset($_POST['orderId'])) {
 
     // Prepare and execute the SQL query
     $sqlReport = "SELECT p.product_name,
-       oi.product_price_type,
+       oi.rate,
        SUM(oi.quantity) AS total_quantity,
        oi.total,
        o.order_date,
@@ -174,7 +174,7 @@ FROM order_item AS oi
 JOIN orders AS o ON oi.order_id = o.order_id
 JOIN product AS p ON oi.product_id = p.product_id
 WHERE oi.order_id = $orderId
-GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.client_contact, o.client_address, o.client_email, o.sub_total, o.vat, o.total_amount, o.shipping, o.discount, o.phytosanitary, o.grand_total, o.paid, o.due, o.payment_place, o.gstn
+GROUP BY p.product_name, oi.rate, o.order_date, o.client_name, o.client_contact, o.client_address, o.client_email, o.sub_total, o.vat, o.total_amount, o.shipping, o.discount, o.phytosanitary, o.grand_total, o.paid, o.due, o.payment_place, o.gstn
 ";
 
     $orderResult = $connect->query($sqlReport); // Changed variable name from $orderResultOrder to $orderResult
@@ -192,7 +192,7 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
             // Fetching values from the fetched row
             $productName = $order['product_name'];
             $quantity = $order['total_quantity'];
-            $payment_type = $order['product_price_type'];
+            $payment_type = $order['rate'];
             $total = $order['total'];
             $shipping = $order['shipping'];
             $phytosanitary = $order['phytosanitary'];
@@ -206,7 +206,7 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
             echo '<td>' . $productName . '</td>';
             echo '<td>' . $quantity . '</td>';
             echo '<td>' . $payment_type . '</td>';
-            echo '<td>' . $total . '</td>';
+            echo '<td class="d-flex align-items-center justify-content-end">' . $total . '</td>';
             //echo '<td>' . $shipping . '</td>';
             //echo '<td>' . $phytosanitary . '</td>';
             //echo '<td>' . $gstn . '</td>';
@@ -217,14 +217,14 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
         echo '<th class="text-center" scope="row" colspan="2">phytosanitary</th>';
         echo '<td></td>';
         echo '<td></td>';
-        echo '<td>' . $phytosanitary . '</td>'; // Assuming $totalAmount is the total amount for the order
+        echo '<td>' . $phytosanitary . '.00</td>'; // Assuming $totalAmount is the total amount for the order
         echo '</tr>';
 
         echo '<tr>';
         echo '<th class="text-center" scope="row" colspan="2">shipping</th>';
         echo '<td></td>';
         echo '<td></td>';
-        echo '<td>' . $shipping . '</td>'; // Assuming $totalAmount is the total amount for the order
+        echo '<td>' . $shipping . '.00</td>'; // Assuming $totalAmount is the total amount for the order
         echo '</tr>';
 
         echo '<tr>';
