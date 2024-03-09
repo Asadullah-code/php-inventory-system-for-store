@@ -165,6 +165,7 @@ if(isset($_POST['orderId'])) {
        o.shipping,
        o.discount,
        o.phytosanitary,
+       o.payment_type,
        o.grand_total,
        o.paid,
        o.due,
@@ -174,7 +175,7 @@ FROM order_item AS oi
 JOIN orders AS o ON oi.order_id = o.order_id
 JOIN product AS p ON oi.product_id = p.product_id
 WHERE oi.order_id = $orderId
-GROUP BY p.product_name, oi.rate, o.order_date, o.client_name, o.client_contact, o.client_address, o.client_email, o.sub_total, o.vat, o.total_amount, o.shipping, o.discount, o.phytosanitary, o.grand_total, o.paid, o.due, o.payment_place, o.gstn
+GROUP BY p.product_name, oi.rate, o.order_date, o.client_name, o.client_contact, o.client_address, o.client_email, o.sub_total, o.vat, o.total_amount, o.shipping, o.discount, o.phytosanitary, o.payment_type, o.grand_total, o.paid, o.due, o.payment_place, o.gstn
 ";
 
     $orderResult = $connect->query($sqlReport); // Changed variable name from $orderResultOrder to $orderResult
@@ -199,6 +200,7 @@ GROUP BY p.product_name, oi.rate, o.order_date, o.client_name, o.client_contact,
             $gstn = $order['gstn'];
             $grand_total = $order['grand_total'];
             $vat = $order['vat'];
+            $paymentMethod = $order['payment_type'];
 
             // Outputting table rows
             echo '<tr>';
@@ -253,15 +255,41 @@ GROUP BY p.product_name, oi.rate, o.order_date, o.client_name, o.client_contact,
 
               </tbody>
             </table>
-            <div class="col-12 d-flex align-items-start justify-content-start flex-column">
-               <p><b>Payment detail as below:</b>bank detail of company</p>
-               <p>Bank Holder's name:</p>
-               <p>Saving account no.:</p>
-               <p>Bank Name:</p>
-               <p>Address:</p>
-               <p>Postcode:</p>
-               <p>Email: dilangam@yahoo.com</p>
-            </div>
+
+            <!-- Check if gstn is not null -->
+    <?php if ($paymentMethod == 1): ?>
+        <div class="col-12 d-flex align-items-start justify-content-start">
+            <p>Payment Detail:<b>DILANGAMANOJ@gmail.com</b></p>
+            
+        </div>
+    <?php elseif ($paymentMethod == 2): ?>
+        <div class="col-12 d-flex align-items-start justify-content-start flex-column westernAddress">
+            <b>Payment detail as below:</b><br>
+            <p>bank detail of company</p>
+            <p>Bank Holder's name: PREEYAPORN</p>
+            <p>Bank Holder's surname: TALUENGJIT</p>
+            <p>Address: 5/93 LADPRAW RD., SOI 17 JOMPHON, CHAUTUJAK, BANGKOK 10900 THAILAND</p>
+            <p>Mobile: +66 8 96651315</p>
+            <p>Bank Account No.: 098-0-343990</p>
+            <p>Bank Name: BANGKOK BANK PUBLIC COMPANY LIMITED</p>
+            <p>Bank Branch: CENTRAL PLAZA GRAND RAMA 9</p>
+            <p>Bank Address: 9/8-9 RAMA 9 RD., HUAI KHWANG, BANGKOK 10310 THAILAND</p>
+            <p>Bank Address: +66 2 1603829</p>
+            <p>SWIFT CODE: BKKBTHBK</p>
+        </div>
+    <?php else: ?>
+        <div class="col-12 d-flex align-items-start justify-content-start flex-column paypalAddress">
+            <b>Payment detail as below:</b><br>
+            <p>bank detail of company</p>
+            <p>Bank Holder's name: Growth Revolution Co.Ltd</p>
+            <p>Saving account no.: 033-4-34153-4</p>
+            <p>Bank Name: Siam Commercial Bank</p>
+            <p>Address: 514/58 Moo 1, Thasood Sub-District, Muangchiangrai District</p>
+            <p>City/Province: Chiangrai, Country: THAILAND,</p>
+            <p>Postcode: 57100</p>
+            <p>Email: p_taluengjit@yahoo.com</p>
+        </div>
+    <?php endif; ?>
          </div>
          
       </div>
