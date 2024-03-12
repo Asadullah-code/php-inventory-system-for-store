@@ -132,12 +132,12 @@ $connect->close();
 							        echo "<tr>";
 							        echo "<td>" . $row["order_date"] . "</td>";
 							        echo "<td>" . $row["client_name"] . "</td>";
-							        if ($product_price_type == 'wholesale' || 'rate') {
+							        if ($product_price_type == 'wholesale' || $product_price_type == 'rate') {
 							        	echo "<td>" . $row["due"] . "</td>";
-							        }else{
 							        	echo "<td></td>";
-							        }
+							        }else
 							        if ($product_price_type == 'thb') {
+							        	echo "<td></td>";
 							        	echo "<td>" . $row["due"] . "</td>";
 							        }else{
 							        	echo "<td></td>";
