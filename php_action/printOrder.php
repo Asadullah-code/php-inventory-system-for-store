@@ -89,23 +89,24 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
       body h3{
          font-size: 18px !important;
       }
-      .table {
-         border: 2px solid #000 !important;
+      .table, th {
+         border: 0.5px solid #000 !important;
          border-collapse: collapse;
          width: 100%;
       }
-      th, td {
-         border: 2px solid #000 !important;
-         padding: 4px;
-         text-align: left !important;
-         font-size: 11px !important;
+      td {
+         border: 0.1px solid #000 !important;
       }
+      .text{
+        text-align: right;
+      }
+      
    </style>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
    <div class="container-fluid" style="border: 2px solid #000;">
-      <div class="row" style="margin: 0px !important;">
+      <div class="row" style="margin: 0px !important; padding: 0px !important;">
          <div class="col-12 d-flex align-items-center justify-content-center" style="border: 2px solid #000;">
             <h2 class="text-dark text-center">Invoice</h2>
          </div>
@@ -120,7 +121,7 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
             <p class="fw-semibold">Tel: <a href="tel: <?php echo $clientContact; ?>"><?php echo $clientContact; ?></a></p>
             <p class="fw-semibold">Email: <a href="mailto: <?php echo $clientEmail; ?>"><?php echo $clientEmail; ?></a></p>
          </div>
-         <div class="col-md-6 col-12 d-flex flex-column" style="border-left: 2px solid #000;">
+         <div class="col-md-6 col-12 d-flex flex-column">
             <p class="fw-semibold text-end">Date: <span class="text-danger"><?php echo $orderDate; ?></span></p>
             <p class="fw-semibold text-end">Inv No: <span class="text-danger">SE<?php echo $orderId; ?></span></p>
          </div>
@@ -132,7 +133,17 @@ GROUP BY p.product_name, oi.product_price_type, o.order_date, o.client_name, o.c
                   <th scope="col" style="width: 50% !important;">Description</th>
                   <th scope="col" style="width: 15% !important;">Qty<br>(Bag/Flask)</th>
                   <th scope="col" style="width: 15% !important;">Unit/<br>Price</th>
-                  <th scope="col" style="width: 20% !important;">Amount<br> <span class="text-uppercase"><?php echo $payment_type; ?></span></th>
+                  <th scope="col" style="width: 20% !important;">Amount<br> <span class="text-uppercase">
+                    <?php
+                    if ($payment_type == 'thb') {
+                        echo "THB";
+                    }else{
+                        echo "USD";
+                    }
+                        
+                      ?>
+                        
+                    </span></th>
                   <!-- <th scope="col" style="width: 10% !important;">Shipping</th>
                   <th scope="col" style="width: 10% !important;">Phytosanitary</th>
                   <th scope="col" style="width: 10% !important;">Paypal 5%<br> Charges</th> -->
@@ -208,7 +219,7 @@ GROUP BY p.product_name, oi.rate, o.order_date, o.client_name, o.client_contact,
             echo '<td>' . $productName . '</td>';
             echo '<td>' . $quantity . '</td>';
             echo '<td>' . $payment_type . '</td>';
-            echo '<td class="d-flex align-items-center justify-content-end">' . $total . '</td>';
+            echo '<td class="text">' . $total . '</td>';
             //echo '<td>' . $shipping . '</td>';
             //echo '<td>' . $phytosanitary . '</td>';
             //echo '<td>' . $gstn . '</td>';
@@ -219,21 +230,21 @@ GROUP BY p.product_name, oi.rate, o.order_date, o.client_name, o.client_contact,
         echo '<th class="text-center" scope="row" colspan="2">phytosanitary</th>';
         echo '<td></td>';
         echo '<td></td>';
-        echo '<td>' . $phytosanitary . '.00</td>'; // Assuming $totalAmount is the total amount for the order
+        echo '<td class="text">' . $phytosanitary . '.00</td>'; // Assuming $totalAmount is the total amount for the order
         echo '</tr>';
 
         echo '<tr>';
         echo '<th class="text-center" scope="row" colspan="2">shipping</th>';
         echo '<td></td>';
         echo '<td></td>';
-        echo '<td>' . $shipping . '.00</td>'; // Assuming $totalAmount is the total amount for the order
+        echo '<td class="text">' . $shipping . '.00</td>'; // Assuming $totalAmount is the total amount for the order
         echo '</tr>';
 
         echo '<tr>';
         echo '<th class="text-center" scope="row" colspan="2">paypal charges 5%</th>';
         echo '<td></td>';
         echo '<td></td>';
-        echo '<td>' . $vat . '</td>'; // Assuming $totalAmount is the total amount for the order
+        echo '<td class="text">' . $vat . '</td>'; // Assuming $totalAmount is the total amount for the order
         echo '</tr>';
         
         // Outputting total row
@@ -241,7 +252,7 @@ GROUP BY p.product_name, oi.rate, o.order_date, o.client_name, o.client_contact,
         echo '<th class="text-center" scope="row" colspan="2">Total</th>';
         echo '<td></td>';
         echo '<td></td>';
-        echo '<td>' . $grand_total . '</td>'; // Assuming $totalAmount is the total amount for the order
+        echo '<td class="text">' . $grand_total . '</td>'; // Assuming $totalAmount is the total amount for the order
         echo '</tr>';
     } else {
         // Query execution failed
