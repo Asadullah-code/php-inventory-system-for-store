@@ -300,7 +300,7 @@ if($_GET['o'] == 'add') {
 							  // Add an event listener to the input field to update the select value
 							  otherInput.addEventListener("input", function() {
 							    if (paymentPlaceSelect.value === "11") {
-							      paymentPlaceSelect.value = otherInput.value;
+							      paymentPlaceSelect.value = otherInput.value();
 							    }
 							  });
 							});
