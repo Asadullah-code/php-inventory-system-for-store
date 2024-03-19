@@ -154,6 +154,7 @@ if($_GET['o'] == 'add') {
 			  					<input type="number" name="quantity[]" id="quantity<?php echo $x; ?>" onkeyup="getTotal(<?php echo $x ?>)" autocomplete="off" class="form-control" min="1" />
 			  					</div>
 			  				</td>
+			  				
 			  				<td style="padding-left:20px;">			  					
 			  					<input type="text" name="total[]" id="total<?php echo $x; ?>" autocomplete="off" class="form-control" disabled="true" />			  					
 			  					<input type="hidden" name="totalValue[]" id="totalValue<?php echo $x; ?>" autocomplete="off" class="form-control" />			  					
@@ -475,6 +476,7 @@ if($_GET['o'] == 'add') {
 										 	} // /while 
 
 			  						?>
+			  						
 									
 			  					</div>
 			  				</td>
