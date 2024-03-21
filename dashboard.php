@@ -117,7 +117,7 @@ $connect->close();
 						<?php
 							include 'php_action/db_connect.php';
 
-							$sqlOrder = "SELECT o.order_date, o.client_name, o.due, oi.product_price_type
+							$sqlOrder = "SELECT o.order_date, o.client_name, o.grand_total, oi.product_price_type
 							             FROM orders AS o
 							             JOIN order_item AS oi ON o.order_id = oi.order_id
 							             WHERE o.order_date = '$currentDate'
@@ -133,12 +133,12 @@ $connect->close();
 							        echo "<td>" . $row["order_date"] . "</td>";
 							        echo "<td>" . $row["client_name"] . "</td>";
 							        if ($product_price_type == 'wholesale' || $product_price_type == 'rate') {
-							        	echo "<td>" . $row["due"] . "</td>";
+							        	echo "<td>" . $row["grand_total"] . "</td>";
 							        	echo "<td></td>";
 							        }else
 							        if ($product_price_type == 'thb') {
 							        	echo "<td></td>";
-							        	echo "<td>" . $row["due"] . "</td>";
+							        	echo "<td>" . $row["grand_total"] . "</td>";
 							        }else{
 							        	echo "<td></td>";
 							        }
