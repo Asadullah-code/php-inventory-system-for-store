@@ -128,7 +128,7 @@ $connect->close();
 							if ($resultOrder->num_rows > 0) {
 							    // Output data of each row
 							    while ($row = $resultOrder->fetch_assoc()) {
-							    	echo $product_price_type = $row['product_price_type'];
+							    	 $product_price_type = $row['product_price_type'];
 							        echo "<tr>";
 							        echo "<td>" . $row["order_date"] . "</td>";
 							        echo "<td>" . $row["client_name"] . "</td>";
