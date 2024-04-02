@@ -13,12 +13,20 @@ if($_POST) {
     $end_date = date('Y-m-d', strtotime($endDate));
 
     // Fetch data from the database
-    $sql = "SELECT orders.*, order_item.product_price_type 
-            FROM orders 
-            JOIN order_item ON orders.order_id = order_item.order_id 
-            WHERE orders.order_date >= '$start_date' 
+    $sql = "SELECT 
+            orders.*, 
+            GROUP_CONCAT(DISTINCT order_item.product_price_type) AS product_price_types 
+        FROM 
+            orders 
+        JOIN 
+            order_item ON orders.order_id = order_item.order_id 
+        WHERE 
+            orders.order_date >= '$start_date' 
             AND orders.order_date <= '$end_date' 
-            AND order_item.product_price_type = '$product_price_type' AND orders.order_status = 1";
+            AND order_item.product_price_type = '$product_price_type' 
+            AND orders.order_status = 1 
+        GROUP BY 
+            orders.order_id";
 
     $query = $connect->query($sql);
 
@@ -37,7 +45,7 @@ if($_POST) {
                     <td><center><?php echo $result['client_name'] ; ?></center></td>
                     <td><center><?php echo $result['client_contact'] ; ?></center></td>
                     <td><center><?php echo $result['grand_total'] ; ?></center></td>
-                    <td><center><?php echo $result['product_price_type'] ; ?></center></td>
+                    <td><center><?php echo $result['product_price_types'] ; ?></center></td>
                 </tr>
             <?php } ?>
             <tr>
