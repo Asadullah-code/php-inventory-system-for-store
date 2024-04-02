@@ -24,14 +24,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<tr><th colspan="2" style="padding: 6px 10px;">Product Name</th><th colspan="2" style="padding: 6px 10px;">Quantity</th><th colspan="2" style="padding: 6px 10px;">Product Date</th></tr>';
         // Loop through each product fetched from product table
         while ($row = $result_products->fetch_assoc()) {
-            //echo '<tr>';
-            //echo '<td style="padding: 6px 10px;">' . $row['product_name'] . '</td>';
-            //echo '<td style="padding: 6px 10px;">' . $row['product_date'] . '</td>';
-            //echo '<td style="padding: 6px 10px;">' . $row['quantity'] . '</td>';
+            echo '<tr>';
+            echo '<td colspan="2" style="padding: 6px 10px;">' . $row['product_name'] . '</td>';
+            echo '<td colspan="2" style="padding: 6px 10px;">' . $row['product_date'] . '</td>';
+            echo '<td colspan="2" style="padding: 6px 10px;">' . $row['quantity'] . '</td>';
             //echo '<td style="padding: 6px 10px;">' . $row['rate'] . '</td>';
             //echo '<td style="padding: 6px 10px;">' . $row['wholesale'] . '</td>';
             //echo '<td style="padding: 6px 10px;">' . $row['thb'] . '</td>';
-            //echo '</tr>';
+            echo '</tr>';
         }
         // Additional row for editing quantity of product Datewise
         //echo '<tr>';
@@ -49,9 +49,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Loop through each row fetched from edit_pdetail table
             while ($row = $result_edit_pdetail->fetch_assoc()) {
                 echo '<tr>';
-                echo '<td colspan="2" style="padding: 6px 10px;">' . $row['product_name'] . '</td>';
-                echo '<td colspan="2" style="padding: 6px 10px;">' . $row['quantity'] . '</td>';
-                echo '<td colspan="2" style="padding: 6px 10px;">' . $row['product_date'] . '</td>';
+                echo '<td colspan="2" style="padding: 6px 10px;">' . $row['product_name'] . 'edited</td>';
+                echo '<td colspan="2" style="padding: 6px 10px;">' . $row['quantity'] . 'edited</td>';
+                echo '<td colspan="2" style="padding: 6px 10px;">' . $row['product_date'] . 'edited</td>';
                 echo '</tr>';
             }
         } else {
