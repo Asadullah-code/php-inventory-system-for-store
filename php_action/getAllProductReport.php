@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         } else {
             // No data found in the edit_pdetail table
-            echo '<tr><td colspan="3">No data found in the edit_pdetail table.</td></tr>';
+            echo '';
         }
 
         echo '</table>';
