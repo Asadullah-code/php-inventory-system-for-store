@@ -27,7 +27,7 @@ if($_POST) {
                 <th>Shipping</th>
                 <th>Discount</th>
                 <th>Phytosanitary</th>
-                <th>Gst 5%</th>
+                <th>Paypal 5%</th>
                 <th>Total $</th>
             </tr>
             <?php while ($result = $query->fetch_assoc()) { ?>

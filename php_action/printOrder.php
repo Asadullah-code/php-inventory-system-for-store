@@ -207,6 +207,7 @@ GROUP BY p.product_name, oi.rate, o.order_date, o.client_name, o.client_contact,
             $payment_type = $order['rate'];
             $total = $order['total'];
             $shipping = $order['shipping'];
+            $discount = $order['discount'];
             $phytosanitary = $order['phytosanitary'];
             $gstn = $order['gstn'];
             $grand_total = $order['grand_total'];
@@ -239,6 +240,16 @@ GROUP BY p.product_name, oi.rate, o.order_date, o.client_name, o.client_contact,
         echo '<td></td>';
         echo '<td class="text">' . $shipping . '.00</td>'; // Assuming $totalAmount is the total amount for the order
         echo '</tr>';
+
+
+        if ($discount != 0) {
+        echo '<tr>';
+        echo '<th class="text-center" scope="row" colspan="2">discount</th>';
+        echo '<td></td>';
+        echo '<td></td>';
+        echo '<td class="text">' . $discount . '.00</td>'; // Assuming $totalAmount is the total amount for the order
+        echo '</tr>';
+        }
 
         echo '<tr>';
         echo '<th class="text-center" scope="row" colspan="2">paypal charges 5%</th>';
