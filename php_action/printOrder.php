@@ -250,14 +250,18 @@ GROUP BY p.product_name, oi.rate, o.order_date, o.client_name, o.client_contact,
         echo '<td class="text">' . $discount . '.00</td>'; // Assuming $totalAmount is the total amount for the order
         echo '</tr>';
         }
-
+        
+            if ($paymentMethod == 1) {
         echo '<tr>';
-        echo '<th class="text-center" scope="row" colspan="2">paypal charges 5%</th>';
+        echo '<th class="text-center" scope="row" colspan="2">5%</th>';
         echo '<td></td>';
         echo '<td></td>';
         echo '<td class="text">' . $vat . '</td>'; // Assuming $totalAmount is the total amount for the order
         echo '</tr>';
-        
+        } else {
+                echo '';
+        }
+            
         // Outputting total row
         echo '<tr>';
         echo '<th class="text-center" scope="row" colspan="2">Total</th>';
