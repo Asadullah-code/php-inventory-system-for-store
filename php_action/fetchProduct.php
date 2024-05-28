@@ -4,7 +4,7 @@
 
 require_once 'core.php';
 
-$sql = "SELECT product.product_id, product.product_date, product.product_name, product.quantity, product.rate,product.wholesale, product.thb, product.status FROM product
+$sql = "SELECT product.product_id, product.product_date, product.product_name, product.quantity, product.rate,product.wholesale, product.thb, product.active, product.status FROM product
 		WHERE product.status = 1";
 
 $result = $connect->query($sql);
